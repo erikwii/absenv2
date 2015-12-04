@@ -102,60 +102,17 @@
         <td><b>Tanggal </b><input type="date" name="bday" min="2000-01-02"></td>
         <br>
         <table border="1"cellpadding="8"style="font-size:17px;width:350px;">
-            <tbody>
-            <tr>
-                <td style-"background: #e0ffff;text-align:center;">Pokok Bahasan</td>
-                <td style-"background: #e0ffff;text-align:center;">Jumlah Mahasiswa</td>
-            </tr>
-            <tr>
-                <form method="post" action="">
-                    <td><input type="text" name=""></td>
-                    <td><input type="text" name=""></td>
-                </form>
-            </tr>
-            <tr>
-                <form method="post" action="">
-                    <td><input type="text" name=""></td>
-                    <td><input type="text" name=""></td>
-                </form>
-            </tr>
-            <tr>
-                <form method="post" action="">
-                    <td><input type="text" name=""></td>
-                    <td><input type="text" name=""></td>
-                </form>
-            </tr>
-            <tr>
-                <form method="post" action="">
-                    <td><input type="text" name=""></td>
-                    <td><input type="text" name=""></td>
-                </form>
-            </tr>
-            <tr>
-                <form method="post" action="">
-                    <td><input type="text" name=""></td>
-                    <td><input type="text" name=""></td>
-                </form>
-            </tr>
-            <tr>
-                <form method="post" action="">
-                    <td><input type="text" name=""></td>
-                    <td><input type="text" name=""></td>
-                </form>
-            </tr>
-            <tr>
-                <form method="post" action="">
-                    <td><input type="text" name=""></td>
-                    <td><input type="text" name=""></td>
-                </form>
-            </tr>
-            <tr>
-                <form method="post" action="">
-                    <td><input type="text" name=""></td>
-                    <td><input type="text" name=""></td>
-                </form>
-            </tr>
-            </tbody>
+            <form method="post" action="">
+                <br>
+                        <tr>
+                            <td><b>&nbsp;Pokok Bahasan &nbsp;</b></td><td><b>&nbsp;:&nbsp;</b></td>
+                            <td><input type="text" name=""></td>
+                        </tr>
+                        <tr>
+                            <td><b>&nbsp;Jumlah Mahasiswa &nbsp;</b></td><td><b>&nbsp;:&nbsp;</b></td>
+                            <td><input type="text" name=""></td>
+                        </tr>
+
         </table>
         <br>
         <input type="submit" name="submit" value="Submit" />
