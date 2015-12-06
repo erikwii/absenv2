@@ -19,6 +19,14 @@ Route::get('/',function()
 */
 
 /*routes of older system*/
+
+
+//Route::get('absence', 'AbsenceController@index');
+//Route::get('absence/tambah', 'AbsenceController@tambah');
+//Route::post('absence', 'AbsenceController@simpan');
+
+
+//new routes for absen v2 here:
 Route::get('/', 'HomeController@home');
 Route::get ('/home','HomeController@home');
 Route::get ('/profildosen',function(){
@@ -56,13 +64,10 @@ Route::get ('/showadmin',function(){
     return view('admin/showadmin');
 
 });
+Route::get ('/createcourse',function(){
+    return view('lecturers/createcourse');
 
-//Route::get('absence', 'AbsenceController@index');
-//Route::get('absence/tambah', 'AbsenceController@tambah');
-//Route::post('absence', 'AbsenceController@simpan');
-
-
-//new routes for absen v2 here:
+});
 //authentication routes
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
