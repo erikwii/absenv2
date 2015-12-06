@@ -2,7 +2,7 @@
     <ul class="nav navbar-nav side-nav">
 <br>
         <li>
-            <a href="profildosen">Create Course</a>
+            <a href="createcourse">Create Course</a>
         </li>
 <br>
         <li>
