@@ -2,6 +2,10 @@
     <ul class="nav navbar-nav side-nav">
 <br>
         <li>
+            <a href="lihatabsen">Lihat Absen</a>
+        </li>
+        <br>
+        <li>
             <a href="inputabsen">Input Absen</a>
         </li>
 <br>
