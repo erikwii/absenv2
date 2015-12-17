@@ -25,49 +25,40 @@ Route::get('/',function()
 //Route::get('absence/tambah', 'AbsenceController@tambah');
 //Route::post('absence', 'AbsenceController@simpan');
 
-
+/***********************************************************/
 //new routes for absen v2 here:
+/**********************************************************/
+
+//route for home
 Route::get('/', 'HomeController@home');
 Route::get ('/home','HomeController@home');
-Route::get ('/profildosen',function(){
-    return view('lecturers/profildosen');
-});
-Route::get ('/profiladmin',function(){
-    return view('admin/profiladmin');
 
-});
-Route::get ('/coursetopic',function(){
-    return view('lecturers/coursetopic');
+//route for student's profile
+Route::get('profil', 'StudentController@profil');
+//route for dosen's profile
+Route::get ('/profildosen','LecturerController@profildosen');
+//route for admin's profile
+Route::get ('/profiladmin', 'AdminController@profiladmin');
+//route for topik dosen
+Route::get ('/coursetopic', 'LecturerController@coursetopic');
+//route for rekap dosen
+Route::get ('/rekapdosen', 'LecturerController@rekapdosen');
+//route for rekap admin
+Route::get ('/rekapadmin', 'AdminController@rekapadmin');
+//route for crudjadwal for admin
+Route::get ('/crudjadwal', 'AdminController@crudjadwal');
+//route for add course for mahasiswa
+Route::get ('/enrollmhs', 'StudentController@enrollmhs');
+//route for input absen mahasiswa
+Route::get ('/inputabsen','StudentController@inputabsen');
+//route for show all presences for admin
+Route::get ('/showadmin', 'AdminController@showadmin');
+//route for create new course dosen
+Route::get ('/createcourse','LecturerController@createcourse');
+//route for lihatabsen mhs for mahasiswa
+Route::get ('/lihatabsen', 'StudentController@lihatabsen');
 
-});
-Route::get ('/rekapdosen',function(){
-    return view('lecturers/rekap');
 
-});
-Route::get ('/rekapadmin',function(){
-    return view('admin/rekap');
-
-});
-Route::get ('/crudjadwal',function(){
-    return view('admin/crudjadwal');
-
-});
-Route::get ('/enrollmhs',function(){
-    return view('students/enroll');
-
-});
-Route::get ('/inputabsen',function(){
-    return view('students/inputabsen');
-
-});
-Route::get ('/showadmin',function(){
-    return view('admin/showadmin');
-
-});
-Route::get ('/createcourse',function(){
-    return view('lecturers/createcourse');
-
-});
 //authentication routes
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -80,7 +71,6 @@ Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('profil', 'StudentController@profil');
 //forgot password
 Route::get('auth/password/email', 'Auth\PasswordController@getEmail');
 Route::post('auth/password/email', 'Auth\PasswordController@postEmail');
