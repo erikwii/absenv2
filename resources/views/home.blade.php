@@ -75,8 +75,8 @@
         <br>
         <br>
 
-        <button type="button" class="btn btn-default btn-block" onClick="window.location='http://localhost/absenv2/public/auth/login'"><b>Login</b></button>
-        <button type="button" class="btn btn-default btn-block" onClick="window.location='http://localhost/absenv2/public/auth/register'"><b>Sign Up</b></button>
+        <button type="button" class="btn btn-default btn-block" onClick="window.location='auth/login'"><b>Login</b></button>
+        <button type="button" class="btn btn-default btn-block" onClick="window.location='auth/register'"><b>Sign Up</b></button>
 	<!-- time btn btn-default btn-block content -->
 
 @stop
