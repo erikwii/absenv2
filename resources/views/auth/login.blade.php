@@ -34,5 +34,5 @@
         <button type="submit">Login</button>
     </div>
 {!! Form::close() !!}
-    <button type="button" class="btn btn-default btn-block" onClick="window.location='http://localhost/absenv2/public/'"><b>Back to Home</b></button>
+    <button type="button" class="btn btn-default btn-block" onClick="window.location='/home'"><b>Back to Home</b></button>
 </center>
