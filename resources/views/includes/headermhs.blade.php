@@ -11,6 +11,6 @@
 <!-- Top Menu Items -->
 <ul class="nav navbar-right top-nav">
     <li class="dropdown">
-        <button type="button" class="btn btn-default btn-block" onClick="window.location='http://localhost/absenv2/public/auth/logout'"><b>Logout</b></button>
+        <button type="button" class="btn btn-default btn-block" onClick="window.location='/auth/logout'"><b>Logout</b></button>
  </li>
 </ul>
