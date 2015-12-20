@@ -14,10 +14,18 @@ class AdminController extends Controller
     return view('admin.profiladmin');
     }
     public function rekapadmin(){
-        return view('admin.rekapadmin');
+        return view('admin.rekap');
     }
+
+    public function showadmin(){
+        return view('admin.showadmin');
+    }
+
     public function crudjadwal(){
         return view('admin.crudjadwal');
+    }
+    public function updateuser(){
+        return view('admin.updateuser');
     }
 
 }
