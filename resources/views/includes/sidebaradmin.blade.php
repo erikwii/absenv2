@@ -6,7 +6,7 @@
         </li>
         <br>
         <li>
-            <a href="profiladmin">Add and Delete User</a>
+            <a href="updateuser">Add and Delete User</a>
         </li>
         <br>
         <li>
