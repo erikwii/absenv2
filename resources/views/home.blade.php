@@ -38,11 +38,14 @@
             <br>
             <br>
             <br>
+            {!! Form::open(array('url' => 'auth/login', 'method'=>'get')) !!}
+                <button type="submit" class="btn btn-default btn-block"><b>Login</b>
+                </button>
+            {!! Form::close() !!}
 
-            <button type="button" class="btn btn-default btn-block" onClick="window.location='auth/login'"><b>Login</b>
-            </button>
-            <button type="button" class="btn btn-default btn-block" onClick="window.location='auth/register'"><b>Sign
-                    Up</b></button>
+            {!! Form::open(array('url' => 'auth/register', 'method'=>'get')) !!}
+                <button type="button" class="btn btn-default btn-block" onClick="window.location='auth/register'"><b>Sign Up</b></button>
+            {!! Form::close() !!}
 
         </div>
     </div>
