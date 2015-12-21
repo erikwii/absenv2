@@ -44,7 +44,7 @@
             {!! Form::close() !!}
 
             {!! Form::open(array('url' => 'auth/register', 'method'=>'get')) !!}
-                <button type="button" class="btn btn-default btn-block" onClick="window.location='auth/register'"><b>Sign Up</b></button>
+                <button type="submit" class="btn btn-default btn-block"><b>Sign Up</b></button>
             {!! Form::close() !!}
 
         </div>
