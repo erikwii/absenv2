@@ -39,6 +39,7 @@ Route::get('profil', 'StudentController@profil');
 Route::get ('/profildosen','LecturerController@profildosen');
 //route for admin's profile
 Route::get ('/profiladmin', 'AdminController@profiladmin');
+
 //route for topik dosen
 Route::get ('/coursetopic', 'LecturerController@coursetopic');
 //route for rekap dosen

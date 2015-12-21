@@ -15,7 +15,6 @@ class AbsenceController extends Controller
     {
         $absence=absence::all();
         return view('absence.index')->with('absence',$absence);
-
     }
     public function tambah()
     {

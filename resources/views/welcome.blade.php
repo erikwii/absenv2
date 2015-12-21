@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Unused-->
 <html>
     <head>
         <title>Laravel</title>

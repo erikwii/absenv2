@@ -255,8 +255,10 @@ class Dispatcher implements DispatcherContract
         if ($this->queueResolver) {
             $connection = $event instanceof ShouldBroadcastNow ? 'sync' : null;
 
-            $this->resolveQueue()->connection($connection)->push('Illuminate\Broadcasting\BroadcastEvent', [
-                'event' => serialize($event),
+            $queue = method_exists($event, 'onQueue') ? $event->onQueue() : null;
+
+            $this->resolveQueue()->connection($connection)->pushOn($queue, 'Illuminate\Broadcasting\BroadcastEvent', [
+                'event' => serialize(clone $event),
             ]);
         }
     }
@@ -425,7 +427,9 @@ class Dispatcher implements DispatcherContract
      */
     protected function cloneArgumentsForQueueing(array $arguments)
     {
-        return array_map(function ($a) { return is_object($a) ? clone $a : $a; }, $arguments);
+        return array_map(function ($a) {
+            return is_object($a) ? clone $a : $a;
+        }, $arguments);
     }
 
     /**
