@@ -1,6 +1,6 @@
 <?php
 
-namespace app\HTTP\Traits;
+namespace App\HTTP\Traits;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +18,13 @@ trait RegistersUsers
     public function getRegister()
     {
         return view('auth.register');
+    }
+
+    /**
+     *
+     */
+    public function getStudentRegistrationForm(){
+        return view('auth.student_registration');
     }
 
     /**
@@ -40,6 +47,10 @@ trait RegistersUsers
         Auth::login($this->create($request->all()));
 
         return redirect($this->redirectPath());
+
+        /* Modification part unfinished */
+        //$userreg = $request->request();
+        //return response()->view('home',$userreg);
     }
 }
 

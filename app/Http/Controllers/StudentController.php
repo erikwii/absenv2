@@ -14,12 +14,12 @@ class StudentController extends Controller
     return view('students.profil');
     }
     public function enrollmhs(){
-        return view('students/enroll');
+        return view('students.enroll');
     }
     public function inputabsen(){
-        return view('students/inputabsen');
+        return view('students.inputabsen');
     }
     public function lihatabsen(){
-        return view('students/lihatabsen');
+        return view('students.lihatabsen');
     }
 }
