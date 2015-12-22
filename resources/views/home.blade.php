@@ -1,6 +1,7 @@
 @extends('layouts.masterhome')
 @section('content')
-
+    <!-- Load waktu onload  -->
+    <script type="text/javascript" src="{!! asset('js/waktu.js') !!}"></script>
     <body onload="waktu()">
     <div class="row">
         <div class="col-lg-120">
@@ -22,13 +23,7 @@
             <br>
             <br>
 
-
-            <!-- Load waktu onload  -->
-            <script type="text/javascript" src="{!! asset('js/waktu.js') !!}"></script>
-
             <?php
-            $hariIni = date('Y-m-d');
-            $bulanIni = date('m');
             use App\Helpers;
             echo "<center><h3> Hari, Tanggal : " . Helpers::indonesian_date() . " <span id='output'></span> WIB </center></h3></span>"
             ?>

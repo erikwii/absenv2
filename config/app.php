@@ -149,6 +149,7 @@ return [
 		 * Laravel PHP Storm helper
 		 * */
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
     ],
 
     /*
@@ -198,7 +199,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 		'Form'      => Illuminate\Html\FormFacade::class,
 		'HTML'      => Illuminate\Html\HtmlFacade::class,
-
+		'Debugbar' => 'Barryvdh\Debugbar\Facade',
     ],
 
 ];
