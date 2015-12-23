@@ -7,8 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use App\Http\Traits\AuthenticatesAndRegistersUsers;
-use App\Http\Requests;
-//use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -65,5 +64,17 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+    /**
+     *
+     */
+    public function getStudentRegistrationForm(Request $request){
+        //return view with extra parameter
+        //check path if path not from auth/register forward to the page
+        if(!$request->has('path'))
+            return view('auth.register'); //return to registration form
+        //else meaning it must has stored register data
+        $reg_data=$request->input('reg_data');
+        return view('auth.student_registration', array('reg_data'=>$reg_data));
     }
 }

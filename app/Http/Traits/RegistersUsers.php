@@ -21,13 +21,6 @@ trait RegistersUsers
     }
 
     /**
-     *
-     */
-    public function getStudentRegistrationForm(){
-        return view('auth.student_registration');
-    }
-
-    /**
      * Handle a registration request for the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -44,13 +37,17 @@ trait RegistersUsers
         }
 
         //we do not want to login directly but bring it to the new page
-        Auth::login($this->create($request->all()));
+        $registration_data=$request->all();
+        //Auth::login($this->create($request->all()));
 
-        return redirect($this->redirectPath());
+        //return redirect($this->redirectPath());
+        $path='auth/register';
+        /* Modification*/
+        $data = array('path'=>$path,'reg_data'=>$registration_data);
+        //TODO obfuscating passing parameter, at the moment plain text being passed
+        //We can implement crypto here
+        return redirect()->action('Auth\AuthController@getStudentRegistrationForm', $data);
 
-        /* Modification part unfinished */
-        //$userreg = $request->request();
-        //return response()->view('home',$userreg);
     }
 }
 

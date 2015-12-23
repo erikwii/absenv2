@@ -41,7 +41,7 @@
             Password:
         </label>
         <div class="col-sm-2">
-            <input type="password" name="name" value="" class="form-control" placeholder="enter password">
+            <input type="password" name="password" value="" class="form-control" placeholder="enter password">
         </div>
     </div>
 
