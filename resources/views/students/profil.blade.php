@@ -38,12 +38,12 @@
             <tr>
                 <td><b>&nbsp;Nomor Registrasi &nbsp;</b></td>
                 <td><b>&nbsp;:&nbsp;</b></td>
-                <td> &nbsp;3135136204&nbsp; </td>
+                <td> &nbsp;{{$noreg}}&nbsp; </td>
             </tr>
             <tr>
                 <td><b>&nbsp;Nama Mahasiswa &nbsp;</b></td>
                 <td><b>&nbsp;:&nbsp;</b></td>
-                <td>&nbsp;Dinda Kharisma&nbsp;</td>
+                <td>&nbsp;{{$name}}&nbsp;</td>
             </tr>
             <tr>
                 <td><b>&nbsp;Program Studi&nbsp; </b></td>
