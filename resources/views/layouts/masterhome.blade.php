@@ -58,7 +58,9 @@
 
 </div>
 <!-- /#wrapper -->
-<nav>@include('includes.footer')</nav>
+<nav>
+    @include('includes.footer')
+</nav>
 <!-- jQuery -->
 {!! HTML::script('assets/js/jquery-1.11.0.js') !!}
 
