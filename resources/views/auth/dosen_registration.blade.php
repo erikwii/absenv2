@@ -17,18 +17,17 @@
 </h1>
 
 
-{!! Form::open(array('url' => '/auth/student_registration', 'class' => 'form-horizontal','role'=>'form')) !!}
-
+{!! Form::open(array('url' => '/auth/dosen_registration', 'class' => 'form-horizontal','role'=>'form')) !!}
+{!! csrf_field() !!}
         <!-- previous submission of registration data is re-encoded again as form element -->
 
-{!! csrf_field() !!}
 
 <div class="form-group center-block">
-    <label class="control-label col-sm-6" for="nrg">
-        No. Registrasi:
+    <label class="control-label col-sm-6" for="kode_dosen">
+        Kode dosen
     </label>
     <div class="col-sm-2    ">
-        <input type="text" name="noreg" value='' class="form-control" placeholder="enter registration id">
+        <input type="text" name="kode_dosen" value='' class="form-control" placeholder="enter kode dosen">
     </div>
 </div>
 
@@ -42,38 +41,11 @@
 </div>
 
 <div class="form-group">
-    <label class="control-label col-sm-6" for="prodi">
-        Program Studi:
-    </label>
-    <div class="col-sm-2">
-        <input type="text" name="prodi" value="" class="form-control" placeholder="enter prodi">
-    </div>
-</div>
-
-<div class="form-group">
-    <label class="control-label col-sm-6" for="alamat">
-        Alamat:
-    </label>
-    <div class="col-sm-2">
-        <input type="text" name="alamat" value="" class="form-control" placeholder="enter address">
-    </div>
-</div>
-
-<div class="form-group">
     <label class="control-label col-sm-6" for="telephone">
         Phone:
     </label>
     <div class="col-sm-2">
         <input type="text" name="telepon" value="" class="form-control" placeholder="enter phone">
-    </div>
-</div>
-
-<div class="form-group">
-    <label class="control-label col-sm-6" for="semester">
-        Semester:
-    </label>
-    <div class="col-sm-2">
-        <input type="text" name="semester" value="" class="form-control" placeholder="enter semester">
     </div>
 </div>
 
@@ -85,6 +57,7 @@
         <button type="submit" class="btn btn-info">Register</button>
     </div>
 </div>
+
 
 {!! Form::close() !!}
 

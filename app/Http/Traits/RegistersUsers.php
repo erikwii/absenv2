@@ -44,11 +44,17 @@ trait RegistersUsers
         //return redirect($this->redirectPath());
 
         $path='auth/register';
-        /* Modification*/
+        //fill path with some value so we knew next page is coming from this place
         $data = array('path'=>$path,'reg_data'=>$registration_data);
-        //TODO obfuscating passing parameter, at the moment plain text being passed
-        //We can implement crypto here
-        return redirect()->action('Auth\AuthController@getStudentRegistrationForm', $data);
+        if(strcmp($registration_data['role'],'student')==0){
+            //TODO obfuscating passing parameter, at the moment plain text being passed
+            //We can implement crypto here
+            return redirect()->action('Auth\AuthController@getStudentRegistrationForm', $data);
+        } else { //then the role is dosen
+            return redirect()->action('Auth\AuthController@getDosenRegistrationForm', $data);
+        }
+
+
 
     }
 }
