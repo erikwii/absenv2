@@ -28,7 +28,8 @@ trait RegistersUsers
      */
     public function postRegister(Request $request)
     {
-        $validator = $this->validator($request->all());
+        //validator function is implemented in AuthController
+        $validator = $this->account_validator($request->all());
 
         if ($validator->fails()) {
             $this->throwValidationException(
@@ -38,15 +39,22 @@ trait RegistersUsers
 
         //we do not want to login directly but bring it to the new page
         $registration_data=$request->all();
+        //turn off user creation at this state, we only wanted to create user once in final stage of form wizard submission
         //Auth::login($this->create($request->all()));
-
         //return redirect($this->redirectPath());
+
         $path='auth/register';
-        /* Modification*/
+        //fill path with some value so we knew next page is coming from this place
         $data = array('path'=>$path,'reg_data'=>$registration_data);
-        //TODO obfuscating passing parameter, at the moment plain text being passed
-        //We can implement crypto here
-        return redirect()->action('Auth\AuthController@getStudentRegistrationForm', $data);
+        if(strcmp($registration_data['role'],'student')==0){
+            //TODO obfuscating passing parameter, at the moment plain text being passed
+            //We can implement crypto here
+            return redirect()->action('Auth\AuthController@getStudentRegistrationForm', $data);
+        } else { //then the role is dosen
+            return redirect()->action('Auth\AuthController@getDosenRegistrationForm', $data);
+        }
+
+
 
     }
 }

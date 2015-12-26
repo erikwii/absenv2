@@ -61,7 +61,6 @@ Route::get ('/lihatabsen', 'StudentController@lihatabsen');
 //route for add and delete user for admin
 Route::get ('/updateuser', 'AdminController@updateuser');
 
-
 //authentication routes
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -72,6 +71,10 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 //route for student registration
 Route::get('auth/student_registration','Auth\AuthController@getStudentRegistrationForm');
+Route::post('auth/student_registration', 'Auth\AuthController@postStudentRegistration');
+
+Route::get('auth/dosen_registration','Auth\AuthController@getDosenRegistrationForm');
+Route::post('auth/dosen_registration','Auth\AuthController@postDosenRegistration');
 
 Route::controllers([
     'password' => 'Auth\PasswordController',

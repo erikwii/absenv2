@@ -20,10 +20,8 @@
 {!! Form::open(array('url' => '/auth/student_registration', 'class' => 'form-horizontal','role'=>'form')) !!}
 
         <!-- previous submission of registration data is re-encoded again as form element -->
-        @foreach($reg_data as $key => $value)
-        {!! Form::hidden($key,$value) !!}
-        @endforeach
 
+{!! csrf_field() !!}
 
 <div class="form-group center-block">
     <label class="control-label col-sm-6" for="nrg">
@@ -39,7 +37,7 @@
         Nama:
     </label>
     <div class="col-sm-2">
-        <input type="text" name="nama" value={{$reg_data['name']}} class="form-control" placeholder="enter name">
+        <input type="text" name="nama" value={{$reg_name}} class="form-control" placeholder="enter name">
     </div>
 </div>
 
@@ -66,7 +64,7 @@
         Phone:
     </label>
     <div class="col-sm-2">
-        <input type="text" name="phone" value="" class="form-control" placeholder="enter phone">
+        <input type="text" name="telepon" value="" class="form-control" placeholder="enter phone">
     </div>
 </div>
 
@@ -87,7 +85,6 @@
         <button type="submit" class="btn btn-info">Register</button>
     </div>
 </div>
-
 
 {!! Form::close() !!}
 
