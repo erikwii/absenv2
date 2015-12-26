@@ -28,7 +28,8 @@ trait RegistersUsers
      */
     public function postRegister(Request $request)
     {
-        $validator = $this->validator($request->all());
+        //validator function is implemented in AuthController
+        $validator = $this->account_validator($request->all());
 
         if ($validator->fails()) {
             $this->throwValidationException(
@@ -38,9 +39,10 @@ trait RegistersUsers
 
         //we do not want to login directly but bring it to the new page
         $registration_data=$request->all();
+        //turn off user creation at this state, we only wanted to create user once in final stage of form wizard submission
         //Auth::login($this->create($request->all()));
-
         //return redirect($this->redirectPath());
+
         $path='auth/register';
         /* Modification*/
         $data = array('path'=>$path,'reg_data'=>$registration_data);

@@ -72,6 +72,7 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 //route for student registration
 Route::get('auth/student_registration','Auth\AuthController@getStudentRegistrationForm');
+Route::post('auth/student_registration', 'Auth\AuthController@postStudentRegistration');
 
 Route::controllers([
     'password' => 'Auth\PasswordController',
