@@ -1,95 +1,124 @@
 @extends('layouts.masterdosen')
 @section('content')
-    <div class="row">
-        <div class="col-lg-120">
+        <!-- Load waktu onload  -->
+<script type="text/javascript" src="{!! asset('js/waktu.js') !!}"></script>
+<style>
 
-            <h1 class="page-header" style= "background-color:#222222; color:#DEDEDE; text-align:center">
-                {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE SYSTEM
-            </h1>
-            <h2 style= "text-align:center"><small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of Jakarta :: </small></h2></tr>
-            <br>
-            </br>
-            <h2 style="color:red; text-align:center">Welcome!</h2>
+    h3 {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 1.0em;
+        line-height: 1.5em;
+        letter-spacing: -0.05em;
+        margin-bottom: 20px;
+        padding: .1em 0;
+        color: #444;
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+        text-align: center;
+    }
+    h3:before,
+    h3:after {
+        content: "";
+        position: relative;
+        display: inline-block;
+        width: 50%;
+        height: 1px;
+        vertical-align: middle;
+        background: #f0f0f0;
+    }
+    h3:before {
+        left: -.5em;
+        margin: 0 0 0 -50%;
+    }
+    h3:after {
+        left: .5em;
+        margin: 0 -50% 0 0;
+    }
+    h3 > span {
+        display: inline-block;
+        vertical-align: middle;
+        white-space: normal;
+    }
+    p {
+        display: block;
+        font-size: 0.8em;
+        line-height: 1.0em;
+        margin-bottom: 18px;
+        color: #555;
+    }
+    #w {
+        display: block;
+        width: 500px;
+        margin: 0 auto;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    #content {
+        display: block;
+        width: 100%;
+        background: #fff;
+        padding: 25px 20px;
+        padding-bottom: 35px;
+        -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+        -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    }
+    .activity {
+        border-bottom: 1px solid #d6d1af;
+        padding-bottom: 4px;
+    }
+</style>
+<body onload="waktu()">
+<div class="row">
+    <div class="col-lg-120">
+        <h1 class="page-header" style= "background-color:#222222; color:#DEDEDE; text-align:center">
+            {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
+            SYSTEM
+        </h1>
+        <h2 style="text-align:center">
+            <small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of Jakarta
+                ::
+            </small>
+        </h2>
+        <h2 style="color:red; text-align:center">Welcome!</h2>
 
-            <!-- time content -->
-            <br>
-            <br>
-            <?php
-            function indonesian_date ($timestamp = '', $date_format = 'l, j F Y', $suffix = 'Pukul') {
-                if (trim ($timestamp) == '')
-                {
-                    $timestamp = time ();
-                }
-                elseif (!ctype_digit ($timestamp))
-                {
-                    $timestamp = strtotime ($timestamp);
-                }
-                # remove S (st,nd,rd,th) there are no such things in indonesia :p
-                $date_format = preg_replace ("/S/", "", $date_format);
-                $pattern = array (
-                        '/Mon[^day]/','/Tue[^sday]/','/Wed[^nesday]/','/Thu[^rsday]/',
-                        '/Fri[^day]/','/Sat[^urday]/','/Sun[^day]/','/Monday/','/Tuesday/',
-                        '/Wednesday/','/Thursday/','/Friday/','/Saturday/','/Sunday/',
-                        '/Jan[^uary]/','/Feb[^ruary]/','/Mar[^ch]/','/Apr[^il]/','/May/',
-                        '/Jun[^e]/','/Jul[^y]/','/Aug[^ust]/','/Sep[^tember]/','/Oct[^ober]/',
-                        '/Nov[^ember]/','/Dec[^ember]/','/January/','/February/','/March/',
-                        '/April/','/June/','/July/','/August/','/September/','/October/',
-                        '/November/','/December/',
-                );
-                $replace = array ( 'Sen','Sel','Rab','Kam','Jum','Sab','Min',
-                        'Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu',
-                        'Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des',
-                        'Januari','Februari','Maret','April','Juni','Juli','Agustus','Sepember',
-                        'Oktober','November','Desember',
-                );
-                $date = date ($date_format, $timestamp);
-                $date = preg_replace ($pattern, $replace, $date);
-                $date = "{$date} {$suffix}";
-                return $date;
-            }
-            ?>
+        <!-- time content -->
 
-            <script type="text/javascript">
-                // 1 detik = 1000
-                window.setTimeout("waktu()",1000);
-                function waktu() {
-                    var tanggal = new Date();
-                    setTimeout("waktu()",1000);
-                    document.getElementById("output").innerHTML = tanggal.getHours()+":"+tanggal.getMinutes()+":"+tanggal.getSeconds();
-                }
-            </script>
-            <body onload="waktu()">
+        <?php
+        use App\Helpers;
+        echo "<center><h3> Hari, Tanggal : " . Helpers::indonesian_date() . " <span id='output'></span> WIB </center></h3>"
+        ?>
+                <!-- time content -->
+        <div id="w">
+            <div id="content" class="clearfix">
+                <h3>Identitas Dosen</h3>
 
-            <?php
-
-            $hariIni = date('Y-m-d');
-            $bulanIni = date('m');
-
-            echo "<center><h3> Hari, Tanggal : ".indonesian_date()." <span id='output'></span> WIB </center></h3>"
+                <section id="activity">
 
 
-            ?>
-                    <!-- time content -->
-            <br>
-            <br>
+                    <p class="activity"><td><b>&nbsp;Kode Dosen &nbsp;</b></td>
+                    <td><b>&nbsp;:&nbsp;</b></td>
+                    <td> &nbsp;{{$kode_dosen}}&nbsp; </td></p>
 
-            <DT style="text-align: center; font: bold">Identitas Dosen</DT>
-            <br>
-            <table border="1" align="center" cellpadding="5" cellspacing="1" bordercolor="#000000">
-                <tr>
-                    <td><b>&nbsp;Nama Dosen &nbsp;</b></td><td><b>&nbsp;:&nbsp;</b></td>
-                    <td>&nbsp;Muhammad Eka Suryana&nbsp;</td>
-                </tr>
-                <tr>
-                    <td><b>&nbsp;NIP &nbsp;</b></td><td><b>&nbsp;:&nbsp;</b></td>
-                    <td>&nbsp;19851223 2012121 002 1&nbsp;</td>
-                </tr>
+                    <p class="activity"><td><b>&nbsp;Nama Dosen &nbsp;</b></td>
+                    <td><b>&nbsp;:&nbsp;</b></td>
+                    <td>&nbsp;{{$name}}&nbsp;</td></p>
 
+                    <p class="activity"><td><b>&nbsp;Telepon&nbsp; </b></td>
+                    <td><b>&nbsp;:&nbsp;</b></td>
+                    <td> &nbsp;{{$telepon}}&nbsp; </td></p>
 
-            </table>
-            </body>
-            </html>
+                </section>
 
-            <br>
-            </br>
+            </div><!-- @end #content -->
+        </div><!-- @end #w -->
+
+    </div>
+</div>
+</body>
+</html>
+
+<br>
+</br>
 @stop
