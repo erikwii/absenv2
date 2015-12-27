@@ -26,7 +26,11 @@ class StudentController extends Controller
         $student = Student::where('Nama_Mhs',$name)->take(1)->get();
         //$student
         $noreg = $student[0]['attributes']['Noreg'];
-        return view('students.profil',['name'=>$name,'noreg'=>$noreg]);
+        $prodi = $student[0]['attributes']['Prodi'];
+        $semester = $student[0]['attributes']['Semester'];
+        $alamat = $student[0]['attributes']['Alamat'];
+        $telepon = $student[0]['attributes']['Telepon'];
+        return view('students.profil',['name'=>$name,'noreg'=>$noreg,'prodi'=>$prodi,'semester'=>$semester,'alamat'=>$alamat,'telepon'=>$telepon]);
     }
 
     public function enrollmhs()
