@@ -24,6 +24,7 @@ class AdminController extends Controller
     public function crudjadwal(){
         return view('admin.crudjadwal');
     }
+
     public function updateuser(){
         return view('admin.updateuser');
     }

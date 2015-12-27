@@ -35,6 +35,17 @@
 </div>
 
 <div class="form-group">
+    <label class="control-label col-sm-6" for="name">
+        Role:
+    </label>
+    <div class="col-sm-2">
+        <?php
+        echo Form::select('role', array('student' => 'Student', 'dosen' => 'Dosen'), 'student', array('class' => 'form-control'));
+        ?>
+    </div>
+</div>
+
+<div class="form-group">
     <label class="control-label col-sm-6" for="empty">
 
     </label>

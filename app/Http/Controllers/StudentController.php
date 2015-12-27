@@ -14,7 +14,7 @@ class StudentController extends Controller
     public function __construct()
     {
         //attach auth middleware, if user not authenticated forward to login page
-        $user=Auth::user();
+        //$user=Auth::user();
         $this->middleware('auth');
     }
 

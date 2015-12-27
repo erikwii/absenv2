@@ -101,6 +101,22 @@ class AuthController extends Controller
     }
 
     /**
+     * Custom authentication since we have extra field, info
+     * @param Request $request
+     */
+    public function authenticate(Request $request){
+        $email=$request['email'];
+        $password=$request['password'];
+        $role=$request['role'];
+        if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => $role])) {
+            if(strcmp($role,'student')==0)
+                return redirect()->action('StudentController@profil');
+            else
+                return redirect()->action('LecturerController@profildosen');
+        }
+    }
+
+    /**
      * dosenRegistrationForm preparation
      * @param Request $request
      */
@@ -156,7 +172,7 @@ class AuthController extends Controller
         $student->Semester=$request['semester'];
         $student->save();
         //3.forward the user into profile page, redirectPath() return $redirectTo
-        return redirect($this->redirectPath());
+        return redirect()->action('StudentController@profil');
     }
 
     /**
@@ -182,6 +198,6 @@ class AuthController extends Controller
         $lecturer->Telepon=$request['telepon'];
         $lecturer->save();
         //3. redirect to profile page
-        return redirect($this->redirectPath());
+        return redirect()->action('LecturerController@profildosen');
     }
 }
