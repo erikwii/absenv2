@@ -8,114 +8,64 @@
             </h1>
             <h2 style= "text-align:center"><small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of Jakarta :: </small></h2></tr>
             <br>
-            </br>
             <h2 style="color:black; text-align:center">Topik Perkuliahan</h2>
             <br>
+            <head>
+                <link href="{!! asset('assets/css/jquery-ui.css') !!}" media="all" rel="stylesheet" type="text/css"/>
+                <script type="text/javascript" src="{!! asset('js/jquery-1.10.2.js') !!}"></script>
+                <script type="text/javascript" src="{!! asset('js/jquery-ui.js') !!}"></script>
+                <script type="text/javascript" src="{!! asset('js/datepicker.js') !!}"></script>
+            </head>
 
-<center>
-<table id="example" class="display" cellspacing="0" width="100%">
-    <tbody>
-    <tr>
-        <th>Kode Matkul: <select size="1" id="Kode Matkul" name="Kode Matkul">
-                <option value="" selected="selected">
-                </option>
-                <option value="3901">
-                    3901
-                <option value="3902">
-                    3902
-                </option>
-                <option value="3903">
-                    3903
-                </option>
-                <option value="3904">
-                    3904
-                </option>
-                <option value="3905">
-                    3905
-                </option>
-                <option value="3906">
-                    3906
-                </option>
-                <option value="3907">
-                    3907
-                </option>
-                <option value="3908">
-                    3908
-                </option>
-                <option value="3909">
-                    3909
-                </option>
-            </select>
-        </th>
-        <th ALIGN="center">Pertemuan: <select size="1" id="Pertemuan" name="Pertemuan">
-                <option value="" selected="selected">
-                </option>
-                <option value="01">
-                    01
-                <option value="02">
-                    02
-                </option>
-                <option value="03">
-                    03
-                </option>
-                <option value="04">
-                    04
-                </option>
-                <option value="05">
-                    05
-                </option>
-                <option value="06">
-                    06
-                </option>
-                <option value="07">
-                    07
-                </option>
-                <option value="08">
-                    08
-                </option>
-                <option value="09">
-                    09
-                </option>
-                <option value="10">
-                    10
-                </option>
-                <option value="11">
-                    11
-                </option>
-                <option value="12">
-                    12
-                </option>
-                <option value="13">
-                    13
-                </option>
-                <option value="14">
-                    14
-                </option>
-                <option value="15">
-                    15
-                </option>
-                <option value="16">
-                    16
-                </option>
-            </select>
-        </th>
-        <td><b>Tanggal </b><input type="date" name="bday" min="2000-01-02"></td>
+            <body>
+
+            {!! Form::open((['url'=> 'coursetopic'])) !!}
+            <center>
+                <div class="form-group">
+                    {!! Form::label('pertemuan_ke','Pertemuan Ke ') !!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                    {!! Form::select('pertemuan_ke', array('1'=>'1', '2'=>'2', '3'=>'3', '4'=>'4', '5'=>'5',
+                    '6'=>'6', '7'=>'7', '8'=>'8', '9'=>'9' , '10'=>'10' , '11'=>'11', '12'=>'12',
+                    '13'=>'13', '14'=>'14', '15'=>'15', '16'=>'16' ), '1') !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('Kode_Matkul','Kode Mata Kuliah ') !!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                    {!! Form::select('Kode_Matkul',array('3901'=>'3901', '3902'=>'3902', '3903'=>'3903', '3904'=>'3904', '3905'=>'3905',
+                    '3906'=>'3906', '3907'=>'3907'), '3901') !!}
+
+                </div>
+                </center>
+
+
+                <div class="form-group">
+                    {!! Form::label('tanggal','Tanggal :') !!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                    {!! Form::text('tanggal', '', array('id' => 'datepicker')) !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('nama_topik','Topik Pembahasan    :') !!}
+                    {!! Form::text('nama_topik',null,['class' => 'form-control' ])!!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('jumlah_mhs','Jumlah Mahasiswa :') !!}
+                    {!! Form::text('jumlah_mhs',null,['class' => 'form-control'])!!}
+                </div>
+<br>
+            <br>
+            <br>
+                <div class="form-group">
+                    {!! Form::submit('Tambah',['class' => 'btn btn-primary form-control']) !!}
+                </div>
+                {!! Form::close() !!}
+
+            {!! Form::open(array('url' => 'coursetopic', 'class' => 'form-horizontal','method'=>'get')) !!}
+            <button type="submit" class="btn btn-default btn-block"><b>Lihat Topik Perkuliahan</b></button>
+            {!! Form::close() !!}
+
+
+            <br>
         <br>
-        <table border="1"cellpadding="8"style="font-size:17px;width:350px;">
-            <form method="post" action="">
-                <br>
-                        <tr>
-                            <td><b>&nbsp;Pokok Bahasan &nbsp;</b></td><td><b>&nbsp;:&nbsp;</b></td>
-                            <td><input type="text" name=""></td>
-                        </tr>
-                        <tr>
-                            <td><b>&nbsp;Jumlah Mahasiswa &nbsp;</b></td><td><b>&nbsp;:&nbsp;</b></td>
-                            <td><input type="text" name=""></td>
-                        </tr>
-
-        </table>
-        <br>
-        <input type="submit" name="submit" value="Submit" />
-        </center>
-
+        </body>
     @stop

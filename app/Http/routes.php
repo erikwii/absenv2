@@ -41,7 +41,10 @@ Route::get ('/profildosen','LecturerController@profildosen');
 Route::get ('/profiladmin', 'AdminController@profiladmin');
 
 //route for topik dosen
-Route::get ('/coursetopic', 'LecturerController@coursetopic');
+Route::get ('coursetopic/tambahtopik', 'TopicController@tambahtopik');
+Route::post('coursetopic', 'TopicController@simpantopik');
+Route::get ('coursetopic', 'TopicController@showtopic');
+
 //route for rekap dosen
 Route::get ('/rekapdosen', 'LecturerController@rekapdosen');
 //route for rekap admin
@@ -55,7 +58,7 @@ Route::get ('/inputabsen','StudentController@inputabsen');
 //route for show all presences for admin
 Route::get ('/showadmin', 'AdminController@showadmin');
 //route for create new course dosen
-Route::get ('/createcourse','LecturerController@createcourse');
+Route::get ('createcourse','LecturerController@createcourse');
 //route for lihatabsen mhs for mahasiswa
 Route::get ('/lihatabsen', 'StudentController@lihatabsen');
 //route for add and delete user for admin
@@ -72,7 +75,7 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 //route for student registration
 Route::get('auth/student_registration','Auth\AuthController@getStudentRegistrationForm');
 Route::post('auth/student_registration', 'Auth\AuthController@postStudentRegistration');
-
+//route for dosen registration
 Route::get('auth/dosen_registration','Auth\AuthController@getDosenRegistrationForm');
 Route::post('auth/dosen_registration','Auth\AuthController@postDosenRegistration');
 

@@ -9,68 +9,60 @@
             <h2 style= "text-align:center"><small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of Jakarta :: </small></h2></tr>
             <br>
             </br>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+            <head>
+                <link href="{!! asset('assets/css/jquery-ui.css') !!}" media="all" rel="stylesheet" type="text/css"/>
+                <script type="text/javascript" src="{!! asset('js/jquery-1.10.2.js') !!}"></script>
+                <script type="text/javascript" src="{!! asset('js/jquery-ui.js') !!}"></script>
+                <script type="text/javascript" src="{!! asset('js/datepicker.js') !!}"></script>
+            </head>
 
-    <script>
-        $(document).ready(function() {
-            $("#datepicker").datepicker();
-        });
-    </script>
-</head>
+             </hr>
+            <body>
+            <center>
+                <h1>Create Course</h1>
+                {!! Form::open()!!}
+                <div class="form-group">
+                    {!! Form::label('kode_matkul','Kode Matakuliah :') !!}
+                    {!! Form::text('kode_matkul',null,['class' => 'from-control'])!!}
+                </div>
 
-<body>
-<center>
-<h3 style="text-align:center">CREATE NEW COURSE</h3>
-    <br>
-<table border="0"cellpadding="3" cellspacing="3"style="font-size:17px;width:350px;">
-    <form method="post" action="">
-        <tr>
-            <td><b>&nbsp;Course Name &nbsp;</b></td><td><b>&nbsp;:&nbsp;</b></td>
-            <td><input type="text" name=""></td>
-        </tr>
-        <tr>
-            <td class="animate4 bounceIn"><b>&nbsp;Prodi&nbsp;</b></td><td><b>&nbsp;:&nbsp;</b></td>
-            <td><select id="prodi" name="prodi">
-                    <option selected value = "Sistem Komputer">Sistem Komputer</option>
-                    <option value = "Matematika">Matematika</option>
-                    <option value = "Pendidikan Matematika">Pendidikan Matematika</option></select>
-            </td>
-        <tr>
-            <td><b>&nbsp;Schedule &nbsp;</b></td><td><b>&nbsp;:&nbsp;</b></td>
-            <td><label for="hari">Day</label>
-                <select name="hari" id="keterangan">
-                    <option value="Senin" selected="selected">Senin</option>
-                    <option value="Selasa">Selasa</option>
-                    <option value="Rabu">Rabu</option>
-                    <option value="Kamis">Kamis</option><option value="Jumat">Jumat</option>
-                </select><br />
-                <label for="hari">Time</label>
-                <select name="hari" id="hari">
-                    <option value="0-1" selected="selected">0-1</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="2+">2+</option><option value="3">3</option>
-                    <option value="4">3-4</option><option value="5">5</option>
-                </select></td></tr>
-        <tr>
-            <td><b>Course Start Date &nbsp;</b></td><td><b>&nbsp;:&nbsp;</b></td>
-            <td><input id="datepicker" /></td>
-        </tr>
-        <tr>
-            <td>
-                <input name="submit" type="button" value="Create Course" />
-            </td></tr>
+                <div class="form-group">
+                    {!! Form::label('nama_matkul','Nama Matakuliah :') !!}
+                    {!! Form::text('nama_matkul',null,['class' => 'from-control'])!!}
+                </div>
 
-    </form>
-</table>
-    </center>
-<br>
-<br>
-</body>
-</html>
-            @stop
+                <div class="form-group">
+                    {!! Form::label('sks','SKS :') !!}
+                    {!! Form::text('sks',null,['class' => 'from-control'])!!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('prodi','Program Studi :') !!}
+                    {!! Form::select('prodi', array('PM' => 'Pendidikan Matematika', 'M' => 'Matematika', 'S' => 'Sistem Komputer'), 'S') !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('day','Hari :') !!}
+                    {!! Form::select('day', array('1' => 'Senin', '2' => 'Selasa', '3' => 'Rabu', '4' => 'Kamis', '5' => 'Jumat'), '1') !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('time','Jam :') !!}
+                    {!! Form::select('time', array('0-1' => '0-1', '1' => '1', '2+' => '2+', '3' => '3', '3-4' => '3-4', '5' =>'5'), '1') !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('date','Course start day') !!}
+                    {!! Form::text('date', '', array('id' => 'datepicker')) !!}
+                </div>
+                <center>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-info">Create</button>
+                </center>
+        </div>
+        {!! Form::close() !!}
+        </center>
+        <br>
+        <br>
+        </body>
+@stop

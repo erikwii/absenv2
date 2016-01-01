@@ -6,7 +6,7 @@
         </li>
 <br>
         <li>
-            <a href="coursetopic">Course Topic</a>
+            <a href="/coursetopic/tambahtopik">Course Topic</a>
         </li>
 <br>
         <li>

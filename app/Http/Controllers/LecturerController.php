@@ -31,9 +31,7 @@ class LecturerController extends Controller
         return view('lecturers.profildosen',['name'=>$name,'kode_dosen'=>$kode_dosen,'telepon'=>$telepon]);
 
     }
-    public function coursetopic(){
-        return view('lecturers.coursetopic');
-    }
+
     public function rekapdosen(){
         return view('lecturers.rekap');
     }
