@@ -35,7 +35,4 @@ class LecturerController extends Controller
     public function rekapdosen(){
         return view('lecturers.rekap');
     }
-    public function createcourse(){
-        return view('lecturers.createcourse');
-    }
 }

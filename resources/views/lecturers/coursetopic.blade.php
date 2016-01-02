@@ -63,8 +63,6 @@
             {!! Form::open(array('url' => 'coursetopic', 'class' => 'form-horizontal','method'=>'get')) !!}
             <button type="submit" class="btn btn-default btn-block"><b>Lihat Topik Perkuliahan</b></button>
             {!! Form::close() !!}
-
-
             <br>
         <br>
         </body>

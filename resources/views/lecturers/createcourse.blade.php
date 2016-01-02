@@ -20,25 +20,25 @@
             <body>
             <center>
                 <h1>Create Course</h1>
-                {!! Form::open()!!}
+                {!! Form::open((['url'=> 'createcourse'])) !!}
                 <div class="form-group">
-                    {!! Form::label('kode_matkul','Kode Matakuliah :') !!}
-                    {!! Form::text('kode_matkul',null,['class' => 'from-control'])!!}
+                    {!! Form::label('Kode_Matkul','Kode Matakuliah :') !!}
+                    {!! Form::text('Kode_Matkul',null,['class' => 'from-control'])!!}
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('nama_matkul','Nama Matakuliah :') !!}
-                    {!! Form::text('nama_matkul',null,['class' => 'from-control'])!!}
+                    {!! Form::label('Nama_Matkul','Nama Matakuliah :') !!}
+                    {!! Form::text('Nama_Matkul',null,['class' => 'from-control'])!!}
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('sks','SKS :') !!}
-                    {!! Form::text('sks',null,['class' => 'from-control'])!!}
+                    {!! Form::label('SKS','SKS :') !!}
+                    {!! Form::text('SKS',null,['class' => 'from-control'])!!}
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('prodi','Program Studi :') !!}
-                    {!! Form::select('prodi', array('PM' => 'Pendidikan Matematika', 'M' => 'Matematika', 'S' => 'Sistem Komputer'), 'S') !!}
+                    {!! Form::select('prodi', array('Pendidikan Matematika' => 'Pendidikan Matematika', 'Matematika' => 'Matematika', 'Sistem Komputer' => 'Sistem Komputer'), 'S') !!}
                 </div>
 
                 <div class="form-group">
@@ -55,14 +55,18 @@
                     {!! Form::label('date','Course start day') !!}
                     {!! Form::text('date', '', array('id' => 'datepicker')) !!}
                 </div>
-                <center>
-                    <div class="col-sm-2">
-                        <button type="submit" class="btn btn-info">Create</button>
-                </center>
-        </div>
-        {!! Form::close() !!}
-        </center>
-        <br>
+<br>
+            <br>
+            <br>
+                <div class="form-group">
+                    {!! Form::submit('Tambah',['class' => 'btn btn-primary form-control']) !!}
+                </div>
+                {!! Form::close() !!}
+
+            {!! Form::open(array('url' => 'createcourse', 'class' => 'form-horizontal','method'=>'get')) !!}
+            <button type="submit" class="btn btn-default btn-block"><b>Lihat Mata Kuliah</b></button>
+            {!! Form::close() !!}
+            <br>
         <br>
         </body>
-@stop
+    @stop

@@ -2,7 +2,7 @@
     <ul class="nav navbar-nav side-nav">
 <br>
         <li>
-            <a href="createcourse">Create Course</a>
+            <a href="/createcourse/tambahMatkul">Create Course</a>
         </li>
 <br>
         <li>

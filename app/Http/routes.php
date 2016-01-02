@@ -58,7 +58,9 @@ Route::get ('/inputabsen','StudentController@inputabsen');
 //route for show all presences for admin
 Route::get ('/showadmin', 'AdminController@showadmin');
 //route for create new course dosen
-Route::get ('createcourse','LecturerController@createcourse');
+Route::get ('createcourse/tambahMatkul', 'MatkulController@tambahMatkul');
+Route::post('createcourse', 'MatkulController@simpanMatkul');
+Route::get ('createcourse', 'MatkulController@showMatkul');
 //route for lihatabsen mhs for mahasiswa
 Route::get ('/lihatabsen', 'StudentController@lihatabsen');
 //route for add and delete user for admin
