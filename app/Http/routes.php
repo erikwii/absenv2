@@ -73,6 +73,8 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 //registration routes
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
+Route::get('auth/register_admin', 'Auth\AuthAdminController@getAdminRegister');
+Route::post('auth/register_admin', 'Auth\AuthAdminController@postAdminRegister');
 
 //route for student registration
 Route::get('auth/student_registration','Auth\AuthController@getStudentRegistrationForm');
@@ -84,6 +86,11 @@ Route::post('auth/dosen_registration','Auth\AuthController@postDosenRegistration
 Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
+
+//route for admin registration
+Route::get('auth/admin_registration','Auth\AuthAdminController@getAdminRegistrationForm');
+Route::post('auth/admin_registration','Auth\AuthAdminController@postAdminRegistration');
+
 
 //forgot password
 Route::get('auth/password/email', 'Auth\PasswordController@getEmail');
