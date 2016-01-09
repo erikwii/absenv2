@@ -1,21 +1,20 @@
+@inject('request', 'Illuminate\Http\Request')
+<?php $path=$request::capture()->path() ?>
+
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
-<br>
-        <li>
-            <a href="lihatabsen">Lihat Absen</a>
+        <li @if(strcmp($path,"lihatabsen")==0) class="active" @endif>
+            <a href="/lihatabsen">Lihat Absen</a>
         </li>
         <br>
-        <li>
-            <a href="inputabsen">Input Absen</a>
+        <li @if(strcmp($path,"inputabsen")==0) class="active" @endif>
+            <a href="/inputabsen">Input Absen</a>
         </li>
-<br>
-        <li>
-            <a href="enrollmhs">Add Course</a>
+        <li @if(strcmp($path,"enrollmhs")==0) class="active" @endif>
+            <a href="/enrollmhs">Add Course</a>
         </li>
-<br>
-        <li>
-            <a href="profil">Profile</a>
+        <li @if(strcmp($path,"profil")==0) class="active" @endif>
+            <a href="/profil">Profile</a>
         </li>
-
     </ul>
 </div>

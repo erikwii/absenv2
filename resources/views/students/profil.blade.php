@@ -92,6 +92,7 @@
                 <!-- time content -->
         <div id="w">
             <div id="content" class="clearfix">
+
                 <h3>Identitas Mahasiswa</h3>
 
                 <section id="activity">

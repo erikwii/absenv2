@@ -9,7 +9,7 @@
 @endif
 <center>
 
-    <link href="{!! asset('assets/css/bootstrap.css') !!}" media="all" rel="stylesheet" type="text/css"/>
+    {!! HTML::style('assets/css/bootstrap.css') !!}
 
     <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
         {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 50, 'height' => 50 )) !!} Online Presence User
@@ -59,9 +59,7 @@
             Role:
         </label>
         <div class="col-sm-2">
-            <?php
-            echo Form::select('role', array('student' => 'Student', 'dosen' => 'Dosen'), 'student', array('class' => 'form-control'));
-            ?>
+            {!!Form::select('role', array('student' => 'Student', 'dosen' => 'Dosen'), 'student', array('class' => 'form-control'))!!}
         </div>
     </div>
 

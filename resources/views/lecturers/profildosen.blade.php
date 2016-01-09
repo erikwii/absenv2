@@ -2,6 +2,7 @@
 @section('content')
         <!-- Load waktu onload  -->
 <script type="text/javascript" src="{!! asset('js/waktu.js') !!}"></script>
+
 <style>
 
     h3 {

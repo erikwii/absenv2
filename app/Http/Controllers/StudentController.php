@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Student;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
