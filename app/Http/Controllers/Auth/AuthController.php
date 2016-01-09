@@ -27,6 +27,7 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
     protected $redirectTo = 'profil';
+    private $maxLoginAttempts = 7;
 
     /**
      * Create a new authentication controller instance.
@@ -108,12 +109,42 @@ class AuthController extends Controller
         $email=$request['email'];
         $password=$request['password'];
         $role=$request['role'];
-        if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => $role])) {
-            if(strcmp($role,'student')==0)
-                return redirect()->action('StudentController@profil');
-            else
-                return redirect()->action('LecturerController@profildosen');
+
+        $this->validate($request, [
+            $this->loginUsername() => 'required', 'password' => 'required',
+        ]);
+
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        $throttles = $this->isUsingThrottlesLoginsTrait();
+        if ($throttles && $this->hasTooManyLoginAttempts($request)) {
+            return $this->sendLockoutResponse($request);
         }
+
+        if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => $role],$request->has('remember'))) {
+            if(strcmp($role,'student')==0) {
+                $this->redirectTo = "profil";
+                //return redirect()->action('StudentController@profil');
+            }
+            else {
+                $this->redirectTo="profildosen";
+                //return redirect()->action('LecturerController@profildosen');
+            }
+            return $this->handleUserWasAuthenticated($request, $throttles);
+        }
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        if ($throttles) {
+            $this->incrementLoginAttempts($request);
+        }
+
+        return redirect($this->loginPath())
+            ->withInput($request->only($this->loginUsername(), 'remember'))
+            ->withErrors([
+                $this->loginUsername() => $this->getFailedLoginMessage(),
+            ]);
     }
 
     /**
