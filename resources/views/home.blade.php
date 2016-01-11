@@ -34,8 +34,7 @@
             <br>
             <br>
             {!! Form::open(array('url' => 'auth/login', 'method'=>'get')) !!}
-                <button type="submit" class="btn btn-default btn-block"><b>Login</b>
-                </button>
+                <button type="submit" class="btn btn-default btn-block"><b>Login</b></button>
             {!! Form::close() !!}
 
             {!! Form::open(array('url' => 'auth/register', 'method'=>'get')) !!}

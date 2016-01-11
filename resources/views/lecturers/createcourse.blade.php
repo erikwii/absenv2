@@ -68,11 +68,13 @@
         </div>
         {!! Form::close() !!}
 
+
         {!! Form::open(array('url' => 'createcourse', 'class' => 'form-horizontal','method'=>'get')) !!}
-        <button type="submit" class="btn btn-default btn-block"><b>Lihat Mata Kuliah</b></button>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary form-control"><b>Lihat Mata Kuliah</b></button>
+        </div>
         {!! Form::close() !!}
-        <br>
-        <br>
-    </body>
+
+        </body>
     </div>
 @stop
