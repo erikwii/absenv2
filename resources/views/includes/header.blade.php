@@ -6,6 +6,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="index.html">Sistem Absensi Berbasis Web</a>
+    <a class="navbar-brand" href="/">Sistem Absensi Berbasis Web</a>
 </div>
 <!-- Top Menu Items -->

@@ -5,8 +5,6 @@
     <body onload="waktu()">
     <div class="row">
         <div class="col-lg-120">
-
-
             <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
                 {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
                 SYSTEM
