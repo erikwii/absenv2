@@ -34,16 +34,16 @@ Route::get('/', 'HomeController@home');
 Route::get ('/home','HomeController@home');
 
 //route for student's profile
-Route::get('profil', 'StudentController@profil');
+Route::get('/profil', 'StudentController@profil');
 //route for dosen's profile
 Route::get ('/profildosen','LecturerController@profildosen');
 //route for admin's profile
 Route::get ('/profiladmin', 'AdminController@profiladmin');
 
 //route for topik dosen
-Route::get ('coursetopic/tambahtopik', 'TopicController@tambahtopik');
-Route::post('coursetopic', 'TopicController@simpantopik');
-Route::get ('coursetopic', 'TopicController@showtopic');
+Route::get ('/coursetopic/tambahtopik', 'TopicController@tambahtopik');
+Route::post('/coursetopic', 'TopicController@simpantopik');
+Route::get ('/coursetopic', 'TopicController@showtopic');
 
 //route for rekap dosen
 Route::get ('/rekapdosen', 'LecturerController@rekapdosen');
@@ -58,43 +58,43 @@ Route::get ('/inputabsen','StudentController@inputabsen');
 //route for show all presences for admin
 Route::get ('/showadmin', 'AdminController@showadmin');
 //route for create new course dosen
-Route::get ('createcourse/tambahMatkul', 'MatkulController@tambahMatkul');
-Route::post('createcourse', 'MatkulController@simpanMatkul');
-Route::get ('createcourse', 'MatkulController@showMatkul');
+Route::get ('/createcourse/tambahMatkul', 'MatkulController@tambahMatkul');
+Route::post('/createcourse', 'MatkulController@simpanMatkul');
+Route::get ('/createcourse', 'MatkulController@showMatkul');
 //route for lihatabsen mhs for mahasiswa
 Route::get ('/lihatabsen', 'StudentController@lihatabsen');
 //route for add and delete user for admin
 Route::get ('/updateuser', 'AdminController@updateuser');
 
 //authentication routes
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@authenticate');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::get('/auth/login', 'Auth\AuthController@getLogin');
+Route::post('/auth/login', 'Auth\AuthController@authenticate');
+Route::get('/auth/logout', 'Auth\AuthController@getLogout');
 //registration routes
-Route::get('auth/register', 'Auth\AuthController@getRegister');
-Route::post('auth/register', 'Auth\AuthController@postRegister');
-Route::get('auth/register_admin', 'Auth\AuthAdminController@getAdminRegister');
-Route::post('auth/register_admin', 'Auth\AuthAdminController@postAdminRegister');
+Route::get('/auth/register', 'Auth\AuthController@getRegister');
+Route::post('/auth/register', 'Auth\AuthController@postRegister');
+Route::get('/auth/register_admin', 'Auth\AuthAdminController@getAdminRegister');
+Route::post('/auth/register_admin', 'Auth\AuthAdminController@postAdminRegister');
 
 //route for student registration
-Route::get('auth/student_registration','Auth\AuthController@getStudentRegistrationForm');
-Route::post('auth/student_registration', 'Auth\AuthController@postStudentRegistration');
+Route::get('/auth/student_registration','Auth\AuthController@getStudentRegistrationForm');
+Route::post('/auth/student_registration', 'Auth\AuthController@postStudentRegistration');
 //route for dosen registration
-Route::get('auth/dosen_registration','Auth\AuthController@getDosenRegistrationForm');
-Route::post('auth/dosen_registration','Auth\AuthController@postDosenRegistration');
+Route::get('/auth/dosen_registration','Auth\AuthController@getDosenRegistrationForm');
+Route::post('/auth/dosen_registration','Auth\AuthController@postDosenRegistration');
 
 Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
 
 //route for admin registration
-Route::get('auth/admin_registration','Auth\AuthAdminController@getAdminRegistrationForm');
-Route::post('auth/admin_registration','Auth\AuthAdminController@postAdminRegistration');
+Route::get('/auth/admin_registration','Auth\AuthAdminController@getAdminRegistrationForm');
+Route::post('/auth/admin_registration','Auth\AuthAdminController@postAdminRegistration');
 
 
 //forgot password
-Route::get('auth/password/email', 'Auth\PasswordController@getEmail');
-Route::post('auth/password/email', 'Auth\PasswordController@postEmail');
+Route::get('/auth/password/email', 'Auth\PasswordController@getEmail');
+Route::post('/auth/password/email', 'Auth\PasswordController@postEmail');
 //reset password
-Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
-Route::post('password/reset', 'Auth\PasswordController@postReset');
+Route::get('/password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('/password/reset', 'Auth\PasswordController@postReset');

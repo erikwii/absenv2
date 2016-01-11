@@ -131,6 +131,7 @@ class AuthController extends Controller
                 $this->redirectTo="profildosen";
                 //return redirect()->action('LecturerController@profildosen');
             }
+            $request->session()->put("role",$role);
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -145,6 +146,18 @@ class AuthController extends Controller
             ->withErrors([
                 $this->loginUsername() => $this->getFailedLoginMessage(),
             ]);
+    }
+
+    /**
+     * Log the user out of the application.
+     * Override default function from TraitAuthenticateUsers
+     * @return \Illuminate\Http\Response
+     */
+    public function getLogout(Request $request)
+    {
+        $request->session()->forget('role');
+        Auth::logout();
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
 
     /**
