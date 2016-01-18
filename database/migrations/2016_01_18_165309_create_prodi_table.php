@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLecturersTable extends Migration
+class CreateProdiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,10 @@ class CreateLecturersTable extends Migration
      */
     public function up()
     {
-        Schema::create('lecturers', function (Blueprint $table) {
-            $table->string('Kode_Dosen',5)->primary();
-			$table->string('Nama_Dosen',30);
-			$table->string('Telepon',15);
-            $table->foreign('id_user')->references('id')->on('users');
+        //
+        Schema::create('prodi', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('Prodi_Id',True,True)->unique();
             $table->timestamps();
         });
     }
@@ -28,6 +27,7 @@ class CreateLecturersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('lecturers');
+        //
+        Schema::drop('prodi');
     }
 }

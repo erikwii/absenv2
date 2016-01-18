@@ -28,9 +28,11 @@ class AbsenceController extends Controller
         absence::create($input);
         return redirect ('absence');
 
-       /* $input['tgl'] = Carbon::now();
+       /*
+       $input['tgl'] = Carbon::now();
         absence::create(Request::all());
-        return redirect ('absence');*/
+        return redirect ('absence');
+       */
 
 
 

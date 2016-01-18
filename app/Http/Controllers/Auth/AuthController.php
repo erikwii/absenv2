@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
 use App\Models\Lecturer;
+use App\Models\Users;
+use App\Models\Prodi;
 
 class AuthController extends Controller
 {
@@ -65,7 +67,6 @@ class AuthController extends Controller
         return Validator::make($data, [
             'noreg' => 'required|unique:students|max:255',
             'nama' => 'required|max:255',
-            'prodi' => 'required|min:6',
             'semester' => 'required|numeric',
         ]);
     }
@@ -186,7 +187,14 @@ class AuthController extends Controller
         $reg_data=$request->input('reg_data');
         //store reg_data as session
         $request->session()->put('reg_data',$reg_data);
-        return view('auth.student_registration', ['reg_name'=>$reg_data['name']]);
+        //pass along all prodi name
+        $prodis = Prodi::all();
+        //need to transform prodis to associative array;
+        $prodi_arr=array();
+        foreach($prodis as $prodi){
+            $prodi_arr[$prodi->id]=$prodi->prodi;
+        }
+        return view('auth.student_registration', ['reg_name'=>$reg_data['name'],'prodis'=>$prodi_arr]);
     }
 
     /**
@@ -200,6 +208,8 @@ class AuthController extends Controller
                 $request, $validator
             );
         }
+        //get id first
+        $id=Users::getNextId('users');
 
         //1. create new users instance & authenticate the user
         $reg_data = $request->session()->get('reg_data');
@@ -210,10 +220,11 @@ class AuthController extends Controller
         $student = new Student;
         $student->Noreg=$request['noreg'];
         $student->Nama_Mhs =$request['nama'];
-        $student->Prodi =$request['prodi'];
+        $student->Prodi_Id =$request['Prodi_Id'];
         $student->Alamat=$request['alamat'];
         $student->Telepon=$request['telepon'];
         $student->Semester=$request['semester'];
+        $student->id_user=$id;
         $student->save();
         //3.forward the user into profile page, redirectPath() return $redirectTo
         return redirect()->action('StudentController@profil');

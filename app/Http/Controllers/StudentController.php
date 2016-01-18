@@ -22,15 +22,17 @@ class StudentController extends Controller
     {
         $user = Auth::user();
         //$user_data = $request->user();
-        $name = $user['attributes']['name'];
-        $student = Student::where('Nama_Mhs',$name)->take(1)->get();
+        $id = $user->id;
+        $student = Student::where('id_user',$id)->first();
         //$student
-        $noreg = $student[0]['attributes']['Noreg'];
-        $prodi = $student[0]['attributes']['Prodi'];
-        $semester = $student[0]['attributes']['Semester'];
-        $alamat = $student[0]['attributes']['Alamat'];
-        $telepon = $student[0]['attributes']['Telepon'];
-        return view('students.profil',['name'=>$name,'noreg'=>$noreg,'prodi'=>$prodi,'semester'=>$semester,'alamat'=>$alamat,'telepon'=>$telepon]);
+        $name = $student->Nama_Mhs;
+        $noreg = $student->Noreg;
+        $prodi_model=$student->prodi;
+        $prodi_name = $prodi_model->prodi;
+        $semester = $student->Semester;
+        $alamat = $student->Alamat;
+        $telepon = $student->Telepon;
+        return view('students.profil',['name'=>$name,'noreg'=>$noreg,'prodi'=>$prodi_name,'semester'=>$semester,'alamat'=>$alamat,'telepon'=>$telepon]);
     }
 
     public function enrollmhs()

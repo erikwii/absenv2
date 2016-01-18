@@ -43,10 +43,10 @@
 
 <div class="form-group">
     <label class="control-label col-sm-6" for="prodi">
-        Program Studi:
+        Role:
     </label>
     <div class="col-sm-2">
-        <input type="text" name="prodi" value="" class="form-control" placeholder="enter prodi">
+        {!!Form::select('Prodi_Id', $prodis, 0, array('class' => 'form-control'))!!}
     </div>
 </div>
 

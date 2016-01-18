@@ -19,11 +19,27 @@ class Student extends Model
     protected $fillable = [
         'Noreg',
         'Nama_Mhs',
-        'Prodi',
+        'Prodi_Id',
         'Alamat',
         'Telepon',
-        'Semester'
+        'Semester',
+        'id_user'
     ];
+
+    //get the prodi mapping
+    public function prodi(){
+        return $this->hasOne('App\Models\Prodi','id','Prodi_Id');
+    }
+
+    //accessor for id_user
+    public function getIdUserAttribute($value){
+        return $value;
+    }
+
+    //mutator for Noreg
+    public function setIdUserAttribute($value){
+        $this->attributes['id_user']=$value;
+    }
 
     //accessor for Noreg
     public function getNoregAttribute($value){
@@ -46,13 +62,13 @@ class Student extends Model
     }
 
     //accessor for Prodi
-    public function getProdiAttribute($value){
+    public function getProdiIdAttribute($value){
         return $value;
     }
 
     //mutator for Prodi
-    public function setProdiAttribute($value){
-        $this->attributes['Prodi']=$value;
+    public function setProdiIdAttribute($value){
+        $this->attributes['Prodi_Id']=$value;
     }
 
     //accessor for Alamat
