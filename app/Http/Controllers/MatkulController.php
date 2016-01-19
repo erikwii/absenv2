@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Http\Requests;
 use App\Models\Prodi;
@@ -16,27 +17,49 @@ class MatkulController extends Controller
         $this->middleware('auth');
     }
 
-    public function tambahMatkul()
+    public function createMatkul()
     {
         $prodis = Prodi::all();
         $prodi_arr=array();
         foreach($prodis as $prodi){
             $prodi_arr[$prodi->id]=$prodi->prodi;
         }
-        return view('lecturers.createcourse')->with('prodi_options',$prodi_arr);
+
+        //somehow must pass Kode_Dosen tp the next form
+        //get current user
+        $user = Auth::user();
+        //from user get reference to lecturer
+        $lecturer = $user->lecturer;
+        //pass also Kode_Dosen
+        $Kode_Dosen=$lecturer->Kode_Dosen;
+        return view('lecturers.createcourse')->with('prodi_options',$prodi_arr)->with('Kode_Dosen',$Kode_Dosen);
     }
 
-    public function simpanMatkul()
+    /**
+     * Normally we try taken form data with Request Controller but in this case we are using Facade
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function saveMatkul()
     {
         $input=Request::all();
         Course::create($input);
-        return redirect ('createcourse');
+        //return view('lecturers.showcourse');
+        //instead of redirect directly we call another function that do actual redirection
+        return $this->showMatkul();
     }
 
+    /**
+     * We need to filter only course taught by this lecturer is shown
+     * @return $this
+     */
     public function showMatkul()
     {
-        $Course = Course::all();
-       //$Course = Course::where('Kode_Matkul','=',$Kode_Matkul)->get()->first();
-        return view('lecturers.showCourse')->with('Course', $Course);
+        //get current user
+        $user = Auth::user();
+        //get the mapping for lecturer
+        $kode_dosen = $user->lecturer->Kode_Dosen;
+        $courses = Course::where('Kode_Dosen',$kode_dosen)->get();
+
+        return view('lecturers.showcourse')->with('Courses', $courses);
     }
 }

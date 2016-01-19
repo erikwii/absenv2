@@ -23,7 +23,7 @@
         </hr>
         <body>
         <h2><p class="text-center">Create Course</p></h2>
-        {!! Form::open(array('url' => 'createcourse', 'class' => 'form-horizontal')) !!}
+        {!! Form::open(array('url' => '/createcourse/tambahMatkul', 'class' => 'form-horizontal')) !!}
         <div class="form-group center-block">
             {!! Form::label('Kode_Matkul','Kode Matakuliah :',['class' => "control-label col-sm-6"]) !!}
             {!! Form::text('Kode_Matkul',null,['class' => 'col-sm-2'])!!}
@@ -41,7 +41,7 @@
 
         <div class="form-group">
             {!! Form::label('prodi','Program Studi :',['class' => "control-label col-sm-6"]) !!}
-            {!! Form::select('prodi', $prodi_options, 1,['class' => 'col-sm-2']) !!}
+            {!! Form::select('prodi_id', $prodi_options, 1,['class' => 'col-sm-2']) !!}
 
         </div>
 
@@ -57,8 +57,10 @@
 
         <div class="form-group center-block">
             {!! Form::label('date','Course start date :',['class' => "control-label col-sm-6"]) !!}
-            {!! Form::text('date', '', array('id' => 'datepicker','class' => 'col-sm-2')) !!}
+            {!! Form::text('course_start_day', '', array('id' => 'datepicker','class' => 'col-sm-2')) !!}
         </div>
+
+        {!! Form::hidden('Kode_Dosen',$Kode_Dosen) !!}
 
         <br>
         <div class="form-group">
@@ -67,7 +69,7 @@
         {!! Form::close() !!}
 
 
-        {!! Form::open(array('url' => 'createcourse', 'class' => 'form-horizontal','method'=>'get')) !!}
+        {!! Form::open(array('url' => '/showcourse', 'class' => 'form-horizontal','method'=>'get')) !!}
         <div class="form-group">
             <button type="submit" class="btn btn-primary form-control"><b>Lihat Mata Kuliah</b></button>
         </div>

@@ -25,11 +25,11 @@ class Course extends Model
         'Kode_Matkul',
         'Nama_Matkul',
         'SKS',
-        'prodi',
+        'prodi_id',
         'day',
         'time',
-        'course_start_day'
-
+        'course_start_day',
+        'Kode_Dosen'
     ];
 
     //relationships
@@ -39,8 +39,13 @@ class Course extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function Topic()
+    public function topic()
     {
         return $this->belongsTo('App\Models\Topic');
+    }
+
+    public function prodi(){
+        return $this->hasOne('App\Models\Prodi','id','prodi_id');
+        //return $this->belongsTo('App\Models\Prodi','prodi_id','id');
     }
 }

@@ -5,6 +5,9 @@
         <li @if(strcmp($path,"createcourse/tambahMatkul")==0) class="active" @endif>
             <a href="/createcourse/tambahMatkul">Create Course</a>
         </li>
+        <li @if(strcmp($path,"showcourse")==0) class="active" @endif>
+            <a href="/showcourse">Show Course</a>
+        </li>
         <li @if(strcmp($path,"coursetopic/tambahtopik")==0) class="active" @endif>
             <a href="/coursetopic/tambahtopik">Course Topic</a>
         </li>
