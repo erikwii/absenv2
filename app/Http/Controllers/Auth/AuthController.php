@@ -189,7 +189,7 @@ class AuthController extends Controller
         $request->session()->put('reg_data',$reg_data);
         //pass along all prodi name
         $prodis = Prodi::all();
-        //need to transform prodis to associative array;
+        //transform prodi model to associative array;
         $prodi_arr=array();
         foreach($prodis as $prodi){
             $prodi_arr[$prodi->id]=$prodi->prodi;

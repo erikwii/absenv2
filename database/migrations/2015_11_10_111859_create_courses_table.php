@@ -16,6 +16,7 @@ class CreateCoursesTable extends Migration
             $table->string('Kode_Matkul',10)->primary();
 			$table->string('Nama_Matkul',30);
 			$table->string('SKS',10);
+            $table->foreign('prodi_id')->referemces('id')->on('prodi');
         });
     }
 

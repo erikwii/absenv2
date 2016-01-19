@@ -15,7 +15,7 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->string('Noreg',10)->primary();
 			$table->string('Nama_Mhs',30);
-			$table->integer('Prodi_Id',True,True);
+			$table->foreign('Prodi_Id')->references('id')->on('prodi');
 			$table->string('Alamat',50);
 			$table->string('Telepon',15);
 			$table->string('Semester',10);

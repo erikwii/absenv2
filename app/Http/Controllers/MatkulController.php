@@ -5,15 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use App\Models\Course;
 use App\Http\Requests;
-//use Illuminate\Http\Request;
+use App\Models\Prodi;
 
-use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 class MatkulController extends Controller
 {
+    public function __construct()
+    {
+        //attach auth middleware, if user not authenticated forward to login page
+        $this->middleware('auth');
+    }
+
     public function tambahMatkul()
     {
-        return view('lecturers.createcourse');
+        $prodis = Prodi::all();
+        $prodi_arr=array();
+        foreach($prodis as $prodi){
+            $prodi_arr[$prodi->id]=$prodi->prodi;
+        }
+        return view('lecturers.createcourse')->with('prodi_options',$prodi_arr);
     }
 
     public function simpanMatkul()

@@ -41,7 +41,7 @@
 
         <div class="form-group">
             {!! Form::label('prodi','Program Studi :',['class' => "control-label col-sm-6"]) !!}
-            {!! Form::select('prodi', array('Pendidikan Matematika' => 'Pendidikan Matematika', 'Matematika' => 'Matematika', 'Sistem Komputer' => 'Sistem Komputer'), 'Matematika',['class' => 'col-sm-2']) !!}
+            {!! Form::select('prodi', $prodi_options, 1,['class' => 'col-sm-2']) !!}
 
         </div>
 
@@ -52,14 +52,12 @@
 
         <div class="form-group center-block">
             {!! Form::label('time','Jam :',['class' => "control-label col-sm-6"]) !!}
-            {!! Form::select('time', array('0-1' => '0-1', '1' => '1', '2+' => '2+', '3' => '3', '3-4' => '3-4', '5' =>'5'), '1',['class' => 'col-sm-2']) !!}
+            {!! Form::select('time', array('0-1' => '0-1', '2+' => '2+', '3-4' => '3-4', '5' =>'5'), '1',['class' => 'col-sm-2']) !!}
         </div>
 
         <div class="form-group center-block">
-            {!! Form::label('date','Course start day',['class' => "control-label col-sm-6"]) !!}
-            <div class="col-sm-2">
-                {!! Form::text('date', '', array('id' => 'datepicker')) !!}
-            </div>
+            {!! Form::label('date','Course start date :',['class' => "control-label col-sm-6"]) !!}
+            {!! Form::text('date', '', array('id' => 'datepicker','class' => 'col-sm-2')) !!}
         </div>
 
         <br>
