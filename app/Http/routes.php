@@ -60,6 +60,8 @@ Route::get ('/showadmin', 'AdminController@showadmin');
 //route for create new course dosen
 Route::get ('/createcourse/tambahMatkul', 'MatkulController@createMatkul');
 Route::post('/createcourse/tambahMatkul', 'MatkulController@saveMatkul');
+Route::get ('/createcourse/tambahMatkul/{id_matkul}', 'MatkulController@editMatkul');
+Route::post('/createcourse/tambahMatkul/{id_matkul}', 'MatkulController@updateMatkul');
 Route::get ('/showcourse', 'MatkulController@showMatkul');
 //route for lihatabsen mhs for mahasiswa
 Route::get ('/lihatabsen', 'StudentController@lihatabsen');

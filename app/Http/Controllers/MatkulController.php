@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
-use App\Http\Requests;
 use App\Models\Prodi;
 
 use Carbon\Carbon;
@@ -19,7 +18,9 @@ class MatkulController extends Controller
 
     public function createMatkul()
     {
+        //get all prodi information
         $prodis = Prodi::all();
+        //transform prodi to associative array
         $prodi_arr=array();
         foreach($prodis as $prodi){
             $prodi_arr[$prodi->id]=$prodi->prodi;
@@ -35,8 +36,23 @@ class MatkulController extends Controller
         return view('lecturers.createcourse')->with('prodi_options',$prodi_arr)->with('Kode_Dosen',$Kode_Dosen);
     }
 
+    public function editMatkul($id_matkul){
+        $course=Course::where('Kode_matkul',$id_matkul)->first();
+        //get all prodi information
+        $prodis = Prodi::all();
+        //transform prodi to associative array
+        $prodi_arr=array();
+        foreach($prodis as $prodi){
+            $prodi_arr[$prodi->id]=$prodi->prodi;
+        }
+        $kode_dosen=$course->Kode_Dosen;
+        //need to pass filled data to this view (extra parameter)
+        return view('lecturers.editcourse')->with('prodi_options',$prodi_arr)->with('Kode_Dosen',$kode_dosen)->with('course',$course);
+    }
+
     /**
      * Normally we try taken form data with Request Controller but in this case we are using Facade
+     * Missing: Add Validator (Priority 2nd, after all core business function is implemented)
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function saveMatkul()
@@ -45,6 +61,20 @@ class MatkulController extends Controller
         Course::create($input);
         //return view('lecturers.showcourse');
         //instead of redirect directly we call another function that do actual redirection
+        return $this->showMatkul();
+    }
+
+    public function updateMatkul(){
+        $input=Request::all();
+        //retrieve the relevant model with where condition
+        $course=Course::find($input['Kode_Matkul']);
+        $course->Nama_Matkul=$input['Nama_Matkul'];
+        $course->SKS=$input['SKS'];
+        $course->prodi_id=$input['prodi_id'];
+        $course->day=$input['day'];
+        $course->time=$input['time'];
+        $course->course_start_day=$input['course_start_day'];
+        $course->save();
         return $this->showMatkul();
     }
 
