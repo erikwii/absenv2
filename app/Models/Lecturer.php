@@ -22,6 +22,16 @@ class Lecturer extends Model
         'Telepon'
     ];
 
+    public function getIdUserAttribute($value)
+    {
+        return $value;
+    }
+
+    public function setIdUserAttribute($value)
+    {
+        $this->attributes['id_user'] = $value;
+    }
+
     /**
      * @return mixed
      */

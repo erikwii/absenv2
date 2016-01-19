@@ -241,6 +241,9 @@ class AuthController extends Controller
             );
         }
 
+        //get id user
+        $id=Users::getNextId('users');
+
         //1. create new users instance & authenticate the user
         $reg_data = $request->session()->get('reg_data');
         Auth::login($this->create($reg_data));
@@ -251,6 +254,7 @@ class AuthController extends Controller
         $lecturer->Kode_Dosen=$request['kode_dosen'];
         $lecturer->Nama_Dosen =$request['nama'];
         $lecturer->Telepon=$request['telepon'];
+        $lecturer->id_user=$id;
         $lecturer->save();
         //3. redirect to profile page
         return redirect()->action('LecturerController@profildosen');

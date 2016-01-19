@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * This class is not used, what actuall used is User in App\User for each authenticated user
+ * Class Users
+ * @package App\Models
+ */
 class Users extends Model
 {
     protected $table = 'users';
@@ -12,6 +17,7 @@ class Users extends Model
     public $timestamps=true;
 
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -28,6 +34,10 @@ class Users extends Model
     }
 
     public function student(){
-        return $this->hasOne('App\Models\Prodi','id_user','id');
+        return $this->belongsTo('App\Models\Student','id_user','id');
+    }
+
+    public function lecturer(){
+        return $this->belongsTo('App\Models\Lecturer','id_user','id');
     }
 }

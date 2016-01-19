@@ -23,6 +23,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var string
      */
     protected $table = 'users';
+    protected $primaryKey='id';
 
     /**
      * The attributes that are mass assignable.
@@ -37,4 +38,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function student(){
+        return $this->belongsTo('App\Models\Student','id_user','id');
+    }
+
+    public function lecturer(){
+        return $this->belongsTo('App\Models\Lecturer','id','id_user');
+    }
 }
