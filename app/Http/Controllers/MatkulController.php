@@ -52,7 +52,7 @@ class MatkulController extends Controller
 
     /**
      * Normally we try taken form data with Request Controller but in this case we are using Facade
-     * Missing: Add Validator (Priority 2nd, after all core business function is implemented)
+     * Todo: Add Validator (Critical, after all core business function is implemented)
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function saveMatkul()

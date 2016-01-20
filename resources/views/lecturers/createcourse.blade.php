@@ -1,5 +1,10 @@
 @extends('layouts.masterdosen')
 @section('content')
+    <link href="{!! asset('assets/css/jquery-ui.css') !!}" media="all" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="{!! asset('js/jquery-1.10.2.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/jquery-ui.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/datepicker.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/waktu.js') !!}"></script>
     <div class="container">
         <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
             {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
@@ -10,16 +15,18 @@
                 ::
             </small>
         </h2>
-        <br>
-        </br>
-            <link href="{!! asset('assets/css/jquery-ui.css') !!}" media="all" rel="stylesheet" type="text/css"/>
-            <script type="text/javascript" src="{!! asset('js/jquery-1.10.2.js') !!}"></script>
-            <script type="text/javascript" src="{!! asset('js/jquery-ui.js') !!}"></script>
-            <script type="text/javascript" src="{!! asset('js/datepicker.js') !!}"></script>
 
 
-        </hr>
-        <body>
+        <h5><p class='text-center'>
+                Hari, Tanggal :
+                @inject('helpers', 'App\Helpers')
+                {!! $helpers::indonesian_date() !!}
+                <span id='output'></span> WIB
+            </p>
+        </h5>
+
+        <!-- time content -->
+
         <h2><p class="text-center">Create Course</p></h2>
         {!! Form::open(array('url' => '/createcourse/tambahMatkul', 'class' => 'form-horizontal')) !!}
         <div class="form-group center-block">
@@ -73,6 +80,5 @@
         </div>
         {!! Form::close() !!}
 
-        </body>
     </div>
 @stop

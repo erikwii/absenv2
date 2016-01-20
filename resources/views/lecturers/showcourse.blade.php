@@ -21,13 +21,13 @@
         <br>
         <br>
 
-        <h3><p class='text-center'>
+        <h5><p class='text-center'>
                 Hari, Tanggal :
                 @inject('helpers', 'App\Helpers')
                 {!! $helpers::indonesian_date() !!}
                 <span id='output'></span> WIB
             </p>
-        </h3>
+        </h5>
 
                 <!-- time content -->
         <br>
@@ -47,7 +47,7 @@
             @foreach($Courses as $course)
                 <tr>
                     <?php $link= "/createcourse/tambahMatkul/".$course->Kode_Matkul?>
-                    <td width="20" style="text-align:center"><a href={{$link}}>{!! $course->Kode_Matkul !!} </a></td>
+                    <td width="20" style="text-align:center"><a href={!! $link !!}>{!! $course->Kode_Matkul !!} </a></td>
                     <td width="20" style="text-align:center"> {{$course->Nama_Matkul}} </td>
                     <td width="20" style="text-align:center"> {{$course->SKS}} </td>
                     <td width="20" style="text-align:center"> {{$course->prodi->prodi}} </td>
