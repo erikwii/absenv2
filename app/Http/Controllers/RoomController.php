@@ -9,4 +9,6 @@ use App\Http\Requests;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-class RoomController extends Controller
+class RoomController extends Controller{
+
+}

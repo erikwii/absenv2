@@ -27,7 +27,7 @@ class Topic extends Model
     //relationship
     public function courses()
     {
-        return $this->hasMany('App\Models\Course');
+        return $this->belongTo('App\Models\Course','Kode_Matkul','Kode_Matkul');
     }
 
 }

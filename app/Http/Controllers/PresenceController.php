@@ -9,4 +9,6 @@ use App\Http\Requests;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-class PresenceController extends Controller
+class PresenceController extends Controller{
+
+}

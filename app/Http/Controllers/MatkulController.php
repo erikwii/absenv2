@@ -59,11 +59,13 @@ class MatkulController extends Controller
     {
         $input=Request::all();
         Course::create($input);
-        //return view('lecturers.showcourse');
-        //instead of redirect directly we call another function that do actual redirection
         return $this->showMatkul();
     }
 
+    /**
+     * Todo: Add Validator
+     * @return MatkulController
+     */
     public function updateMatkul(){
         $input=Request::all();
         //retrieve the relevant model with where condition
@@ -79,7 +81,7 @@ class MatkulController extends Controller
     }
 
     /**
-     * We need to filter only course taught by this lecturer is shown
+     * Show all course only taught by this lecturer
      * @return $this
      */
     public function showMatkul()

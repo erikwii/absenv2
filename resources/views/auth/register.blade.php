@@ -1,12 +1,5 @@
-@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li><?php echo $error?></li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+@include('errors.error_validator')
+
 <center>
 
     {!! HTML::style('assets/css/bootstrap.css') !!}

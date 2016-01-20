@@ -59,4 +59,9 @@ class Course extends Model
         $instance = DB::table('courses')->select('Kode_Matkul','Nama_Matkul')->orderBy('Kode_Matkul','asc')->get();
         return $instance;
     }
+
+    public static function instancesByCourseId($course_id){
+        $instance = DB::table('courses')->select('Kode_Matkul','Nama_Matkul')->where('Kode_Dosen',$course_id)->orderBy('Kode_Matkul','asc')->get();
+        return $instance;
+    }
 }

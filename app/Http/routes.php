@@ -45,6 +45,11 @@ Route::get ('/coursetopic/tambahtopik', 'TopicController@tambahtopik');
 Route::post('/coursetopic', 'TopicController@simpantopik');
 Route::get ('/coursetopic', 'TopicController@showtopic');
 
+//Todo: For debug, please delete this later
+Route::get('/notopic',function(){
+    return view('lecturers.notopic');
+});
+
 //route for rekap dosen
 Route::get ('/rekapdosen', 'LecturerController@rekapdosen');
 //route for rekap admin
