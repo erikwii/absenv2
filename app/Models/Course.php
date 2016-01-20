@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Course extends Model
 {
@@ -47,5 +48,15 @@ class Course extends Model
     public function prodi(){
         return $this->hasOne('App\Models\Prodi','id','prodi_id');
         //return $this->belongsTo('App\Models\Prodi','prodi_id','id');
+    }
+
+    /**
+     * Alternative approach to get all instance of course but with ascending order
+     * We can achieve similar result with pure Eloquent, might be further enhanced in the future for more complex query
+     * @return mixed
+     */
+    public static function instances(){
+        $instance = DB::table('courses')->select('Kode_Matkul','Nama_Matkul')->orderBy('Kode_Matkul','asc')->get();
+        return $instance;
     }
 }

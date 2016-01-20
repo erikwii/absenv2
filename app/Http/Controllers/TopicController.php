@@ -2,35 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Support\Facades\Request;
 use App\Models\Topic;
 use App\Http\Requests;
-//use Illuminate\Http\Request;
-
-use App\Http\Controllers\Controller;
-use Carbon\Carbon;
-use DB;
+use App\Helpers;
 
 class TopicController extends Controller
 {
+    /**
+     * Todo: must filter only shows courses whom are taught by this user
+     * @return $this
+     */
     public function tambahtopik()
     {
-        return view('lecturers.coursetopic');
+        //get Kode_Matkul & Nama_Matkul from course
+        $courses=Course::instances();
+        $courses_arr=Helpers::toAssociativeArrays($courses);
+        $counter_pertemuan=array();
+        for($i=1;$i<=16;$i++){
+            $counter_pertemuan[$i]=$i;
+        }
+        return view('lecturers.coursetopic')->with('courses',$courses_arr)->with('counter_p',$counter_pertemuan);
     }
 
     public function simpantopik()
     {
         $input=Request::all();
         Topic::create($input);
-        return redirect ('coursetopic');
+        return view('lecturers.coursetopic');
     }
 
     public function showtopic()
     {
         $Topic = Topic::all();
-       //$Topic = Topic::where('id_topik','=',$id_topik)->get()->first();
         return view('lecturers.showtopic')->with('Topic', $Topic);
     }
-
-
 }

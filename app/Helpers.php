@@ -36,4 +36,17 @@ class Helpers{
         $date = "{$date} {$suffix}";
         return $date;
     }
+
+    /**
+     * Transform instances of eloquentModel to instances of associative array
+     */
+    public static function toAssociativeArrays($instances){
+        $array=array();
+        foreach($instances as $instance){
+            $instance_arr = (array)$instance;
+            $vals = array_values($instance_arr);
+            $array[$vals[0]]=$vals[1];
+        }
+        return $array;
+    }
 }

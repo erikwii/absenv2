@@ -32,17 +32,14 @@
         <div class="form-group center-block">
             {!! Form::label('pertemuan_ke','Pertemuan Ke',['class' => "control-label col-sm-6"]) !!}
             <div class="col-sm-2">
-            {!! Form::select('pertemuan_ke', array('1'=>'1', '2'=>'2', '3'=>'3', '4'=>'4', '5'=>'5',
-            '6'=>'6', '7'=>'7', '8'=>'8', '9'=>'9' , '10'=>'10' , '11'=>'11', '12'=>'12',
-            '13'=>'13', '14'=>'14', '15'=>'15', '16'=>'16' ), '1',['class' => 'form-control']) !!}
+            {!! Form::select('pertemuan_ke', $counter_p, null,['class' => 'form-control']) !!}
             </div>
         </div>
 
         <div class="form-group form-group-sm">
-            {!! Form::label('Kode_Matkul','Kode Mata Kuliah',['class' => "control-label col-sm-6"]) !!}
+            {!! Form::label('Kode_Matkul','Mata Kuliah',['class' => "control-label col-sm-6"]) !!}
             <div class="col-sm-2">
-            {!! Form::select('Kode_Matkul',array('3901'=>'3901', '3902'=>'3902', '3903'=>'3903', '3904'=>'3904', '3905'=>'3905',
-            '3906'=>'3906', '3907'=>'3907'), '3901',['class' => 'form-control']) !!}
+            {!! Form::select('Kode_Matkul',$courses, null,['class' => 'form-control']) !!}
             </div>
         </div>
 
