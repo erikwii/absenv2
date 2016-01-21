@@ -3,57 +3,59 @@
         <!-- Load waktu onload  -->
 <script type="text/javascript" src="{!! asset('js/waktu.js') !!}"></script>
 <body onload="waktu()">
-<div class="row">
-    <div class="col-lg-120">
+<div class="container">
 
 
-        <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
-            {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
-            SYSTEM
-        </h1>
-        <h2 style="text-align:center">
-            <small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of
-                Jakarta ::
-            </small>
-        </h2>
-        </tr>
-        <br>
-
-        <!-- time content -->
-        <br>
-        <br>
-
-        <?php
-        use App\Helpers;
-        echo "<center><h3> Hari, Tanggal : " . Helpers::indonesian_date() . " <span id='output'></span> WIB </center></h3></span>"
-        ?>
-                <!-- time content -->
-        <br>
-        <br>
-<!--<tr>-->
-        <h3 style="text-align:center"> Daftar Topik Perkuliahan </h3>
-<table width="120" align = "center" border ="1">
-    <tr>
-        <th width="20" style="text-align:center">NO</th>
-        <th width="20" style="text-align:center">Pertemuan-Ke</th>
-        <th width="20" style="text-align:center">Kode Mata Kuliah</th>
-        <th width="20" style="text-align:center">Tanggal</th>
-        <th width="20" style="text-align:center">Topik Pembahasan</th>
-        <th width="20" style="text-align:center">Jumlah Mahasiswa</th>
+    <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
+        {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
+        SYSTEM
+    </h1>
+    <h2 style="text-align:center">
+        <small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of
+            Jakarta ::
+        </small>
+    </h2>
     </tr>
-    @foreach($Topic as $topics)
+    <br>
+
+    <!-- time content -->
+    <h5><p class='text-center'>
+            Hari, Tanggal :
+            @inject('helpers', 'App\Helpers')
+            {!! $helpers::indonesian_date() !!}
+            <span id='output'></span> WIB
+        </p>
+    </h5>
+    <!-- time content -->
+
+    <!--<tr>-->
+    <h3 style="text-align:center"> Daftar Topik Perkuliahan </h3>
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+    <table class="table table-responsive table-striped table-hover">
+        <thead>
         <tr>
-            <td width="20" style="text-align:center"> {{$topics->id_topik}} </td>
-            <td width="20" style="text-align:center"> {{$topics->pertemuan_ke}} </td>
-            <td width="20" style="text-align:center"> {{$topics->Kode_Matkul}} </td>
-            <td width="20" style="text-align:center"> {{$topics->tanggal}} </td>
-            <td width="20" style="text-align:center"> {{$topics->nama_topik}} </td>
-            <td width="20" style="text-align:center"> {{$topics->jumlah_mhs}} </td>
+            <th>Pertemuan-Ke</th>
+            <th>Kode Mata Kuliah</th>
+            <th>Tanggal</th>
+            <th>Topik Pembahasan</th>
+            <th>Jumlah Mahasiswa</th>
         </tr>
+        </thead>
+        <tbody>
+        @foreach($Topic as $topics)
+            <tr>
+                <td> {{$topics->pertemuan_ke}} </td>
+                <td> {{$topics->Kode_Matkul}} </td>
+                <td> {{$topics->tanggal}} </td>
+                <td> {{$topics->nama_topik}} </td>
+                <td> {{$topics->jumlah_mhs}} </td>
+            </tr>
         @endforeach
+        </tbody>
     </table>
+    </div>
     <br>
     <br>
-</div>
 </div>
 @stop

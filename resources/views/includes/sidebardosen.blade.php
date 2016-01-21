@@ -11,6 +11,9 @@
         <li @if(strcmp($path,"coursetopic/tambahtopik")==0) class="active" @endif>
             <a href="/coursetopic/tambahtopik">Course Topic</a>
         </li>
+        <li @if(strcmp($path,"coursetopic")==0) class="active" @endif>
+            <a href="/coursetopic">Show Topic</a>
+        </li>
         <li @if(strcmp($path,"rekapdosen")==0) class="active" @endif>
             <a href="/rekapdosen">Rekap Absen</a>
         </li>
