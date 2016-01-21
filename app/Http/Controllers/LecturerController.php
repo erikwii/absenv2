@@ -20,13 +20,11 @@ class LecturerController extends Controller
 
     public function profildosen(){
         $user = Auth::user();
-        //$user_data = $request->user();
         $name = $user->name;
         $lecturer = $user->lecturer;
         $kode_dosen = $lecturer->Kode_Dosen;
         $telepon = $lecturer->Telepon;
         return view('lecturers.profildosen',['name'=>$name,'kode_dosen'=>$kode_dosen,'telepon'=>$telepon]);
-
     }
 
     public function rekapdosen(){

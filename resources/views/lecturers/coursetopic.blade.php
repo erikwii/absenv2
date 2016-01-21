@@ -24,6 +24,8 @@
             </p>
         </h5>
 
+        @include('errors.error_validator')
+
         <h2 style="color:black; text-align:center">Topik Perkuliahan</h2>
         <br>
 
