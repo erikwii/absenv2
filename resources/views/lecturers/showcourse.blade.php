@@ -3,62 +3,70 @@
         <!-- Load waktu onload  -->
 <script type="text/javascript" src="{!! asset('js/waktu.js') !!}"></script>
 <body onload="waktu()">
-<div class="row">
-    <div class="col-lg-120">
-        <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
-            {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
-            SYSTEM
-        </h1>
-        <h2 style="text-align:center">
-            <small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of
-                Jakarta ::
-            </small>
-        </h2>
-        </tr>
-        <br>
+<div class="container">
+    <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
+        {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
+        SYSTEM
+    </h1>
+    <h2 style="text-align:center">
+        <small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of
+            Jakarta ::
+        </small>
+    </h2>
+    </tr>
+    <br>
 
-        <!-- time content -->
-        <br>
-        <br>
+    <!-- time content -->
+    <br>
+    <br>
 
-        <h5><p class='text-center'>
-                Hari, Tanggal :
-                @inject('helpers', 'App\Helpers')
-                {!! $helpers::indonesian_date() !!}
-                <span id='output'></span> WIB
-            </p>
-        </h5>
+    <h5><p class='text-center'>
+            Hari, Tanggal :
+            @inject('helpers', 'App\Helpers')
+            {!! $helpers::indonesian_date() !!}
+            <span id='output'></span> WIB
+        </p>
+    </h5>
 
-                <!-- time content -->
-        <br>
-        <br>
-        <!--<tr>-->
-        <h3 style="text-align:center"> Daftar Courses </h3>
-        <table width="800" align="center" border="1">
-            <tr>
-                <th width="20" style="text-align:center">Kode Mata Kuliah</th>
-                <th width="20" style="text-align:center">Mata Kuliah</th>
-                <th width="20" style="text-align:center">SKS</th>
-                <th width="20" style="text-align:center">Program Studi</th>
-                <th width="20" style="text-align:center">Day</th>
-                <th width="20" style="text-align:center">Time</th>
-                <th width="20" style="text-align:center">Course Start Date</th>
-            </tr>
-            @foreach($Courses as $course)
+    <!-- time content -->
+    <br>
+    <br>
+    <!--<tr>-->
+    <h3 style="text-align:center"> Daftar Courses </h3>
+    <div class="row">
+        <div class="col-md-1 col-sm-1"></div>
+        <div class="col-md-10 col-sm-10">
+            <table class="table table-responsive table-striped table-hover">
+                <thead>
                 <tr>
-                    <?php $link= "/createcourse/tambahMatkul/".$course->Kode_Matkul?>
-                    <td width="20" style="text-align:center"><a href={!! $link !!}>{!! $course->Kode_Matkul !!} </a></td>
-                    <td width="20" style="text-align:center"> {{$course->Nama_Matkul}} </td>
-                    <td width="20" style="text-align:center"> {{$course->SKS}} </td>
-                    <td width="20" style="text-align:center"> {{$course->prodi->prodi}} </td>
-                    <td width="20" style="text-align:center"> {{$course->day}} </td>
-                    <td width="20" style="text-align:center"> {{$course->time}} </td>
-                    <td width="20" style="text-align:center"> {{$course->course_start_day}} </td>
+                    <th>Kode Mata Kuliah</th>
+                    <th>Mata Kuliah</th>
+                    <th>SKS</th>
+                    <th>Program Studi</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Course Start Date</th>
                 </tr>
-            @endforeach
-        </table>
-        <br>
-        <br>
+                </thead>
+                <tbody>
+                @foreach($Courses as $course)
+                    <tr>
+                        <?php $link = "/createcourse/tambahMatkul/" . $course->Kode_Matkul?>
+                        <td width="20" style="text-align:center"><a href={!! $link !!}>{!! $course->Kode_Matkul !!} </a>
+                        </td>
+                        <td> {{$course->Nama_Matkul}} </td>
+                        <td> {{$course->SKS}} </td>
+                        <td> {{$course->prodi->prodi}} </td>
+                        <td> {{$course->day}} </td>
+                        <td> {{$course->time}} </td>
+                        <td> {{$course->course_start_day}} </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
+    <br>
+    <br>
 </div>
 @stop
