@@ -11,7 +11,7 @@
             <a href="/inputabsen">Input Absen</a>
         </li>
         <li @if(strcmp($path,"enrollmhs")==0) class="active" @endif>
-            <a href="/enrollmhs">Add Course</a>
+            <a href="/enrollmhs">Enroll Course</a>
         </li>
         <li @if(strcmp($path,"profil")==0) class="active" @endif>
             <a href="/profil">Profile</a>

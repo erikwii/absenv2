@@ -50,6 +50,11 @@
 
         </div>
 
+        <div class="form-group">
+            {!! Form::label('ruang','Nama Ruang :',['class' => "control-label col-sm-6"]) !!}
+            {!! Form::select('id_ruang', $room_options, 1,['class' => 'col-sm-2']) !!}
+        </div>
+
         <div class="form-group center-block">
             {!! Form::label('day','Hari :',['class' => "control-label col-sm-6"]) !!}
             {!! Form::select('day', array('Senin' => 'Senin', 'Selasa' => 'Selasa', 'Rabu' => 'Rabu', 'Kamis' => 'Kamis', 'Jumat' => 'Jumat'), 'Senin',['class' => 'col-sm-2']) !!}

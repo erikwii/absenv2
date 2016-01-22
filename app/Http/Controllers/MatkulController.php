@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\Prodi;
+use App\Models\Room;
 
 use Carbon\Carbon;
 class MatkulController extends Controller
@@ -26,6 +28,9 @@ class MatkulController extends Controller
             $prodi_arr[$prodi->id]=$prodi->prodi;
         }
 
+        $room = Room::room_name();
+        $room_arr = Helpers::toAssociativeArrays($room);
+
         //somehow must pass Kode_Dosen to the next form
         //get current user
         $user = Auth::user();
@@ -33,7 +38,10 @@ class MatkulController extends Controller
         $lecturer = $user->lecturer;
         //pass also Kode_Dosen
         $Kode_Dosen=$lecturer->Kode_Dosen;
-        return view('lecturers.createcourse')->with('prodi_options',$prodi_arr)->with('Kode_Dosen',$Kode_Dosen);
+        return view('lecturers.createcourse')
+            ->with('prodi_options',$prodi_arr)
+            ->with('Kode_Dosen',$Kode_Dosen)
+            ->with('room_options', $room_arr);
     }
 
     public function editMatkul($id_matkul){
@@ -47,7 +55,13 @@ class MatkulController extends Controller
         }
         $kode_dosen=$course->Kode_Dosen;
         //need to pass filled data to this view (extra parameter)
-        return view('lecturers.editcourse')->with('prodi_options',$prodi_arr)->with('Kode_Dosen',$kode_dosen)->with('course',$course);
+        $room = Room::room_name();
+        $room_arr = Helpers::toAssociativeArrays($room);
+        return view('lecturers.editcourse')
+            ->with('prodi_options',$prodi_arr)
+            ->with('Kode_Dosen',$kode_dosen)
+            ->with('room_options',$room_arr)
+            ->with('course',$course);
     }
 
     /**
@@ -74,6 +88,7 @@ class MatkulController extends Controller
         $course->SKS=$input['SKS'];
         $course->prodi_id=$input['prodi_id'];
         $course->day=$input['day'];
+        $course->id_ruang=$input['id_ruang'];
         $course->time=$input['time'];
         $course->course_start_day=$input['course_start_day'];
         $course->save();

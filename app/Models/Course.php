@@ -30,7 +30,8 @@ class Course extends Model
         'day',
         'time',
         'course_start_day',
-        'Kode_Dosen'
+        'Kode_Dosen',
+        'id_ruang'
     ];
 
     //relationships
@@ -48,6 +49,10 @@ class Course extends Model
     public function prodi(){
         return $this->hasOne('App\Models\Prodi','id','prodi_id');
         //return $this->belongsTo('App\Models\Prodi','prodi_id','id');
+    }
+
+    public function room(){
+        return $this->hasOne('App\Models\Room','id_ruang','id_ruang');
     }
 
     /**

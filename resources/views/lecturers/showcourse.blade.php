@@ -45,6 +45,7 @@
                     <th>Program Studi</th>
                     <th>Day</th>
                     <th>Time</th>
+                    <th>Room</th>
                     <th>Course Start Date</th>
                 </tr>
                 </thead>
@@ -59,6 +60,7 @@
                         <td> {{$course->prodi->prodi}} </td>
                         <td> {{$course->day}} </td>
                         <td> {{$course->time}} </td>
+                        <td> {!! $course->room->nama_ruang !!} </td>
                         <td> {{$course->course_start_day}} </td>
                     </tr>
                 @endforeach
