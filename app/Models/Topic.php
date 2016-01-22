@@ -31,6 +31,21 @@ class Topic extends Model
         return $this->belongTo('App\Models\Course','Kode_Matkul','Kode_Matkul');
     }
 
+    public static function topicsByKodeDosen($lecturer_id){
+        $topics = DB::table('topics')
+                ->join('courses','topics.Kode_Matkul','=','courses.Kode_Matkul')
+                ->where('Kode_Dosen',$lecturer_id)
+                ->get();
+        return $topics;
+    }
+
+    public static function topicsByKodeMatkul($course_id){
+        $topics = DB::table('topics')
+            ->where('Kode_Matkul',$course_id)
+            ->get();
+        return $topics;
+    }
+
     //check if this composite key already exist
     public static function isExist($pertemuan, $id_matkul){
         $count = DB::table('topics')

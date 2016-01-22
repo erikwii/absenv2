@@ -42,7 +42,7 @@ class Course extends Model
      */
     public function topic()
     {
-        return $this->belongsTo('App\Models\Topic');
+        return $this->hasMany('App\Models\Topic','Kode_Matkul','Kode_Matkul');
     }
 
     public function prodi(){
@@ -60,7 +60,7 @@ class Course extends Model
         return $instance;
     }
 
-    public static function instancesByCourseId($course_id){
+    public static function instancesByLecturerId($course_id){
         $instance = DB::table('courses')->select('Kode_Matkul','Nama_Matkul')->where('Kode_Dosen',$course_id)->orderBy('Kode_Matkul','asc')->get();
         return $instance;
     }

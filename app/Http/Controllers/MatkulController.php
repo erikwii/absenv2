@@ -26,7 +26,7 @@ class MatkulController extends Controller
             $prodi_arr[$prodi->id]=$prodi->prodi;
         }
 
-        //somehow must pass Kode_Dosen tp the next form
+        //somehow must pass Kode_Dosen to the next form
         //get current user
         $user = Auth::user();
         //from user get reference to lecturer

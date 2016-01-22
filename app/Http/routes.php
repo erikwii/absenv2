@@ -42,10 +42,10 @@ Route::get ('/profiladmin', 'AdminController@profiladmin');
 
 //route for topik dosen
 Route::get ('/coursetopic/tambahtopik', 'TopicController@tambahtopik');
-Route::post('/coursetopic', 'TopicController@simpantopik');
-Route::get ('/coursetopic', 'TopicController@showtopic');
+Route::post('/coursetopic/tambahtopik', 'TopicController@simpantopik');
+Route::get ('/coursetopic', 'TopicController@showTopic');
+Route::post('/coursetopic', 'TopicController@showTopicFiltered');
 
-//Todo: For debug, please delete this later
 Route::get('/notopic',function(){
     return view('lecturers.notopic');
 });

@@ -29,7 +29,7 @@
         <h2 style="color:black; text-align:center">Topik Perkuliahan</h2>
         <br>
 
-        {!! Form::open(array('url' => '/coursetopic', 'class' => 'form-horizontal')) !!}
+        {!! Form::open(array('url' => '/coursetopic/tambahtopic', 'class' => 'form-horizontal')) !!}
 
         <div class="form-group center-block">
             {!! Form::label('pertemuan_ke','Pertemuan Ke',['class' => "control-label col-sm-6"]) !!}
