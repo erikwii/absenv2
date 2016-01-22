@@ -45,6 +45,8 @@ Route::get ('/coursetopic/tambahtopik', 'TopicController@tambahtopik');
 Route::post('/coursetopic/tambahtopik', 'TopicController@simpantopik');
 Route::get ('/coursetopic', 'TopicController@showTopic');
 Route::post('/coursetopic', 'TopicController@showTopicFiltered');
+Route::get ('/coursetopic/{id_course}', 'TopicController@editTopic');
+Route::post('/coursetopic/{id_course}', 'TopicController@updateTopic');
 
 Route::get('/notopic',function(){
     return view('lecturers.notopic');

@@ -8,7 +8,6 @@ use App\Models\Topic;
 use App\Helpers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Response;
 
 class TopicController extends Controller
 {
@@ -21,6 +20,7 @@ class TopicController extends Controller
     /**
      * Validator condition: jumlah_mhs (numeric), nama_topic (not null)
      * Plus both pertemuan_ke and kode_matkul must be composite unique
+     * Todo: add extra condition rules number of students can't be greater than 50
      * @param array $data
      * @return mixed
      */
@@ -100,7 +100,7 @@ class TopicController extends Controller
      * pass registered course such that user can select it from the select box
      * @return view to showtopic
      */
-    public function showTopic(Request $request)
+    public function showTopic()
     {
         //from course get all registered course for this semester
         $user = Auth::user();
@@ -115,8 +115,10 @@ class TopicController extends Controller
     }
 
     /**
-     * Handle ajax request
-     * Todo: Page successfully called back on ajax submission but not yet updated back to current page
+     * Handle ajax, the function will be called twice
+     * 1. For the first Ajax request, which further will invoke response for bodyonload (call the function again)
+     * 2. Response to Ajax response by forwarding to actual view loaded with queried course_id
+     * The reason for this two calling because in the first step, page is loaded asynchronously (not replaced in current page)
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -145,5 +147,38 @@ class TopicController extends Controller
         }
 
         return view('lecturers.showtopic')->with('Topic', $Topic)->with('Courses',$courses_arr);
+    }
+
+    public function editTopic($topic_id){
+        $user = Auth::user();
+        //get the mapping for lecturer
+        $kode_dosen = $user->lecturer->Kode_Dosen;
+
+        //get Kode_Matkul & Nama_Matkul from course
+        $courses=Course::instancesByLecturerId($kode_dosen); //filter by code dosen
+        $courses_arr=Helpers::toAssociativeArrays($courses);
+        $counter_pertemuan=array();
+        for($i=1;$i<=16;$i++){
+            $counter_pertemuan[$i]=$i;
+        }
+
+        //query again to get the correct data based on the given course_id
+        $topic = Topic::topicById($topic_id);
+
+        return view('lecturers.edittopic')->with('courses',$courses_arr)->with('counter_p',$counter_pertemuan)
+            ->with('topic',$topic);
+    }
+
+    public function updateTopic(Request $request){
+        $input=$request->all();
+        //retrieve the relevant model with where condition
+        $course=Topic::find($input['id_topik']);
+        $course->pertemuan_ke=$input['pertemuan_ke'];
+        $course->Kode_Matkul=$input['Kode_Matkul'];
+        $course->tanggal=$input['tanggal'];
+        $course->nama_topik=$input['nama_topik'];
+        $course->jumlah_mhs=$input['jumlah_mhs'];
+        $course->save();
+        return $this->showTopic();
     }
 }

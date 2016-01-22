@@ -60,7 +60,7 @@
 <!-- /#wrapper -->
 <nav>@include('includes.footer')</nav>
 <!-- jQuery -->
-{!! HTML::script('assets/js/jquery-1.11.0.js') !!}
+<!-- {!! HTML::script('assets/js/jquery-1.11.0.js') !!} -->
 
         <!-- Bootstrap Core JavaScript -->
 {!! HTML::script('assets/js/bootstrap.min.js') !!}

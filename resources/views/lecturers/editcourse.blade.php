@@ -66,7 +66,7 @@
 
         <br>
         <div class="form-group">
-            {!! Form::submit('Tambah',['class' => 'btn btn-primary form-control']) !!}
+            {!! Form::submit('Update',['class' => 'btn btn-primary form-control']) !!}
         </div>
         {!! Form::close() !!}
 

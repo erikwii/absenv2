@@ -52,6 +52,7 @@
                 <th>Tanggal</th>
                 <th>Topik Pembahasan</th>
                 <th>Jumlah Mahasiswa</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -62,6 +63,8 @@
                     <td> {{$topics->tanggal}} </td>
                     <td> {{$topics->nama_topik}} </td>
                     <td> {{$topics->jumlah_mhs}} </td>
+                    <?php $link = "/coursetopic/" . $topics->id_topik?>
+                    <td><a href={!! $link !!}>Edit</a>
                 </tr>
             @endforeach
             </tbody>

@@ -57,4 +57,11 @@ class Topic extends Model
         return false;
     }
 
+    public static function topicById($id){
+        $topic = DB::table('topics')
+            ->where('id_topik',$id)
+            ->first();
+        return $topic;
+    }
+
 }

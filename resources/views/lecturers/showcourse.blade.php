@@ -52,7 +52,7 @@
                 @foreach($Courses as $course)
                     <tr>
                         <?php $link = "/createcourse/tambahMatkul/" . $course->Kode_Matkul?>
-                        <td width="20" style="text-align:center"><a href={!! $link !!}>{!! $course->Kode_Matkul !!} </a>
+                        <td><a href={!! $link !!}>{!! $course->Kode_Matkul !!} </a>
                         </td>
                         <td> {{$course->Nama_Matkul}} </td>
                         <td> {{$course->SKS}} </td>
