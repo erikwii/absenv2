@@ -33,17 +33,16 @@
         <div class="form-group center-block">
             {!! Form::label('pertemuan_ke','Pertemuan Ke',['class' => "control-label col-sm-6"]) !!}
             <div class="col-sm-2">
-                {!! Form::select('pertemuan_ke', $counter_p, $topic->pertemuan_ke,['class' => 'form-control']) !!}
+                {!! Form::select('pertemuan_ke', $counter_p, $topic->pertemuan_ke,['class' => 'form-control','disabled']) !!}
             </div>
         </div>
 
         <div class="form-group form-group-sm">
             {!! Form::label('Kode_Matkul','Mata Kuliah',['class' => "control-label col-sm-6"]) !!}
             <div class="col-sm-2">
-                {!! Form::select('Kode_Matkul',$courses, $topic->Kode_Matkul,['class' => 'form-control']) !!}
+                {!! Form::select('Kode_Matkul',$courses, $topic->Kode_Matkul,['class' => 'form-control','disabled']) !!}
             </div>
         </div>
-
 
         <div class="form-group">
             {!! Form::label('tanggal','Tanggal',['class' => "control-label col-sm-6"]) !!}

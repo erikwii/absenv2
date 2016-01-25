@@ -49,7 +49,8 @@ class TopicController extends Controller
     protected function checkCompositeUnique($validator){
         $pertemuan = $validator->getData()['pertemuan_ke'];
         $id_matkul = $validator->getData()['Kode_Matkul'];
-        $stat = Topic::isExist($pertemuan,$id_matkul);
+        $course = Course::instanceByKodeMatkul($id_matkul);
+        $stat = Topic::isExist($pertemuan,$course->seksi);
         if($stat)
             return true;
         return false;
@@ -63,9 +64,8 @@ class TopicController extends Controller
         $user = Auth::user();
         //get the mapping for lecturer
         $kode_dosen = $user->lecturer->Kode_Dosen;
-
         //get Kode_Matkul & Nama_Matkul from course
-        $courses=Course::instancesByLecturerId($kode_dosen); //filter by code dosen
+        $courses=Course::courseMapByLecturerId($kode_dosen); //filter by code dosen
         $courses_arr=Helpers::toAssociativeArrays($courses);
         $counter_pertemuan=array();
         for($i=1;$i<=16;$i++){
@@ -92,7 +92,17 @@ class TopicController extends Controller
             );
         }
 
-        Topic::create($input);
+        //Topic::create($input);
+        $topic = new Topic;
+        $topic->pertemuan_ke=$input['pertemuan_ke'];
+        $topic->tanggal=$input['tanggal'];
+        //seek kode seksi given current Kode_Matkul & running semester
+        $course = Course::instanceByKodeMatkul($input['Kode_Matkul']);
+        $topic->kode_seksi=$course->seksi;
+        $topic->nama_topik=$input['nama_topik'];
+        $topic->jumlah_mhs=$input['jumlah_mhs'];
+        $topic->save();
+        //$topic
         return $this->showTopic();
     }
 
@@ -108,7 +118,7 @@ class TopicController extends Controller
         $kode_dosen = $user->lecturer->Kode_Dosen;
 
         //get Kode_Matkul & Nama_Matkul from course, therefore not Courses Model instance
-        $courses=Course::instancesByLecturerId($kode_dosen); //filter by code dosen
+        $courses=Course::courseMapByLecturerId($kode_dosen); //filter by code dosen
         $courses_arr=Helpers::toAssociativeArrays($courses);
         $Topic = Topic::topicsByKodeDosen($kode_dosen);
         return view('lecturers.showtopic')->with('Topic', $Topic)->with('Courses',$courses_arr);
@@ -129,12 +139,14 @@ class TopicController extends Controller
         $kode_dosen = $user->lecturer->Kode_Dosen;
 
         //get Kode_Matkul & Nama_Matkul from course, therefore not Courses Model instance
-        $courses=Course::instancesByLecturerId($kode_dosen); //filter by code dosen
+        $courses=Course::courseMapByLecturerId($kode_dosen); //filter by code dosen
         $courses_arr=Helpers::toAssociativeArrays($courses);
         $course_id=$request['Kode_Matkul'];
+        //need mapping from kode_matkul to kode_seksi
         $Topic = Topic::topicsByKodeMatkul($course_id);
         //filter by kode matkul registered, we do not required to filter by kode dosen since previous form already filtered it
         $input=$request->all();
+        //debugging purpose
         $response = array(
             'response' => 'Called created successfully',
             '_token'=>$input['_token'],
@@ -155,7 +167,7 @@ class TopicController extends Controller
         $kode_dosen = $user->lecturer->Kode_Dosen;
 
         //get Kode_Matkul & Nama_Matkul from course
-        $courses=Course::instancesByLecturerId($kode_dosen); //filter by code dosen
+        $courses=Course::courseMapByLecturerId($kode_dosen); //filter by code dosen
         $courses_arr=Helpers::toAssociativeArrays($courses);
         $counter_pertemuan=array();
         for($i=1;$i<=16;$i++){
@@ -173,8 +185,8 @@ class TopicController extends Controller
         $input=$request->all();
         //retrieve the relevant model with where condition
         $course=Topic::find($input['id_topik']);
-        $course->pertemuan_ke=$input['pertemuan_ke'];
-        $course->Kode_Matkul=$input['Kode_Matkul'];
+        //$course->pertemuan_ke=$input['pertemuan_ke'];
+        //$course->Kode_Matkul=$input['Kode_Matkul'];
         $course->tanggal=$input['tanggal'];
         $course->nama_topik=$input['nama_topik'];
         $course->jumlah_mhs=$input['jumlah_mhs'];

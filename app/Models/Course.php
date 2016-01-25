@@ -15,7 +15,7 @@ class Course extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'Kode_Matkul';
+    protected $primaryKey = 'seksi';
 
     /**
      * The attributes that are mass assignable.
@@ -31,7 +31,8 @@ class Course extends Model
         'time',
         'course_start_day',
         'Kode_Dosen',
-        'id_ruang'
+        'id_ruang',
+        'id_semester'
     ];
 
     //relationships
@@ -48,11 +49,18 @@ class Course extends Model
 
     public function prodi(){
         return $this->hasOne('App\Models\Prodi','id','prodi_id');
-        //return $this->belongsTo('App\Models\Prodi','prodi_id','id');
     }
 
     public function room(){
         return $this->hasOne('App\Models\Room','id_ruang','id_ruang');
+    }
+
+    /**
+     * Mapping to kalender
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function kalender(){
+        return $this->hasOne('App\Models\Kalender','id','id_semester');
     }
 
     /**
@@ -65,8 +73,50 @@ class Course extends Model
         return $instance;
     }
 
-    public static function instancesByLecturerId($course_id){
-        $instance = DB::table('courses')->select('Kode_Matkul','Nama_Matkul')->where('Kode_Dosen',$course_id)->orderBy('Kode_Matkul','asc')->get();
+    /**
+     * Get the list of courses taught by this lecturer filtered by currently running semester (default)
+     * @param $lecturer_id
+     * @return mixed
+     */
+    public static function courseMapByLecturerId($lecturer_id){
+        $id_semester = Kalender::getRunningSemester()->id;
+
+        $instance = DB::table('courses')->select('Kode_Matkul','Nama_Matkul')
+            ->where('Kode_Dosen',$lecturer_id)
+            ->where('id_semester',$id_semester)
+            ->orderBy('Kode_Matkul','asc')
+            ->get();
+        return $instance;
+    }
+
+    public static function sectionMapByLecturerId($lecturer_id){
+        $id_semester = Kalender::getRunningSemester()->id;
+
+        $instance = DB::table('courses')->select('seksi','Nama_Matkul')
+            ->where('Kode_Dosen',$lecturer_id)
+            ->where('id_semester',$id_semester)
+            ->get();
+        return $instance;
+    }
+
+    public static function instanceByLecturerId($lecturer_id){
+        $id_semester = Kalender::getRunningSemester()->id;
+        $instance = DB::table('courses')
+            ->where('Kode_Dosen',$lecturer_id)
+            ->where('id_semester',$id_semester)
+            ->orderBy('Kode_Matkul','asc')
+            ->get();
+        return $instance;
+    }
+
+    public static function instanceByKodeMatkul($course_id){
+        $id_semester = Kalender::getRunningSemester()->id;
+        $instance = DB::table('courses')
+            ->where('Kode_Matkul',$course_id)
+            ->where('id_semester',$id_semester)
+            ->orderBy('Kode_Matkul','asc')
+            ->first();
+
         return $instance;
     }
 }

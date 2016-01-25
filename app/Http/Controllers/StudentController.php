@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Enrollment;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 
 class StudentController extends Controller
 {
@@ -37,6 +36,19 @@ class StudentController extends Controller
 
     public function enrollmhs()
     {
+        return view('students.enroll');
+    }
+
+    public function saveenrollment(Request $request){
+        $input = $request->all();
+        //get data from the form
+        $enrollment = new Enrollment;
+        $enrollment->kode_seksi = $input['kode_seksi'];
+        //query noreg from current user
+        $user = Auth::user();
+        $noreg = Student::where('id_user',$user->id)->first()->Noreg;
+        $enrollment->noreg=$noreg;
+        $enrollment->save();
         return view('students.enroll');
     }
 

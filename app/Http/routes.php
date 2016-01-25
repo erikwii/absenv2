@@ -60,6 +60,7 @@ Route::get ('/rekapadmin', 'AdminController@rekapadmin');
 Route::get ('/crudjadwal', 'AdminController@crudjadwal');
 //route for add course for mahasiswa
 Route::get ('/enrollmhs', 'StudentController@enrollmhs');
+Route::post ('/enrollmhs', 'StudentController@saveenrollment');
 //route for input absen mahasiswa
 Route::get ('/inputabsen','StudentController@inputabsen');
 //route for show all presences for admin

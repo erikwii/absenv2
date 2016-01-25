@@ -39,6 +39,7 @@
             <table class="table table-responsive table-striped table-hover">
                 <thead>
                 <tr>
+                    <th>Kode Seksi</th>
                     <th>Kode Mata Kuliah</th>
                     <th>Mata Kuliah</th>
                     <th>SKS</th>
@@ -52,9 +53,9 @@
                 <tbody>
                 @foreach($Courses as $course)
                     <tr>
-                        <?php $link = "/createcourse/tambahMatkul/" . $course->Kode_Matkul?>
-                        <td><a href={!! $link !!}>{!! $course->Kode_Matkul !!} </a>
-                        </td>
+                        <?php $link = "/createcourse/tambahMatkul/" . $course->seksi?>
+                        <td><a href={!! $link !!}>{!! $course->seksi !!}</a></td>
+                        <td> {!! $course->Kode_Matkul !!}</td>
                         <td> {{$course->Nama_Matkul}} </td>
                         <td> {{$course->SKS}} </td>
                         <td> {{$course->prodi->prodi}} </td>

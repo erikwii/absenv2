@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\Prodi;
 use App\Models\Room;
+use App\Models\Kalender;
 
 use Carbon\Carbon;
 class MatkulController extends Controller
@@ -44,8 +45,8 @@ class MatkulController extends Controller
             ->with('room_options', $room_arr);
     }
 
-    public function editMatkul($id_matkul){
-        $course=Course::where('Kode_matkul',$id_matkul)->first();
+    public function editMatkul($id_course){
+        $course=Course::where('seksi',$id_course)->first();
         //get all prodi information
         $prodis = Prodi::all();
         //transform prodi to associative array
@@ -72,7 +73,20 @@ class MatkulController extends Controller
     public function saveMatkul()
     {
         $input=Request::all();
-        Course::create($input);
+        //Course::create($input);
+        $course = new Course;
+        $course->Kode_Matkul=$input['Kode_Matkul'];
+        $course->Nama_Matkul=$input['Nama_Matkul'];
+        $course->SKS=$input['SKS'];
+        $course->prodi_id=$input['prodi_id'];
+        $course->day=$input['day'];
+        $course->id_ruang=$input['id_ruang'];
+        $course->time=$input['time'];
+        $course->Kode_Dosen=$input['Kode_Dosen'];
+        $semester = Kalender::getRunningSemester();
+        $course->id_semester=$semester->id;
+        $course->course_start_day=$input['course_start_day'];
+        $course->save();
         return $this->showMatkul();
     }
 
@@ -83,7 +97,7 @@ class MatkulController extends Controller
     public function updateMatkul(){
         $input=Request::all();
         //retrieve the relevant model with where condition
-        $course=Course::find($input['Kode_Matkul']);
+        $course=Course::find($input['seksi']);
         $course->Nama_Matkul=$input['Nama_Matkul'];
         $course->SKS=$input['SKS'];
         $course->prodi_id=$input['prodi_id'];
@@ -96,7 +110,7 @@ class MatkulController extends Controller
     }
 
     /**
-     * Show all course only taught by this lecturer
+     * Show all course only taught by this lecturer on current semester
      * @return $this
      */
     public function showMatkul()
@@ -105,8 +119,10 @@ class MatkulController extends Controller
         $user = Auth::user();
         //get the mapping for lecturer
         $kode_dosen = $user->lecturer->Kode_Dosen;
-        $courses = Course::where('Kode_Dosen',$kode_dosen)->get();
-
+        $id_semester = Kalender::getRunningSemester()->id;
+        $courses = Course::where('Kode_Dosen',$kode_dosen)
+            ->where('id_semester',$id_semester)
+            ->get();
         return view('lecturers.showcourse')->with('Courses', $courses);
     }
 }

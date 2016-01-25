@@ -27,46 +27,63 @@
         <h2><p class="text-center">Create Course</p></h2>
         {!! Form::open(array('url' => array('/createcourse/tambahMatkul',$course->Kode_Matkul), 'class' => 'form-horizontal')) !!}
         <div class="form-group center-block">
-            {!! Form::label('Kode_Matkul','Kode Matakuliah :',['class' => "control-label col-sm-6"]) !!}
+            {!! Form::label('Kode_Matkul','Kode Matakuliah',['class' => "control-label col-sm-6"]) !!}
             <!-- Set this field as disabled -->
-            {!! Form::text('Kode_Matkul',$course->Kode_Matkul,['class' => 'col-sm-2','readonly'])!!}
+            <div class="col-sm-2">
+            {!! Form::text('Kode_Matkul',$course->Kode_Matkul,['class' => 'form-control','readonly'])!!}
+            </div>
         </div>
 
         <div class="form-group center-block">
-            {!! Form::label('Nama_Matkul','Nama Matakuliah :',['class' => "control-label col-sm-6"]) !!}
-            {!! Form::text('Nama_Matkul',$course->Nama_Matkul,['class' => 'col-sm-2'])!!}
+            {!! Form::label('Nama_Matkul','Nama Matakuliah',['class' => "control-label col-sm-6"]) !!}
+            <div class="col-sm-2">
+            {!! Form::text('Nama_Matkul',$course->Nama_Matkul,['class' => 'form-control'])!!}
+            </div>
         </div>
 
         <div class="form-group center-block">
-            {!! Form::label('SKS','SKS :',['class' => "control-label col-sm-6"]) !!}
-            {!! Form::text('SKS',$course->SKS,['class' => 'col-sm-2'])!!}
+            {!! Form::label('SKS','SKS',['class' => "control-label col-sm-6"]) !!}
+            <div class="col-sm-2">
+            {!! Form::text('SKS',$course->SKS,['class' => 'form-control'])!!}
+            </div>
         </div>
 
         <div class="form-group">
-            {!! Form::label('prodi','Program Studi :',['class' => "control-label col-sm-6"]) !!}
-            {!! Form::select('prodi_id', $prodi_options,$course->prodi_id,['class' => 'col-sm-2']) !!}
+            {!! Form::label('prodi','Program Studi',['class' => "control-label col-sm-6"]) !!}
+            <div class="col-sm-2">
+            {!! Form::select('prodi_id', $prodi_options,$course->prodi_id,['class' => 'form-control']) !!}
+            </div>
         </div>
 
         <div class="form-group">
-            {!! Form::label('ruang','Nama Ruang :',['class' => "control-label col-sm-6"]) !!}
-            {!! Form::select('id_ruang', $room_options, $course->id_ruang,['class' => 'col-sm-2']) !!}
+            {!! Form::label('ruang','Nama Ruang',['class' => "control-label col-sm-6"]) !!}
+            <div class="col-sm-2">
+            {!! Form::select('id_ruang', $room_options, $course->id_ruang,['class' => 'form-control']) !!}
+            </div>
         </div>
 
         <div class="form-group center-block">
-            {!! Form::label('day','Hari :',['class' => "control-label col-sm-6"]) !!}
-            {!! Form::select('day', array('Senin' => 'Senin', 'Selasa' => 'Selasa', 'Rabu' => 'Rabu', 'Kamis' => 'Kamis', 'Jumat' => 'Jumat'), $course->day,['class' => 'col-sm-2']) !!}
+            {!! Form::label('day','Hari',['class' => "control-label col-sm-6"]) !!}
+            <div class="col-sm-2">
+            {!! Form::select('day', array('Senin' => 'Senin', 'Selasa' => 'Selasa', 'Rabu' => 'Rabu', 'Kamis' => 'Kamis', 'Jumat' => 'Jumat'), $course->day,['class' => 'form-control']) !!}
+            </div>
         </div>
 
         <div class="form-group center-block">
-            {!! Form::label('time','Jam :',['class' => "control-label col-sm-6"]) !!}
-            {!! Form::select('time', array('0-1' => '0-1', '2+' => '2+', '3-4' => '3-4', '5' =>'5'), $course->time,['class' => 'col-sm-2']) !!}
+            {!! Form::label('time','Jam',['class' => "control-label col-sm-6"]) !!}
+            <div class="col-sm-2">
+            {!! Form::select('time', array('0-1' => '0-1', '2+' => '2+', '3-4' => '3-4', '5' =>'5'), $course->time,['class' => 'form-control']) !!}
+            </div>
         </div>
 
         <div class="form-group center-block">
-            {!! Form::label('date','Course start date :',['class' => "control-label col-sm-6"]) !!}
-            {!! Form::text('course_start_day', $course->course_start_day, array('id' => 'datepicker','class' => 'col-sm-2')) !!}
+            {!! Form::label('date','Course start date',['class' => "control-label col-sm-6"]) !!}
+            <div class="col-sm-2">
+            {!! Form::text('course_start_day', $course->course_start_day, array('id' => 'datepicker','class' => 'form-control')) !!}
+            </div>
         </div>
 
+        {!! Form::hidden('seksi',$course->seksi) !!}
         {!! Form::hidden('Kode_Dosen',$Kode_Dosen) !!}
 
         <br>
