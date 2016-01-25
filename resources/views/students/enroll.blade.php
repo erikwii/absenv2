@@ -1,68 +1,77 @@
 @extends('layouts.mastermhs')
 @section('content')
-            <h1 class="page-header" style= "background-color:#222222; color:#DEDEDE; text-align:center">
-                {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE SYSTEM
-            </h1>
-            <h2 style= "text-align:center"><small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of Jakarta :: </small></h2></tr>
-            <br>
-            </br>
-            <h2 style="color:black; text-align:center">ENROLL MATA KULIAH</h2>
-            <br>
+    <div class="container">
+        <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
+            {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
+            SYSTEM
+        </h1>
+        <h2 style="text-align:center">
+            <small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of Jakarta
+                ::
+            </small>
+        </h2>
+        </tr>
 
-            <center>
+        <h2 style="text-align:center">ENROLL MATA KULIAH</h2>
 
-<p align="right">
-</p>
-<form id="form1" name="form1" method="post" action="">
-    <div>
-        Kode Seksi</div>
-    <div>
-        <input type="text" name="name" value="">
+        <form id="form1" name="form1" method="post" action="" class="form-horizontal" role="form">
+            <div class="form-group form-group-sm" style="text-align: center;">
+                <div>
+                    Kode Seksi
+                </div>
+            </div>
+            <div class="form-group form-group-sm">
+                <div class="col-md-5 col-sm-5"></div>
+                <div class="col-md-2 col-sm-2">
+                    <input type="text" class="form-control" name="name" value="">
+                </div>
+                <div class="col-md-5 col-sm-5"></div>
+            </div>
+            <div class="form-group form-group-sm">
+                <div class="col-md-5 col-sm-5"></div>
+                <div class="col-md-1 col-sm-1">
+                    <button type="submit" class="btn btn-primary" value="Submit">Tambah</button>
+                </div>
+                <div class="col-md-1 col-sm-1">
+                    <button type="reset" class="btn btn-info" value="Reset">Reset</button>
+                </div>
+            </div>
+            <br/>
+        </form>
+
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            Kode Seksi
+                        </th>
+                        <th>
+                            Nama Mata Kuliah
+                        </th>
+                        <th>
+                            Hapus
+                        </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>3901</td>
+                        <td>Analisis dan Perancangan Sistem</td>
+                        <td>Hapus</td>
+                    </tr>
+                    <tr>
+                        <td>3902</td>
+                        <td> Pengolahan Citra</td>
+                        <td>Hapus</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
     </div>
-    <br />
-    <button type="submit" value="Submit">Tambah</button>&nbsp;&nbsp;
-    <button type="reset" value="Reset">Reset</button>
-    <br />
-    <br />
-    <table width="699" border="1">
-        <tr>
-            <td width="158" rowspan="2"><div align="center"><strong><font face="Arial, Helvetica, sans-serif">Kode Seksi</font></strong></div></td>
-            <td width="278" rowspan="2"><div align="center"><strong><font face="Arial, Helvetica, sans-serif">Nama Mata Kuliah </font></strong></div></td>
-            <td width="241" rowspan="2"><div align="center"><strong><font face="Arial, Helvetica, sans-serif">Hapus</font></strong></div></td>
-        </tr>
-        <tr>
-
-
-        <tr>
-            <td style="text-align:center;">3901</td>
-            <td style="text-align:center;">Analisis dan Perancangan Sistem </td>
-            <td style="text-align:center;"><font color="#0000FF"><u>Hapus</u></font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;">3902</td>
-            <td style="text-align:center;"> Pengolahan Citra </td>
-            <td style="text-align:center;"><font color="#0000FF"><u>Hapus</u></font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;">3903</td>
-            <td style="text-align:center;"> Jaringan Komputer </td>
-            <td style="text-align:center;"><font color="#0000FF"><u>Hapus</u></font></td>
-        </tr>
-        <tr>
-
-            <td style="text-align:center;">3904</td>
-            <td style="text-align:center;">Cryptography And Information Security </td>
-            <td style="text-align:center;"><font color="#0000FF"><u>Hapus</u></font></td>
-        </tr>
-        <td style="text-align:center;">3905</td>
-        <td style="text-align:center;">Interaksi Manusia dan Komputer </td>
-        <td style="text-align:center;"><font color="#0000FF"><u>Hapus</u></font></td>
-        </tr>
-    </table>
-    <p align="right">
-    </p>
-</form>
-</center>
-    <br>
-    <br>
 @stop
