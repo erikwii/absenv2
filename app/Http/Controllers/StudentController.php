@@ -36,7 +36,12 @@ class StudentController extends Controller
 
     public function enrollmhs()
     {
-        return view('students.enroll');
+        //pass along all enrolled course by this user
+        $user=Auth::user();
+        $noreg=$user->student->Noreg;
+        $enrollment = Enrollment::courseByUser($noreg);
+        //for now let's pass along content of enrollment
+        return view('students.enroll')->with('enrollments',$enrollment);
     }
 
     public function saveenrollment(Request $request){
@@ -49,7 +54,7 @@ class StudentController extends Controller
         $noreg = Student::where('id_user',$user->id)->first()->Noreg;
         $enrollment->noreg=$noreg;
         $enrollment->save();
-        return view('students.enroll');
+        return $this->enrollmhs();
     }
 
     public function inputabsen()

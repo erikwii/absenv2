@@ -55,6 +55,10 @@ class Course extends Model
         return $this->hasOne('App\Models\Room','id_ruang','id_ruang');
     }
 
+    public function enrollment(){
+        return $this->hasMany('App\Models\Enrollment','kode_seksi','seksi');
+    }
+
     /**
      * Mapping to kalender
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

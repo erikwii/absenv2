@@ -31,6 +31,11 @@ class Student extends Model
         return $this->hasOne('App\Models\Prodi','id','Prodi_Id');
     }
 
+    //get mapping to enrollments()
+    public function enrollment(){
+        return $this->hasMany('App\Models\Enrollment','noreg','Noreg');
+    }
+
     //accessor for id_user
     public function getIdUserAttribute($value){
         return $value;

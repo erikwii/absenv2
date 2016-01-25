@@ -51,6 +51,9 @@
                             Kode Seksi
                         </th>
                         <th>
+                            Kode Mata Kuliah
+                        </th>
+                        <th>
                             Nama Mata Kuliah
                         </th>
                         <th>
@@ -60,16 +63,14 @@
                     </thead>
 
                     <tbody>
+                    @foreach($enrollments as $enrollment)
                     <tr>
-                        <td>3901</td>
-                        <td>Analisis dan Perancangan Sistem</td>
+                        <td>{!! $enrollment->seksi !!}</td>
+                        <td>{!! $enrollment->Kode_Matkul !!}</td>
+                        <td>{!! $enrollment->Nama_Matkul !!}</td>
                         <td>Hapus</td>
                     </tr>
-                    <tr>
-                        <td>3902</td>
-                        <td> Pengolahan Citra</td>
-                        <td>Hapus</td>
-                    </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

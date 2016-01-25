@@ -40,7 +40,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $hidden = ['password', 'remember_token'];
 
     public function student(){
-        return $this->belongsTo('App\Models\Student','id_user','id');
+        return $this->belongsTo('App\Models\Student','id','id_user');
     }
 
     public function lecturer(){
