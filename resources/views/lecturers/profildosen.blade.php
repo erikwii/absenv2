@@ -1,10 +1,5 @@
 @extends('layouts.masterdosen')
 @section('content')
-        <!-- Load waktu onload  -->
-<script type="text/javascript" src="{!! asset('js/waktu.js') !!}"></script>
-
-<body onload="waktu()">
-<div class="container">
     <div>
         <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
             {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
@@ -52,10 +47,7 @@
             </div><!-- @end #content -->
         </div><!-- @end #w -->
     </div>
-</div>
-</body>
-</html>
 
 <br>
-</br>
+
 @stop

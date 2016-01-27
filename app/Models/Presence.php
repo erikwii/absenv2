@@ -24,10 +24,10 @@ class Presence extends Model
         'Kehadiran'
     ];
 
-    public static function getTimeSlotByDate($date){
+    public static function getKodeWaktuByDate($date){
         $instance = DB::select('SELECT time(tanggal) as time FROM presences WHERE date(tanggal)=?',[$date]);
         if(count($instance)==0)
-            return '0';
+            return null;
         $time = $instance[0]->time;
         //next query timeslot, guaranteed to be not null by condition
         $timeslot = WaktuKuliah::getKodeWaktuByTime($time);

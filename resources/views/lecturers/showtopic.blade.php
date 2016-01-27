@@ -1,11 +1,7 @@
 @extends('layouts.masterdosen')
 @section('content')
-        <!-- Load waktu onload  -->
-<script type="text/javascript" src="{!! asset('js/waktu.js') !!}"></script>
-<script type="text/javascript" src="{!! asset('js/jquery-1.10.2.js') !!}"></script>
 {!! HTML::script('js/ajax-response.js') !!}
 
-<div class="container">
     <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
         {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
         SYSTEM
@@ -72,5 +68,4 @@
     </div>
     <br>
     <br>
-</div>
 @stop

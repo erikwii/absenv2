@@ -20,11 +20,21 @@
             <!-- Custom Fonts -->
     {!! HTML::style('assets/font-awesome/css/font-awesome.min.css') !!}
 
+            <!-- jQuery -->
+    {!! HTML::style('assets/css/jquery-ui/jquery-ui.min.css') !!}
+    {!! HTML::script('assets/js/jquery-1.12.0.min.js') !!}
+    {!! HTML::script('assets/js/jquery-ui/jquery-ui.min.js') !!}
+    {!! HTML::script('js/waktu.js') !!}
+
+            <!-- Bootstrap Core JavaScript -->
+    {!! HTML::script('assets/js/bootstrap.min.js') !!}
+
             <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    {!! HTML::script('assets/js/html5shiv.js') !!}
+    {!! HTML::script('assets/js/respond.min.js') !!}
+    <![endif]-->
     <![endif]-->
 
 </head>
@@ -59,11 +69,6 @@
 </div>
 <!-- /#wrapper -->
 <nav>@include('includes.footer')</nav>
-<!-- jQuery -->
-{!! HTML::script('assets/js/jquery-1.11.0.js') !!}
-
-        <!-- Bootstrap Core JavaScript -->
-{!! HTML::script('assets/js/bootstrap.min.js') !!}
 
 </body>
 

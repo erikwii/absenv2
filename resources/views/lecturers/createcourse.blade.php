@@ -1,14 +1,12 @@
 @extends('layouts.masterdosen')
 @section('content')
-    <script type="text/javascript" src="{!! asset('js/jquery-1.10.2.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('js/jquery-ui.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('js/datepicker.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('js/waktu.js') !!}"></script>
-    <div class="container">
+    {!! HTML::script('js/datepicker.js') !!}
+
         <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
             {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
             SYSTEM
         </h1>
+
         <h2 style="text-align:center">
             <small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of Jakarta
                 ::
@@ -99,6 +97,4 @@
             <button type="submit" class="btn btn-primary form-control"><b>Lihat Mata Kuliah</b></button>
         </div>
         {!! Form::close() !!}
-
-    </div>
 @stop
