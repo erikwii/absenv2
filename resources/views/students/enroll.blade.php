@@ -56,9 +56,7 @@
                         <th>
                             Nama Mata Kuliah
                         </th>
-                        <th>
-                            Hapus
-                        </th>
+
                     </tr>
                     </thead>
 
@@ -68,7 +66,7 @@
                         <td>{!! $enrollment->seksi !!}</td>
                         <td>{!! $enrollment->Kode_Matkul !!}</td>
                         <td>{!! $enrollment->Nama_Matkul !!}</td>
-                        <td>Hapus</td>
+
                     </tr>
                     @endforeach
                     </tbody>

@@ -57,9 +57,20 @@ class StudentController extends Controller
         return $this->enrollmhs();
     }
 
+    /**
+     * Student can only register presence on the given day and time
+     * @return mixed
+     */
     public function inputabsen()
     {
-        return view('students.inputabsen');
+        $counter_pertemuan=array();
+        for($i=1;$i<=16;$i++){
+            $counter_pertemuan[$i]=$i;
+        }
+        $user=Auth::user();
+        $noreg=$user->student->Noreg;
+        $enrollment = Enrollment::courseByUser($noreg);
+        return view('students.inputabsen')->with('pertemuan',$counter_pertemuan)->with('enrollments',$enrollment);
     }
 
     public function lihatabsen()

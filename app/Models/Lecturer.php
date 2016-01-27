@@ -71,5 +71,4 @@ class Lecturer extends Model
     public function course(){
         return $this->hasMany('App\Models\Course','Kode_Dosen','Kode_Dosen');
     }
-
 }

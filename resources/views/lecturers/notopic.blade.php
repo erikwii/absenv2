@@ -1,6 +1,5 @@
 @extends('layouts.masterdosen')
 @section('content')
-    <link href="{!! asset('assets/css/jquery-ui.css') !!}" media="all" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="{!! asset('js/jquery-1.10.2.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('js/jquery-ui.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('js/datepicker.js') !!}"></script>

@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\Prodi;
 use App\Models\Room;
 use App\Models\Kalender;
+use App\Models\WaktuKuliah;
 
 use Carbon\Carbon;
 class MatkulController extends Controller
@@ -39,10 +40,14 @@ class MatkulController extends Controller
         $lecturer = $user->lecturer;
         //pass also Kode_Dosen
         $Kode_Dosen=$lecturer->Kode_Dosen;
+        //pass also waktu mapping
+        $waktu_kuliah = WaktuKuliah::waku_map();
+        $waktu_opts = Helpers::toAssociativeArrays($waktu_kuliah);
         return view('lecturers.createcourse')
             ->with('prodi_options',$prodi_arr)
             ->with('Kode_Dosen',$Kode_Dosen)
-            ->with('room_options', $room_arr);
+            ->with('room_options', $room_arr)
+            ->with('waktu_options',$waktu_opts);
     }
 
     public function editMatkul($id_course){
@@ -58,11 +63,14 @@ class MatkulController extends Controller
         //need to pass filled data to this view (extra parameter)
         $room = Room::room_name();
         $room_arr = Helpers::toAssociativeArrays($room);
+        $waktu_kuliah = WaktuKuliah::waku_map();
+        $waktu_opts = Helpers::toAssociativeArrays($waktu_kuliah);
         return view('lecturers.editcourse')
             ->with('prodi_options',$prodi_arr)
             ->with('Kode_Dosen',$kode_dosen)
             ->with('room_options',$room_arr)
-            ->with('course',$course);
+            ->with('course',$course)
+            ->with('waktu_options',$waktu_opts);
     }
 
     /**

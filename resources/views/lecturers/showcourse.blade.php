@@ -2,7 +2,7 @@
 @section('content')
         <!-- Load waktu onload  -->
 <script type="text/javascript" src="{!! asset('js/waktu.js') !!}"></script>
-<body onload="waktu()">
+
 <div class="container">
     <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
         {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
@@ -13,7 +13,7 @@
             Jakarta ::
         </small>
     </h2>
-    </tr>
+
     <br>
 
     <!-- time content -->
@@ -60,7 +60,7 @@
                         <td> {{$course->SKS}} </td>
                         <td> {{$course->prodi->prodi}} </td>
                         <td> {{$course->day}} </td>
-                        <td> {{$course->time}} </td>
+                        <td> {{$course->waktuKuliah->kode_waktu}} </td>
                         <td> {!! $course->room->nama_ruang !!} </td>
                         <td> {{$course->course_start_day}} </td>
                     </tr>

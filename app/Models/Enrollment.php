@@ -39,7 +39,8 @@ class Enrollment extends Model
             ->where('students.Noreg',$user_id)
             ->join('enrollments','enrollments.kode_seksi','=','courses.seksi')
             ->join('students','enrollments.noreg','=','students.Noreg')
-            ->select('courses.seksi','courses.Kode_Matkul','courses.Nama_Matkul')
+            ->join('waktu_kuliah','courses.time','=','waktu_kuliah.id')
+            ->select('courses.seksi','courses.Kode_Matkul','courses.Nama_Matkul','courses.day','courses.time','waktu_kuliah.kode_waktu')
             ->get();
         return $instances;
     }

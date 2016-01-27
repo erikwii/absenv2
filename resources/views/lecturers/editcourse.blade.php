@@ -1,6 +1,5 @@
 @extends('layouts.masterdosen')
 @section('content')
-    <link href="{!! asset('assets/css/jquery-ui.css') !!}" media="all" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="{!! asset('js/jquery-1.10.2.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('js/jquery-ui.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('js/datepicker.js') !!}"></script>
@@ -72,7 +71,7 @@
         <div class="form-group center-block">
             {!! Form::label('time','Jam',['class' => "control-label col-sm-6"]) !!}
             <div class="col-sm-2">
-            {!! Form::select('time', array('0-1' => '0-1', '2+' => '2+', '3-4' => '3-4', '5' =>'5'), $course->time,['class' => 'form-control']) !!}
+            {!! Form::select('time', $waktu_options, $course->time,['class' => 'form-control']) !!}
             </div>
         </div>
 
