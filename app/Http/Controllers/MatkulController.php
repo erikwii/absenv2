@@ -41,7 +41,7 @@ class MatkulController extends Controller
         //pass also Kode_Dosen
         $Kode_Dosen=$lecturer->Kode_Dosen;
         //pass also waktu mapping
-        $waktu_kuliah = WaktuKuliah::waku_map();
+        $waktu_kuliah = WaktuKuliah::waktuMap();
         $waktu_opts = Helpers::toAssociativeArrays($waktu_kuliah);
         return view('lecturers.createcourse')
             ->with('prodi_options',$prodi_arr)
@@ -63,7 +63,7 @@ class MatkulController extends Controller
         //need to pass filled data to this view (extra parameter)
         $room = Room::room_name();
         $room_arr = Helpers::toAssociativeArrays($room);
-        $waktu_kuliah = WaktuKuliah::waku_map();
+        $waktu_kuliah = WaktuKuliah::waktuMap();
         $waktu_opts = Helpers::toAssociativeArrays($waktu_kuliah);
         return view('lecturers.editcourse')
             ->with('prodi_options',$prodi_arr)

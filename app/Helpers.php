@@ -2,6 +2,10 @@
 
 namespace App;
 
+use App\Models\Presence;
+use App\Models\WaktuKuliah;
+use Illuminate\Support\Facades\DB;
+
 class Helpers{
 
     public static function indonesian_date ($timestamp = '', $date_format = 'l, j F Y', $suffix = 'Pukul') {
@@ -48,5 +52,39 @@ class Helpers{
             $array[$vals[0]]=$vals[1];
         }
         return $array;
+    }
+
+    public static function toFullAssociativeArrays($instances){
+        $array=array();
+        foreach($instances as $instance){
+            $instance_arr = (array)$instance;
+            $vals = array_values($instance_arr);
+            $array[$vals[0]]=$vals;
+        }
+        return $array;
+    }
+
+    /**
+     * @param $day string of course day
+     * @param $time_start string of course start time
+     * @param $time_end string of course end time
+     */
+    public static function isAbsentFillable($day, $time_start, $time_end){
+        //get current time in Indonesia
+        $current_day=trans('messages.'.date('l'));
+        //get current time
+        $current_time=date('H:i');
+        //first condition current time must be in interval course time
+        $stat = (boolean)DB::select('select ? between ? and ? as result',[$current_time, $time_start, $time_end])[0]->result;
+        //second condition current day must be within course day
+        $stat2 = strcmp($current_day,$day)==0;
+        //third condition, check in presences table whether current slot already exist
+        $current_slot = WaktuKuliah::getKodeWaktuByTime($current_time);
+        $current_date = date('Y-m-d');
+        $recorded_slot = Presence::getTimeSlotByDate($current_date);
+        //insertable if current slot different from recorded slot
+        $stat3 = strcmp($current_slot,$recorded_slot)<>0;
+        $final_stat = $stat && $stat2 && $stat3;
+        return $final_stat;
     }
 }

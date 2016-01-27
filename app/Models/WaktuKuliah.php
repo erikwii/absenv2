@@ -23,8 +23,14 @@ class WaktuKuliah extends Model
         'waktu_end'
     ];
 
-    public static function waku_map(){
+    public static function waktuMap(){
         $instance = DB::table('waktu_kuliah')->select('id','kode_waktu')->get();
         return $instance;
+    }
+
+    public static function getKodeWaktuByTime($timestamp){
+        //$stat = DB::select('select ? between ? and ? as result',[$current_time, $time_start, $time_end]);
+        $instance = DB::select('select kode_waktu from waktu_kuliah where ? between waktu_start and waktu_end',[$timestamp]);
+        return $instance[0]->kode_waktu;
     }
 }
