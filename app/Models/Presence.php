@@ -24,6 +24,11 @@ class Presence extends Model
         'Kehadiran'
     ];
 
+    /**
+     * Get the time element from datetime parameter, then get kode_waktu from fetched time
+     * @param $date
+     * @return mixed|null
+     */
     public static function getKodeWaktuByDate($date){
         $instance = DB::select('SELECT time(tanggal) as time FROM presences WHERE date(tanggal)=?',[$date]);
         if(count($instance)==0)
@@ -32,5 +37,16 @@ class Presence extends Model
         //next query timeslot, guaranteed to be not null by condition
         $timeslot = WaktuKuliah::getKodeWaktuByTime($time);
         return $timeslot;
+    }
+
+    //check if this composite key already exist
+    public static function isExist($pertemuan, $kode_seksi){
+        $count = DB::table('presences')
+            ->where('pertemuan_ke', $pertemuan)
+            ->where('kode_seksi', $kode_seksi)
+            ->count('*');
+        if($count==1)
+            return true;
+        return false;
     }
 }

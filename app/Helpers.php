@@ -86,8 +86,8 @@ class Helpers
             return 0;
         $current_date = date('Y-m-d');
         $recorded_slot = Presence::getKodeWaktuByDate($current_date);
-        if(is_null($recorded_slot))
-            return 0;
+        //if(is_null($recorded_slot))
+        //    return 0;
         //insertable if current slot different from recorded slot
         $stat3 = strcmp($current_slot, $recorded_slot) <> 0;
         $final_stat = $stat && $stat2 && $stat3;

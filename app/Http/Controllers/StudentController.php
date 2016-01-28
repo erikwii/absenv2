@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers;
 use App\Models\Enrollment;
+use App\Models\Presence;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +60,7 @@ class StudentController extends Controller
     }
 
     /**
+     * Todo: make $counter_pertemuan adaptive, based on select box latest value
      * Student can only register presence on the given day and time
      * @return mixed
      */
@@ -71,7 +73,66 @@ class StudentController extends Controller
         $user=Auth::user();
         $noreg=$user->student->Noreg;
         $enrollment = Enrollment::courseByUser($noreg);
-        return view('students.inputabsen')->with('pertemuan',$counter_pertemuan)->with('enrollments',$enrollment);
+        return view('students.inputabsen')
+            ->with('pertemuan',$counter_pertemuan)
+            ->with('enrollments',$enrollment)
+            ->with('noreg',$noreg);
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function saveabsen(Request $request){
+        $input = $request->all();
+        $validator = $this->presences_validator($input);
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $presence = new Presence;
+        $presence->pertemuan_ke = $request->pertemuan;
+        $presence->kode_seksi = $request->seksi;
+        //query current date time
+        $date = Date('Y-m-d G:i:s');
+        $presence->tanggal=$date;
+        $presence->Noreg=$request->noreg;
+        $presence->kehadiran=1;
+        $presence->save();
+        return $this->inputabsen();
+    }
+
+    /**
+     * Round about solution to debug lambda function
+     * @param $validator
+     * @return bool
+     */
+    public static function checkCompositeUnique($validator){
+        $pertemuan = $validator->getData()['pertemuan_ke'];
+        $seksi = $validator->getData()['kode_seksi'];
+        $stat = Presence::isExist($pertemuan,$seksi);
+        if($stat)
+            return true;
+        return false;
+    }
+
+    protected function presences_validator(array $data)
+    {
+        $validator =Validator::make($data, [
+            'pertemuan_ke' => 'numeric', //dummy placeholder to create validator object
+        ]);
+
+        //callback function cannot be debugged
+        $func_check_unique = function($validator) {
+            //but we can debug if anonymous function calls another function
+            if ($this->checkCompositeUnique($validator)) {
+                $validator->errors()->add('field', 'This presence with the same pertemuan and kode_seksi is exist!');
+            }
+        };
+        $validator->after($func_check_unique);
+        return $validator;
     }
 
     public function lihatabsen()

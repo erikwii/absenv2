@@ -23,6 +23,7 @@
     <!-- time content -->
 
     <h4 style="color:red; text-align:center">Mark your presence today: </h4>
+    @include('errors.error_validator)
     <div class="row">
         <div class="col-md-1 col-sm-1"></div>
         <div class="col-md-10 col-sm-10">
@@ -56,25 +57,29 @@
                 @inject('helpers', 'App\Helpers')
                 @foreach($enrollments as $enrollment)
                     <tr>
-                        <?php $stat = $helpers::isAbsentFillable($enrollment->day, $enrollment->waktu_start, $enrollment->waktu_end)?>
+                        {!! Form::open(array('url' => '/inputabsen', 'class' => 'form-horizontal')) !!}
                         <td>{!! $enrollment->seksi !!}</td>
                         <td>{!! $enrollment->Kode_Matkul !!}</td>
                         <?php $waktu = $enrollment->day . ', ' . $enrollment->kode_waktu ?>
                         <td>{!! $waktu !!}</td>
                         <td>{!! $enrollment->Nama_Matkul !!}</td>
                         <td>{!! $enrollment->pertemuan !!}</td>
-
+                        {!! Form::hidden('seksi', $enrollment->seksi) !!}
+                        {!! Form::hidden('pertemuan',$enrollment->pertemuan+1) !!}
+                        {!! Form::hidden('noreg', $noreg) !!}
+                        <?php $stat = $helpers::isAbsentFillable($enrollment->day, $enrollment->waktu_start, $enrollment->waktu_end)?>
                         @if($stat)
                             <td>{!! Form::select('pertemuan_ke', $pertemuan, $enrollment->pertemuan+1,['class' => 'form-control']) !!}</td>
                             <td>
-                                <button class='btn btn-primary' type="submit" value="Submit">submit</button>
+                                {!! Form::submit('Submit',['class' => 'btn btn-primary form-control']) !!}
                             </td>
                         @else
                             <td>{!! Form::select('pertemuan_ke', $pertemuan, $enrollment->pertemuan+1,['class' => 'form-control','disabled']) !!}</td>
                             <td>
-                                <button class='btn btn-primary' type="submit" value="Submit" disabled>submit</button>
+                                {!! Form::submit('Submit',['class' => 'btn btn-primary form-control','disabled']) !!}
                             </td>
                         @endif
+                        {!! form::close() !!}
                     </tr>
                 @endforeach
                 </tbody>

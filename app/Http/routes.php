@@ -61,8 +61,11 @@ Route::get ('/crudjadwal', 'AdminController@crudjadwal');
 //route for add course for mahasiswa
 Route::get ('/enrollmhs', 'StudentController@enrollmhs');
 Route::post ('/enrollmhs', 'StudentController@saveenrollment');
+
+//Route::get ('/enrollmhs/{id_pertemuan}/{id_seksi}/{noreg}', 'StudentController@saveabsen');
 //route for input absen mahasiswa
 Route::get ('/inputabsen','StudentController@inputabsen');
+Route::post ('/inputabsen','StudentController@saveabsen');
 //route for show all presences for admin
 Route::get ('/showadmin', 'AdminController@showadmin');
 //route for create new course dosen

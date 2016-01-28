@@ -31,8 +31,9 @@ class TopicController extends Controller
             'junlah_mhs' => 'numeric',
         ]);
 
-        //callback function is cannot be debugged
+        //callback function cannot be debugged
         $func_check_unique = function($validator) {
+            //but we can debug if anonymous function calls another function
             if ($this->checkCompositeUnique($validator)) {
                 $validator->errors()->add('field', 'This course with registered pertemuan ke has already been registered!');
             }
