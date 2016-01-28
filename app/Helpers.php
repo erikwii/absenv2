@@ -93,4 +93,18 @@ class Helpers
         $final_stat = $stat && $stat2 && $stat3;
         return $final_stat;
     }
+
+    public static function arrayMap($presences){
+        //first generate empty array of 16 counter
+        $counter_pertemuan=array();
+        for($i=1;$i<=16;$i++){
+            $counter_pertemuan[$i]=0;
+        }
+
+        foreach($presences as $presence){
+            $counter_pertemuan[$presence->pertemuan_ke]=1;
+        }
+        return $counter_pertemuan;
+    }
+
 }

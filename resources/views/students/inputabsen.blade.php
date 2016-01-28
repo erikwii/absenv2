@@ -23,7 +23,7 @@
     <!-- time content -->
 
     <h4 style="color:red; text-align:center">Mark your presence today: </h4>
-    @include('errors.error_validator)
+    @include('errors.error_validator')
     <div class="row">
         <div class="col-md-1 col-sm-1"></div>
         <div class="col-md-10 col-sm-10">

@@ -135,8 +135,18 @@ class StudentController extends Controller
         return $validator;
     }
 
+
     public function lihatabsen()
     {
-        return view('students.lihatabsen');
+        //need to pass along current student registration
+        $user = Auth::user()->student;
+        //get list of enrolled section
+        $enroll = $user->enrollment;
+        $counter_pertemuan=array();
+        for($i=1;$i<=16;$i++){
+            $counter_pertemuan[$i]=$i;
+        }
+
+        return view('students.lihatabsen')->with('enrollments',$enroll)->with('pertemuan',$counter_pertemuan);
     }
 }

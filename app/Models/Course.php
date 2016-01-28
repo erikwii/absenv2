@@ -71,6 +71,10 @@ class Course extends Model
         return $this->hasOne('App\Models\WaktuKuliah','id','time');
     }
 
+    public function presence(){
+        return $this->hasMany('App\Models\Presence','kode_seksi','seksi');
+    }
+
     /**
      * Alternative approach to get all instance of course but with ascending order
      * We can achieve similar result with pure Eloquent, might be further enhanced in the future for more complex query
