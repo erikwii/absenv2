@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Request;
-use App\Models\Lecturer;
+use App\Helpers;
+use App\Models\Kalender;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
-//use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 class LecturerController extends Controller
 {
@@ -27,7 +27,36 @@ class LecturerController extends Controller
         return view('lecturers.profildosen',['name'=>$name,'kode_dosen'=>$kode_dosen,'telepon'=>$telepon]);
     }
 
-    public function rekapdosen(){
-        return view('lecturers.rekap');
+    public function rekapdosen(Request $request){
+        //get list of semester
+        $kalender = Kalender::all('id','semester');;
+        $kalender_array = Helpers::modelAsAssociativeArray($kalender,'id','semester');
+
+        //get list of course sections for current semester and lecturer
+        $lecturer = Auth::user()->lecturer;
+        $kode_dosen = $lecturer->Kode_Dosen;
+        $semester = Kalender::getRunningSemester();
+        $course_model = DB::table('courses')
+            ->where('Kode_Dosen',$kode_dosen)
+            ->where('id_semester',$semester->id);
+        $course = DB::table('courses')
+            ->where('Kode_Dosen',$kode_dosen)
+            ->where('id_semester',$semester->id)
+            ->get();
+        $course_array = Helpers::modelAsAssociativeArray($course,'seksi','Nama_Matkul');
+
+        //make default showing first course on the list
+        $seksi=$course[0]->seksi;
+        //pass along list of enrolled students
+        $enrollment=$course_model
+            ->where('seksi',$seksi)
+            ->join('enrollments as e','e.kode_seksi','=','courses.seksi')
+            ->join('students as s','s.Noreg','=','e.noreg')
+            ->get();
+
+        return view('lecturers.rekap')
+            ->with('kalender_options',$kalender_array)
+            ->with('course_options',$course_array)
+            ->with('enrolls',$enrollment);
     }
 }

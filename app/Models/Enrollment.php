@@ -32,7 +32,7 @@ class Enrollment extends Model
     //get mapping to student
     public function student()
     {
-        return $this->belongsTo('App\Mdeols\Student', 'noreg', 'Noreg');
+        return $this->belongsTo('App\Models\Student', 'noreg', 'Noreg');
     }
 
     /**

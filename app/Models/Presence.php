@@ -49,4 +49,12 @@ class Presence extends Model
             return true;
         return false;
     }
+
+    public static function countPresenceeBySectionNoreg($seksi,$noreg){
+        $count = DB::table('presences')
+            ->where('kode_seksi', $seksi)
+            ->where('Noreg',$noreg)
+            ->count('*');
+        return $count;
+    }
 }

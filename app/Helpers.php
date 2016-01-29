@@ -54,6 +54,16 @@ class Helpers
         return $array;
     }
 
+    public static function modelAsAssociativeArray($model, $fieldname1, $fieldname2){
+        $array = array();
+        foreach($model as $instance){
+            $val1=$instance->$fieldname1;
+            $val2=$instance->$fieldname2;
+            $array[$val1]=$val2;
+        }
+        return $array;
+    }
+
     public static function toFullAssociativeArrays($instances)
     {
         $array = array();
@@ -94,6 +104,11 @@ class Helpers
         return $final_stat;
     }
 
+    /**
+     * Todo: Not a generic class but specific to certain condition will be move later to its proper place
+     * @param $presences
+     * @return array
+     */
     public static function arrayMap($presences){
         //first generate empty array of 16 counter
         $counter_pertemuan=array();
@@ -106,5 +121,4 @@ class Helpers
         }
         return $counter_pertemuan;
     }
-
 }

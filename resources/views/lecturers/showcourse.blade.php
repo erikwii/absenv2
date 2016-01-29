@@ -14,8 +14,6 @@
 <br>
 
 <!-- time content -->
-<br>
-<br>
 
 <h5><p class='text-center'>
         Hari, Tanggal :
@@ -26,8 +24,7 @@
 </h5>
 
 <!-- time content -->
-<br>
-<br>
+
 <!--<tr>-->
 <h3 style="text-align:center"> Daftar Courses </h3>
 <div class="row">

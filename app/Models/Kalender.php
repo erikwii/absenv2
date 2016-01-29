@@ -23,6 +23,13 @@ class Kalender extends model
         'end_period'
     ];
 
+    public function asAssociativeArray($fieldname1, $fieldname2){
+        foreach($this as $instance){
+            $val1=$instance->$fieldname1;
+            $val2=$instance->$fieldname2;
+        }
+    }
+
     /**
      * Not yet check for bug most likely will error due to different format between PHP & MySql
      * @return mixed
