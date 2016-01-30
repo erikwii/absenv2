@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers;
 use App\Models\Kalender;
 use App\Http\Requests;
+use App\Models\Lecturer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -25,6 +26,15 @@ class LecturerController extends Controller
         $kode_dosen = $lecturer->Kode_Dosen;
         $telepon = $lecturer->Telepon;
         return view('lecturers.profildosen',['name'=>$name,'kode_dosen'=>$kode_dosen,'telepon'=>$telepon]);
+    }
+
+    public function updateProfilDosen(Request $request){
+        $input = $request->all();
+        $lecturer = Lecturer::find($input['Kode_Dosen']);
+        $lecturer->Nama_Dosen=$input['Nama_Dosen'];
+        $lecturer->Telepon=$input['Telepon'];
+        $lecturer->save();
+        return $this->profildosen();
     }
 
     public function AjaxReloadRekapDosenWithSemester(Request $request){

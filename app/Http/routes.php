@@ -38,6 +38,7 @@ Route::get('/profil', 'StudentController@profil');
 Route::post('/profil', 'StudentController@updateprofil');
 //route for dosen's profile
 Route::get ('/profildosen','LecturerController@profildosen');
+Route::post ('/profildosen','LecturerController@updateProfilDosen');
 //route for admin's profile
 Route::get ('/profiladmin', 'AdminController@profiladmin');
 
