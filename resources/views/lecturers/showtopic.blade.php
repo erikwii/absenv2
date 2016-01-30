@@ -27,12 +27,18 @@
     {!! Form::open(array('url' => '/coursetopic', 'class' => 'form-horizontal')) !!}
     <div class="form-group center-block">
         {!! Form::label('matkul','Mata Kuliah',['class' => "control-label col-sm-6"]) !!}
+
         <div class="col-sm-2">
-            {!! Form::select('course_id', $Courses, null,['class' => 'form-control','id'=>'changeStatus']) !!}
+            @if(isset($course_id))
+                {!! Form::select('course_id', $Courses, $course_id,['class' => 'form-control','id'=>'changeStatus']) !!}
+            @else
+                {!! Form::select('course_id', $Courses, null,['class' => 'form-control','id'=>'changeStatus']) !!}
+            @endif
         </div>
     </div>
     {!! form::close() !!}
 
+    <!-- Not used here-->
     <div id="ajaxResponse"></div>
 
     <h3 style="text-align:center"> Daftar Topik Perkuliahan </h3>

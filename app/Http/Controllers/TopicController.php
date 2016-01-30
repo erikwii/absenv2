@@ -159,7 +159,7 @@ class TopicController extends Controller
             return response()->json($response);
         }
 
-        return view('lecturers.showtopic')->with('Topic', $Topic)->with('Courses',$courses_arr);
+        return view('lecturers.showtopic')->with('Topic', $Topic)->with('Courses',$courses_arr)->with('course_id',$course_id);
     }
 
     public function editTopic($topic_id){

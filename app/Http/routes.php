@@ -53,8 +53,9 @@ Route::get('/notopic',function(){
 });
 
 //route for rekap dosen
-Route::get ('/rekapdosen', 'LecturerController@rekapdosen');
-Route::post ('/rekapdosen', 'LecturerController@rekapdosen');
+Route::get ('/rekapdosen', 'LecturerController@rekapDosen');
+Route::post ('/rekapdosen', 'LecturerController@postRekapDosen');
+Route::post ('/ajaxrekapdosen', 'LecturerController@AjaxReloadRekapDosenWithSemester');
 //route for rekap admin
 Route::get ('/rekapadmin', 'AdminController@rekapadmin');
 //route for crudjadwal for admin

@@ -3,9 +3,10 @@
  */
 
 $(document).ready(function() {
-    $('select#changeStatus').change(function(e){
+    //handle showTopic
+    $('select#changeStatus[name="course_id"]').change(function(e){
         e.preventDefault();
-        var course_id = $('select#changeStatus').val();
+        var course_id = $('select[id="changeStatus"][name="course_id"]').val();
         var token = $('input[name="_token"]').val();
         $.ajax({
             type: 'POST',
@@ -21,4 +22,25 @@ $(document).ready(function() {
         });
         console.log(token);
     });
+
+    //handle showTopic
+    $('select#changeStatus[name="Semester"]').change(function(e){
+        e.preventDefault();
+        var semester_id = $('select[id="changeStatus"][name="Semester"]').val();
+        var token = $('input[name="_token"]').val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajaxrekapdosen',
+            data: {Semester: semester_id, _token: token},
+            success: function( msg ) {
+                //turn JSON object to javascript object for easier debugging
+                var obj = JSON.parse(msg);
+                //$("#ajaxResponse").append("<div>"+obj._token+"</div>");
+                $('body').load( "/ajaxrekapdosen",{ "_token": obj._token, "Semester" : obj.Semester,"step" : 2} );
+            },
+            dataType: 'html'
+        });
+        console.log(token);
+    });
+
 });

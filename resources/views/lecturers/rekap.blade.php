@@ -1,5 +1,6 @@
 @extends('layouts.masterdosen')
 @section('content')
+    {!! HTML::script('js/ajax-response.js') !!}
     <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
         {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE SYSTEM
     </h1>
@@ -18,23 +19,27 @@
     </h5>
 
     <h2 style="color:black; text-align:center">Rekapitulasi Absen</h2>
-    {!! Form::open(array('url' => '/createcourse/tambahMatkul', 'class' => 'form-horizontal')) !!}
+    {!! Form::open(array('url' => '/rekapdosen', 'class' => 'form-horizontal')) !!}
     <div class="row form-group">
         <div class="col-md-2 col-md-2"></div>
         <div class="col-md-2 col-sm-2">
             <label for="Semester">Semester</label>
-            {!! Form::select('Semester', $kalender_options, 1,['class' => 'form-control']) !!}
+            {!! Form::select('Semester', $kalender_options, $semester_id,['class' => 'form-control','id'=>'changeStatus']) !!}
         </div>
         <div class="col-md-1 col-sm-1"></div>
         <div class="col-md-2 col-sm-2">
             <label for="Kode_Seksi">Nama Mata Kuliah</label>
-            {!! Form::select('Kode_Seksi', $course_options, 1,['class' => 'form-control']) !!}
+            {!! Form::select('Kode_Seksi', $course_options, $kode_seksi,['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="row">
         <div class="col-md-5 col-sm-2"></div>
         <div class="col-md-2 col-sm-2">
-            {!! Form::submit('Check',['class' => 'btn btn-primary form-control']) !!}
+            @if(empty($course))
+                {!! Form::submit('Check',['class' => 'btn btn-primary form-control','disabled']) !!}
+            @else
+                {!! Form::submit('Check',['class' => 'btn btn-primary form-control']) !!}
+            @endif
         </div>
     </div>
     {!! Form::close() !!}
@@ -52,7 +57,7 @@
                 </thead>
                 <tbody>
                 @inject('presence', 'App\Models\Presence')
-                @if(count($enrolls)>0)
+                @if(!empty($enrolls))
                     <?php $i=1?>
                     @foreach($enrolls as $enroll)
                         <tr>
