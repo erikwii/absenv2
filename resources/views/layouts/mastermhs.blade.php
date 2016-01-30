@@ -34,7 +34,6 @@
     {!! HTML::script('assets/js/html5shiv.js') !!}
     {!! HTML::script('assets/js/respond.min.js') !!}
     <![endif]-->
-    <![endif]-->
 </head>
 
 <body>

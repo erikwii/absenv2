@@ -23,6 +23,7 @@ class Student extends Model
         'Alamat',
         'Telepon',
         'Semester',
+        'Mac',
         'id_user'
     ];
 

@@ -1,12 +1,4 @@
-@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}></li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+@include('errors.error_validator');
 
 <link href="{!! asset('assets/css/bootstrap.css') !!}" media="all" rel="stylesheet" type="text/css"/>
 
@@ -19,9 +11,8 @@
 
 {!! Form::open(array('url' => '/auth/student_registration', 'class' => 'form-horizontal','role'=>'form')) !!}
 
-        <!-- previous submission of registration data is re-encoded again as form element -->
-
-{!! csrf_field() !!}
+    <!-- previous submission of registration data is re-encoded again as form element -->
+    {!! csrf_field() !!}
 
 <div class="form-group center-block">
     <label class="control-label col-sm-6" for="nrg">
@@ -70,10 +61,19 @@
 
 <div class="form-group">
     <label class="control-label col-sm-6" for="semester">
-        Semester:
+        Semester Masuk:
     </label>
     <div class="col-sm-2">
         <input type="text" name="semester" value="" class="form-control" placeholder="enter semester">
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-sm-6" for="semester">
+        MAC Address:
+    </label>
+    <div class="col-sm-2">
+        <input type="text" name="Mac" value="" class="form-control" placeholder="enter mac address">
     </div>
 </div>
 

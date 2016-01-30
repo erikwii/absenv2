@@ -1,12 +1,4 @@
-@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}></li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+@include('errors.error_validator')
 
 <link href="{!! asset('assets/css/bootstrap.css') !!}" media="all" rel="stylesheet" type="text/css"/>
 
@@ -18,9 +10,8 @@
 
 
 {!! Form::open(array('url' => '/auth/dosen_registration', 'class' => 'form-horizontal','role'=>'form')) !!}
-{!! csrf_field() !!}
-        <!-- previous submission of registration data is re-encoded again as form element -->
-
+    {!! csrf_field() !!}
+    <!-- previous submission of registration data is re-encoded again as form element -->
 
 <div class="form-group center-block">
     <label class="control-label col-sm-6" for="kode_dosen">

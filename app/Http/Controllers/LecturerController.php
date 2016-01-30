@@ -120,7 +120,7 @@ class LecturerController extends Controller
 
     public function rekapDosen(Request $request){
         //get list of semester
-        $kalender = Kalender::all('id','semester');;
+        $kalender = Kalender::all('id','semester');
         $kalender_array = Helpers::modelAsAssociativeArray($kalender,'id','semester');
 
         //get list of course sections for current semester and lecturer

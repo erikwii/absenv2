@@ -224,6 +224,7 @@ class AuthController extends Controller
         $student->Alamat=$request['alamat'];
         $student->Telepon=$request['telepon'];
         $student->Semester=$request['semester'];
+        $student->Mac=$request['Mac'];
         $student->id_user=$id;
         $student->save();
         //3.forward the user into profile page, redirectPath() return $redirectTo

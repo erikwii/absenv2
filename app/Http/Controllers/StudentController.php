@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Helpers;
 use App\Models\Enrollment;
 use App\Models\Presence;
+use App\Models\Prodi;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,26 @@ class StudentController extends Controller
         $semester = $student->Semester;
         $alamat = $student->Alamat;
         $telepon = $student->Telepon;
-        return view('students.profil',['name'=>$name,'noreg'=>$noreg,'prodi'=>$prodi_name,'semester'=>$semester,'alamat'=>$alamat,'telepon'=>$telepon]);
+        $mac = $student->Mac;
+
+        $prodis = Prodi::all();
+        $prodi_arr=Helpers::modelAsAssociativeArray($prodis,'id','prodi');
+        return view('students.profil',['name'=>$name,'noreg'=>$noreg,'prodi'=>$prodi_name,'semester'=>$semester,
+            'alamat'=>$alamat,'telepon'=>$telepon,'mac'=>$mac,'prodi_opts'=>$prodi_arr]);
+    }
+
+    public function updateProfil(Request $request){
+        $input = $request->all();
+        $student=Student::find($input['Noreg']);
+        $student->Noreg = $input['Noreg'];
+        $student->Nama_Mhs = $input['Nama_Mhs'];
+        $student->Prodi_id = $input['Prodi_id'];
+        $student->Alamat = $input['Alamat'];
+        $student->Telepon = $input['Telepon'];
+        $student->Semester = $input['Semester'];
+        $student->Mac = $input['Mac'];
+        $student->save();
+        return $this->profil();
     }
 
     public function enrollmhs()

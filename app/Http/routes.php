@@ -35,6 +35,7 @@ Route::get ('/home','HomeController@home');
 
 //route for student's profile
 Route::get('/profil', 'StudentController@profil');
+Route::post('/profil', 'StudentController@updateprofil');
 //route for dosen's profile
 Route::get ('/profildosen','LecturerController@profildosen');
 //route for admin's profile
