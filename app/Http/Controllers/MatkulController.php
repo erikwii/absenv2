@@ -95,7 +95,7 @@ class MatkulController extends Controller
         $course->id_semester=$semester->id;
         $course->course_start_day=$input['course_start_day'];
         $course->save();
-        return $this->showMatkul();
+        return $this->viewCourseByLecturer();
     }
 
     /**
@@ -114,14 +114,31 @@ class MatkulController extends Controller
         $course->time=$input['time'];
         $course->course_start_day=$input['course_start_day'];
         $course->save();
-        return $this->showMatkul();
+        return $this->viewCourseByLecturer();
+    }
+
+    /**
+     * Show all course registered for this registered student prodi
+     * @return $this
+     */
+    public function viewCourseByProdi()
+    {
+        //get current user
+        $user = Auth::user();
+        //get the mapping for lecturer
+        $prodi_id = $user->student->Prodi_Id;
+        $id_semester = Kalender::getRunningSemester()->id;
+        $courses = Course::where('Prodi_Id',$prodi_id)
+            ->where('id_semester',$id_semester)
+            ->get();
+        return view('lecturers.showcourse')->with('Courses', $courses);
     }
 
     /**
      * Show all course only taught by this lecturer on current semester
      * @return $this
      */
-    public function showMatkul()
+    public function viewCourseByLecturer()
     {
         //get current user
         $user = Auth::user();

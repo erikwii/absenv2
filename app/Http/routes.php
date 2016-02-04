@@ -65,6 +65,7 @@ Route::get ('/crudjadwal', 'AdminController@crudjadwal');
 //route for add course for mahasiswa
 Route::get ('/enrollmhs', 'StudentController@enrollmhs');
 Route::post ('/enrollmhs', 'StudentController@saveenrollment');
+Route::get ('/student/viewcourse', 'MatkulController@viewCourseByProdi');
 
 //Route::get ('/enrollmhs/{id_pertemuan}/{id_seksi}/{noreg}', 'StudentController@saveabsen');
 //route for input absen mahasiswa
@@ -77,7 +78,7 @@ Route::get ('/createcourse/tambahMatkul', 'MatkulController@createMatkul');
 Route::post('/createcourse/tambahMatkul', 'MatkulController@saveMatkul');
 Route::get ('/createcourse/tambahMatkul/{id_matkul}', 'MatkulController@editMatkul');
 Route::post('/createcourse/tambahMatkul/{id_matkul}', 'MatkulController@updateMatkul');
-Route::get ('/showcourse', 'MatkulController@showMatkul');
+Route::get ('/showcourse', 'MatkulController@viewCourseByLecturer');
 //route for lihatabsen mhs for mahasiswa
 Route::get ('/lihatabsen', 'StudentController@lihatabsen');
 //route for add and delete user for admin

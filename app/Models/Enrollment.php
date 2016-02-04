@@ -36,35 +36,40 @@ class Enrollment extends Model
     }
 
     /**
+     * Default get current semester enrollment
      * @param $user_id
      * @return mixed
      */
     public static function courseByUser($user_id)
     {
         $id_semester = Kalender::getRunningSemester()->id;
-        /*
-        $instances=DB::table('courses')
-            ->where('courses.id_semester',$id_semester)
-            ->where('students.Noreg',$user_id)
-            ->join('enrollments','enrollments.kode_seksi','=','courses.seksi')
-            ->join('students','enrollments.noreg','=','students.Noreg')
-            ->join('waktu_kuliah','courses.time','=','waktu_kuliah.id')
-            ->join('presences','presences.kode_seksi','=','courses.seksi')
-            ->select('courses.seksi', 'courses.Kode_Matkul', 'courses.Nama_Matkul',
-                'courses.day', 'courses.time', 'waktu_kuliah.kode_waktu',
-                'waktu_kuliah.waktu_start', 'waktu_kuliah.waktu_end','presences.pertemuan_ke')
-            ->groupBy('courses.seksi')
-            ->get();
-        */
-        $user = Auth::user();
         $instances = DB::select('SELECT e.id, c.seksi, c.Kode_Matkul,c.Nama_Matkul, c.day, c.time, c.Kode_Dosen,
           e.noreg, max(p.pertemuan_ke) as pertemuan, w.kode_waktu, w.waktu_start, w.waktu_end FROM `enrollments` as e
           inner join courses as c
           inner join presences as p
           inner join waktu_kuliah as w
           on e.kode_seksi=c.seksi and c.seksi=p.kode_seksi and w.id=c.time
-          where e.noreg=?
-          group by c.seksi',[$user->student->Noreg]);
+          where e.noreg=? and c.id_semester=?
+          group by c.seksi',[$user_id,$id_semester]);
+        return $instances;
+    }
+
+    /**
+     * Get list of registered course for current semester per prodi
+     * @param $prodi_id
+     * @return mixed
+     */
+    public static function courseByUserProdi($prodi_id)
+    {
+        $id_semester = Kalender::getRunningSemester()->id;
+        $instances = DB::select('SELECT e.id, c.seksi, c.Kode_Matkul,c.Nama_Matkul, c.day, c.time, c.Kode_Dosen,
+          e.noreg, max(p.pertemuan_ke) as pertemuan, w.kode_waktu, w.waktu_start, w.waktu_end FROM `enrollments` as e
+          inner join courses as c
+          inner join presences as p
+          inner join waktu_kuliah as w
+          on e.kode_seksi=c.seksi and c.seksi=p.kode_seksi and w.id=c.time
+          where c.prodi_id=? and c.id_semester=?
+          group by c.seksi',[$prodi_id,$id_semester]);
         return $instances;
     }
 }

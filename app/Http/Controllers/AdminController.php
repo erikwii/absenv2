@@ -15,7 +15,7 @@ class AdminController extends Controller
     public function __construct()
     {
         //attach auth middleware, if user not authenticated forward to login page
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     public function profiladmin()

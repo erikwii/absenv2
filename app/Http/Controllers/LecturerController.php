@@ -25,7 +25,7 @@ class LecturerController extends Controller
         $lecturer = $user->lecturer;
         $kode_dosen = $lecturer->Kode_Dosen;
         $telepon = $lecturer->Telepon;
-        return view('lecturers.profildosen',['name'=>$name,'kode_dosen'=>$kode_dosen,'telepon'=>$telepon]);
+        return view('lecturers.profildosen',['name' => $name,'kode_dosen' => $kode_dosen,'telepon' => $telepon]);
     }
 
     public function updateProfilDosen(Request $request){
@@ -78,8 +78,6 @@ class LecturerController extends Controller
                 ->join('students as s','s.Noreg','=','e.noreg')
                 ->get();
         }
-
-        $d=empty($course);
 
         return view('lecturers.rekap')
             ->with('kalender_options',$kalender_array)

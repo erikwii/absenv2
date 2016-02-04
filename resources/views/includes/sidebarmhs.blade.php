@@ -10,6 +10,9 @@
         <li @if(strcmp($path,"inputabsen")==0) class="active" @endif>
             <a href="/inputabsen">Input Absen</a>
         </li>
+        <li @if(strcmp($path,"student/viewcourse")==0) class="active" @endif>
+            <a href="/student/viewcourse">View Registered Course</a>
+        </li>
         <li @if(strcmp($path,"enrollmhs")==0) class="active" @endif>
             <a href="/enrollmhs">Enroll Course</a>
         </li>
