@@ -10,6 +10,9 @@ use App\Models\Prodi;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Kalender;
+use App\Models\Course;
 
 class StudentController extends Controller
 {
@@ -66,8 +69,21 @@ class StudentController extends Controller
         return view('students.enroll')->with('enrollments',$enrollment);
     }
 
+    /**
+     * Todo: Add validator to check wether current course has not been registered nor existed
+     * @param Request $request
+     * @return $this
+     */
     public function saveenrollment(Request $request){
         $input = $request->all();
+
+        $validator = $this->enrollment_validator($input);
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
         //get data from the form
         $enrollment = new Enrollment;
         $enrollment->kode_seksi = $input['kode_seksi'];
@@ -80,7 +96,6 @@ class StudentController extends Controller
     }
 
     /**
-     * Todo: make $counter_pertemuan adaptive, based on select box latest value
      * Student can only register presence on the given day and time
      * @return mixed
      */
@@ -124,16 +139,45 @@ class StudentController extends Controller
         return $this->inputabsen();
     }
 
-    /**
-     * Round about solution to debug lambda function
-     * @param $validator
-     * @return bool
-     */
-    public static function checkCompositeUnique($validator){
-        $pertemuan = $validator->getData()['pertemuan_ke'];
+    protected function enrollment_validator(array  $data){
+        $validator =Validator::make($data, [
+            'kode_seksi' => 'numeric', //dummy placeholder to create validator object
+        ]);
+
+        //callback function cannot be debugged
+        $func = function($validator) {
+            //but we can debug if anonymous function calls another function
+            if ($this->checkSectionId($validator)) {
+                $validator->errors()->add('field', 'This section id is not registered!');
+            }
+            if($this->checkIsEnrolled($validator)){
+                $validator->errors()->add('field', 'This section id has been enrolled!');
+            }
+        };
+        $validator->after($func);
+        return $validator;
+    }
+
+    protected function checkSectionId($validator){
         $seksi = $validator->getData()['kode_seksi'];
-        $stat = Presence::isExist($pertemuan,$seksi);
-        if($stat)
+        $id_semester = Kalender::getRunningSemester()->id;
+        $instance = Course::where('seksi',$seksi)
+            ->where('id_semester',$id_semester)
+            ->get();
+        if(count($instance)==0)
+            return true;
+        return false;
+        //the precondition for being add, section id must not exist for current user or has been registered
+    }
+
+    protected function checkIsEnrolled($validator){
+        $seksi = $validator->getData()['kode_seksi'];
+        $user = Auth::user();
+        $noreg = $user->student->Noreg;
+        $instance = Enrollment::where('kode_seksi',$seksi)
+            ->where('noreg',$noreg)
+            ->get();
+        if(count($instance))
             return true;
         return false;
     }
@@ -153,6 +197,20 @@ class StudentController extends Controller
         };
         $validator->after($func_check_unique);
         return $validator;
+    }
+
+    /**
+     * Round about solution to debug lambda function
+     * @param $validator
+     * @return bool
+     */
+    protected function checkCompositeUnique($validator){
+        $pertemuan = $validator->getData()['pertemuan_ke'];
+        $seksi = $validator->getData()['kode_seksi'];
+        $stat = Presence::isExist($pertemuan,$seksi);
+        if($stat)
+            return true;
+        return false;
     }
 
 

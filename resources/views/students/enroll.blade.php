@@ -10,6 +10,8 @@
         </small>
     </h2>
 
+    @include('errors.error_validator')
+
     <h2 style="text-align:center">ENROLL MATA KULIAH</h2>
 
     {!! Form::open(array('url' => '/enrollmhs', 'class' => 'form-horizontal','role'=>'form')) !!}

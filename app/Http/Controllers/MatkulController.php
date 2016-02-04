@@ -131,7 +131,7 @@ class MatkulController extends Controller
         $courses = Course::where('Prodi_Id',$prodi_id)
             ->where('id_semester',$id_semester)
             ->get();
-        return view('lecturers.showcourse')->with('Courses', $courses);
+        return view('students.showcourse')->with('Courses', $courses);
     }
 
     /**
