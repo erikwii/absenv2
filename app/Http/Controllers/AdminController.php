@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,9 +47,21 @@ class AdminController extends Controller
         return view('admin.crudjadwal');
     }
 
-    public function updateuser()
+    //Todo: Implement pagination
+    public function viewuser()
     {
-        return view('admin.updateuser');
+        //get all user instance
+        $users = User::all();
+        return view('admin.viewuser')->with('users',$users);
     }
 
+    //Todo: Finishing implementation for edit user
+    public function editUser($id){
+        return view('admin.viewuser');
+    }
+
+    //Todo: Finishing implementation for delete user
+    public function deleteUser($id){
+        return view('admin.viewuser');
+    }
 }

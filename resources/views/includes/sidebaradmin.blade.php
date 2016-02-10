@@ -5,8 +5,8 @@
         <li @if(strcmp($path,"showadmin")==0) class="active" @endif>
             <a href="/showadmin">Show All Presences</a>
         </li>
-        <li @if(strcmp($path,"updateuser")==0) class="active" @endif>
-            <a href="/updateuser">Add and Delete User</a>
+        <li @if(strcmp($path,"viewuser")==0) class="active" @endif>
+            <a href="/viewuser">View User</a>
         </li>
         <li @if(strcmp($path,"crudjadwal")==0) class="active" @endif>
             <a href="/crudjadwal">CRUD Course Schedule</a>

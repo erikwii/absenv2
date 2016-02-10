@@ -83,7 +83,9 @@ Route::get ('/showcourse', 'MatkulController@viewCourseByLecturer');
 //route for lihatabsen mhs for mahasiswa
 Route::get ('/lihatabsen', 'StudentController@lihatabsen');
 //route for add and delete user for admin
-Route::get ('/updateuser', 'AdminController@updateuser');
+Route::get ('/viewuser', 'AdminController@viewuser');
+Route::get ('/edituser/{id}', 'AdminController@editUser');
+Route::get ('/deleteuser/{id}', 'AdminController@deleteUser');
 
 //authentication routes
 Route::get('/auth/login', 'Auth\AuthController@getLogin');
