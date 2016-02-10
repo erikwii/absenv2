@@ -13,23 +13,30 @@
 
         <!-- previous submission of registration data is re-encoded again as form element -->
 
-{!! csrf_field() !!}
-
-<div class="form-group center-block">
-    <label class="control-label col-sm-6" for="nrg">
-        ID. Admin:
+<div class="form-group">
+    <label class="control-label col-sm-6" for="name">
+        Nama
     </label>
-    <div class="col-sm-2    ">
-        <input type="text" name="Id_Admin" value='' class="form-control" placeholder="enter registration id">
+    <div class="col-sm-2">
+        <input type="text" name="Nama_Admin" value={{$reg_name}} class="form-control" placeholder="enter name">
     </div>
 </div>
 
 <div class="form-group">
     <label class="control-label col-sm-6" for="name">
-        Nama:
+        Alamat
     </label>
     <div class="col-sm-2">
-        <input type="text" name="Nama_Admin" value={{$reg_name}} class="form-control" placeholder="enter name">
+        <input type="text" name="Alamat" value="" class="form-control" placeholder="enter address">
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-sm-6" for="name">
+        Telepon
+    </label>
+    <div class="col-sm-2">
+        <input type="text" name="Telepon" value="" class="form-control" placeholder="enter phone">
     </div>
 </div>
 

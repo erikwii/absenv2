@@ -61,6 +61,7 @@
             <button type="submit" class="btn btn-info">Register</button>
         </div>
     </div>
+    {!! Form::hidden('role','admin') !!}
 
     {!! Form::close() !!}
 

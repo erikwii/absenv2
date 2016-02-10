@@ -46,4 +46,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function lecturer(){
         return $this->belongsTo('App\Models\Lecturer','id','id_user');
     }
+
+    public function admin(){
+        return $this->belongsTo('App\Models\Admin','id','id_user');
+    }
 }

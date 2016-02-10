@@ -9,9 +9,8 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use App\Http\Traits\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-//use App\Models\Student;
-//use App\Models\Lecturer;
 use App\Models\Admin;
+use App\Models\Users;
 
 class AuthAdminController extends Controller
 {
@@ -63,7 +62,6 @@ class AuthAdminController extends Controller
     protected function admin_validator(array $data)
     {
         return Validator::make($data, [
-            'Id_Admin' => 'required|unique:admins|max:255',
             'Nama_Admin' => 'required|max:255',
         ]);
     }
@@ -80,6 +78,7 @@ class AuthAdminController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'role' => $data['role']
         ]);
     }
 
@@ -117,16 +116,19 @@ class AuthAdminController extends Controller
             );
         }
 
+        $id=Users::getNextId('users');
         //1. create new users instance & authenticate the user
         $reg_data = $request->session()->get('reg_data');
         Auth::login($this->create($reg_data));
         //after creation remove the session
         $request->session()->forget('reg_data');
         //2. create new lecturer instance, not extra parameter
-        $admins = new Admin;
-        $admins->Id_Admin = $request['Id_Admin'];
-        $admins->Nama_Admin = $request['Nama_Admin'];
-        $admins->save();
+        $admin = new Admin;
+        $admin->Nama_Admin = $request['Nama_Admin'];
+        $admin->Alamat = $request['Alamat'];
+        $admin->Telepon = $request['Telepon'];
+        $admin->id_user = $id;
+        $admin->save();
         //3. redirect to profile page
         return redirect()->action('AdminController@profiladmin');
     }

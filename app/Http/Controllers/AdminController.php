@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Request;
 use App\Models\Admin;
-use App\Http\Requests;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -21,12 +17,18 @@ class AdminController extends Controller
     public function profiladmin()
     {
         $user = Auth::user();
-        //$user_data = $request->user();
-        $name = $user['attributes']['name'];
-        $admins = Admin::where('Nama_Admin', $name)->take(1)->get();
-        //$student
-        $Id_Admin = $admins[0]['attributes']['Id_Admin'];
-        return view('admin.profiladmin', ['name' => $name, 'Id_Admin' => $Id_Admin]);
+        $admin = $user->admin;
+        return view('admin.profiladmin', ['admin' => $admin]);
+    }
+
+    public function updateProfilAdmin(Request $request){
+        $input = $request->all();
+        $admin = Admin::find($input['id']);
+        $admin->Nama_Admin = $input['Nama_Admin'];
+        $admin->Alamat = $input['Alamat'];
+        $admin->Telepon = $input['Telepon'];
+        $admin->save();
+        return $this->profiladmin();
     }
 
     public function rekapadmin()

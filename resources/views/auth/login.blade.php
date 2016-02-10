@@ -32,7 +32,7 @@
     </label>
     <div class="col-sm-2">
         <?php
-        echo Form::select('role', array('student' => 'Student', 'dosen' => 'Dosen'), 'student', array('class' => 'form-control'));
+        echo Form::select('role', array('student' => 'Student', 'dosen' => 'Dosen','admin' => 'Admin'), 'student', array('class' => 'form-control'));
         ?>
     </div>
 </div>

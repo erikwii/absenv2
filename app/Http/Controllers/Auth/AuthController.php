@@ -128,9 +128,12 @@ class AuthController extends Controller
                 $this->redirectTo = "profil";
                 //return redirect()->action('StudentController@profil');
             }
-            else {
+            else if(strcmp($role,'dosen')==0) {
                 $this->redirectTo="profildosen";
                 //return redirect()->action('LecturerController@profildosen');
+            }
+            else{
+                $this->redirectTo="profiladmin";
             }
             $request->session()->put("role",$role);
             return $this->handleUserWasAuthenticated($request, $throttles);

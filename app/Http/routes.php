@@ -41,6 +41,7 @@ Route::get ('/profildosen','LecturerController@profildosen');
 Route::post ('/profildosen','LecturerController@updateProfilDosen');
 //route for admin's profile
 Route::get ('/profiladmin', 'AdminController@profiladmin');
+Route::post ('/profiladmin', 'AdminController@updateProfilAdmin');
 
 //route for topik dosen
 Route::get ('/coursetopic/tambahtopik', 'TopicController@tambahtopik');
