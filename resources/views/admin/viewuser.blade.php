@@ -25,6 +25,8 @@
 
     @include('errors.error_validator')
 
+    <h3 style="text-align:center"> Daftar User </h3>
+
     <div class="row">
         <div class="col-md-1 col-sm-1"></div>
         <div class="col-md-10 col-sm-10">
@@ -53,13 +55,12 @@
 
             @foreach($users as $user)
             <tr>
-                <?php $linkedit = "/edituser/" . $user->id?>
                 <td>{!! $user->id !!}</td>
                 <td>{!! $user->name !!}</td>
                 <td>{!! $user->email !!}</td>
                 <td>{!! $user->role !!}</td>
                 <?php $user_data = array("id"=>$user->id,"name"=>$user->name,"email"=>$user->email,"role"=>$user->role)?>
-                <td><button type="button" class="btn btn-link edit-btn" data-toggle="modal" data-target="#myModal" data-id={!! json_encode($user_data) !!}>Edit</button></td>
+                <td><button type="button" class="btn btn-link edit-btn" data-toggle="modal" data-target="#myModal" data-id='\'.{!! json_encode($user_data).'\'' !!}>Edit</button></td>
             </tr>
             @endforeach
             <tr>

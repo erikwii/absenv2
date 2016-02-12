@@ -88,6 +88,10 @@ Route::get ('/edituser/{id}', 'AdminController@editUser');
 Route::post ('/edituser/', 'AdminController@editUser');
 Route::get ('/deleteuser/{id}', 'AdminController@deleteUser');
 
+//routes for room management
+Route::get('/viewroom', 'RoomController@showRoom');
+Route::post('/viewroom', 'RoomController@editRoom');
+
 //authentication routes
 Route::get('/auth/login', 'Auth\AuthController@getLogin');
 Route::post('/auth/login', 'Auth\AuthController@authenticate');

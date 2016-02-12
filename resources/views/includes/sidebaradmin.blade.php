@@ -14,6 +14,9 @@
         <li @if(strcmp($path,"rekapadmin")==0) class="active" @endif>
             <a href="/rekapadmin">Rekap Absen</a>
         </li>
+        <li @if(strcmp($path,"viewroom")==0) class="active" @endif>
+            <a href="/viewroom">Room Allocation</a>
+        </li>
         <li @if(strcmp($path,"profiladmin")==0) class="active" @endif>
             <a href="/profiladmin"> Profile </a>
         </li>
