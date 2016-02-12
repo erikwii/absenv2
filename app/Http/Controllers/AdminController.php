@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
-use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -51,17 +53,64 @@ class AdminController extends Controller
     public function viewuser()
     {
         //get all user instance
-        $users = User::all();
+        $users = DB::table('users')->paginate(20);
         return view('admin.viewuser')->with('users',$users);
     }
 
     //Todo: Finishing implementation for edit user
-    public function editUser($id){
-        return view('admin.viewuser');
+    public function editUser(Request $request){
+        $validator = $this->account_validator($request->all());
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        //get old_password field
+        $user = Auth::user();
+        $user->name=$request['name'];
+        $user->email=$request['email'];
+        $user->password=Hash::make($request['password']);
+        $user->save();
+        return $this->viewuser();
     }
 
     //Todo: Finishing implementation for delete user
     public function deleteUser($id){
         return view('admin.viewuser');
+    }
+
+    protected function account_validator(array $data)
+    {
+        $validator = Validator::make($data, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        /*$func = function($validator) {
+            //but we can debug if anonymous function calls another function
+            if ($this->check_password($validator)) {
+                $validator->errors()->add('field', 'Old password do not match database record!');
+            }
+        };
+        $validator->after($func);
+        */
+        return $validator;
+    }
+
+    /**
+     * Unused now, previously used to reset password in admin by verifying password but wrong business case
+     * @param $validator
+     * @return bool
+     */
+    protected function check_password($validator){
+        //get current user id
+        $user = Auth::user();
+        $old_password = $validator->getData()['old_password'];
+        $db_password = $user->password;
+        if(Hash::check($old_password,$db_password))
+            return false;
+        return true;
     }
 }

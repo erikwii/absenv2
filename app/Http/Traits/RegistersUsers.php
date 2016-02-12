@@ -3,7 +3,6 @@
 namespace App\HTTP\Traits;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 
 trait RegistersUsers

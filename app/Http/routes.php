@@ -85,6 +85,7 @@ Route::get ('/lihatabsen', 'StudentController@lihatabsen');
 //route for add and delete user for admin
 Route::get ('/viewuser', 'AdminController@viewuser');
 Route::get ('/edituser/{id}', 'AdminController@editUser');
+Route::post ('/edituser/', 'AdminController@editUser');
 Route::get ('/deleteuser/{id}', 'AdminController@deleteUser');
 
 //authentication routes
