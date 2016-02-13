@@ -9,6 +9,7 @@ $(document).ready(function(){
         var lokasi=room.lokasi;
         $('#nama_ruang').val(room.nama_ruang);
         $('#lokasi').val(room.lokasi);
+        $('#daya_tampung').val(room.daya_tampung);
         $('#id_ruang').val(room.id);
     });
 });

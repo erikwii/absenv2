@@ -29,7 +29,8 @@ class Room extends Model
      */
     protected $fillable = [
         'nama_ruang',
-        'lokasi'
+        'lokasi',
+        'daya_tampung'
     ];
 
     public static function room_name(){

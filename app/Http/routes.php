@@ -91,6 +91,8 @@ Route::get ('/deleteuser/{id}', 'AdminController@deleteUser');
 //routes for room management
 Route::get('/viewroom', 'RoomController@showRoom');
 Route::post('/viewroom', 'RoomController@editRoom');
+Route::get('/addroom', 'RoomController@addRoom');
+Route::post('/addroom', 'RoomController@saveRoom');
 
 //authentication routes
 Route::get('/auth/login', 'Auth\AuthController@getLogin');
