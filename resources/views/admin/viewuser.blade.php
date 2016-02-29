@@ -50,7 +50,6 @@
                 </th>
             </tr>
             </thead>
-
             <tbody>
 
             @foreach($users as $user)
@@ -60,7 +59,7 @@
                 <td>{!! $user->email !!}</td>
                 <td>{!! $user->role !!}</td>
                 <?php $user_data = array("id"=>$user->id,"name"=>$user->name,"email"=>$user->email,"role"=>$user->role)?>
-                <td><button type="button" class="btn btn-link edit-btn" data-toggle="modal" data-target="#myModal" data-id='\'.{!! json_encode($user_data).'\'' !!}>Edit</button></td>
+                <td><button type="button" class="btn btn-link edit-btn" data-toggle="modal" data-target="#myModal" data-id={!! '\''.json_encode($user_data).'\'' !!}>Edit</button></td>
             </tr>
             @endforeach
             <tr>
@@ -86,6 +85,10 @@
                     <div class="modal-body" style="padding:40px 50px;">
                         {!! Form::open(array('url' => '/edituser', 'class' => 'form-horizontal','role'=>'form')) !!}
                         <div class="form-group">
+                            {!! Form::label('id', 'id', array('class' => 'control-label')) !!}
+                            {!! Form::text('id',null,['class' => 'form-control','readonly'])!!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('name', 'Nama', array('class' => 'control-label')) !!}
                             {!! Form::text('name',null,['class' => 'form-control'])!!}
                         </div>
@@ -104,7 +107,6 @@
                         <div class="form-group">
                             {!! Form::submit('Save',['class' => 'btn btn-primary form-control']) !!}
                         </div>
-
                         {!! form::close() !!}
                     </div>
                     <div class="modal-footer">

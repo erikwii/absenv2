@@ -45,10 +45,9 @@ class Enrollment extends Model
         $id_semester = Kalender::getRunningSemester()->id;
         $instances = DB::select('SELECT e.id, c.seksi, c.Kode_Matkul,c.Nama_Matkul, c.day, c.time, c.Kode_Dosen,
           e.noreg, max(p.pertemuan_ke) as pertemuan, w.kode_waktu, w.waktu_start, w.waktu_end FROM `enrollments` as e
-          inner join courses as c
-          inner join presences as p
-          inner join waktu_kuliah as w
-          on e.kode_seksi=c.seksi and c.seksi=p.kode_seksi and w.id=c.time
+          left join courses as c on e.kode_seksi=c.seksi
+          left join presences as p on c.seksi=p.kode_seksi
+          left join waktu_kuliah as w on w.id=c.time
           where e.noreg=? and c.id_semester=?
           group by c.seksi',[$user_id,$id_semester]);
         return $instances;

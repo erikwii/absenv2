@@ -5,6 +5,9 @@
     {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
     SYSTEM
 </h1>
+
+@include('errors.error_validator')
+
 <h2 style="text-align:center">
     <small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of Jakarta
         ::
@@ -97,7 +100,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('Prodi_id', 'Program Studi', array('class' => 'control-label')) !!}
-                    {!! Form::select('Prodi_id',$prodi_opts,$prodi,['class' => 'form-control'])!!}
+                    {!! Form::select('Prodi_id',$prodi_opts,$prodi_id,['class' => 'form-control'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('Alamat', 'Alamat', array('class' => 'control-label')) !!}

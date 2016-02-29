@@ -50,7 +50,7 @@
             <thead>
             <tr>
                 <th>Pertemuan-Ke</th>
-                <th>Kode Mata Kuliah</th>
+                <th>Nama Mata Kuliah</th>
                 <th>Tanggal</th>
                 <th>Topik Pembahasan</th>
                 <th>Jumlah Mahasiswa</th>
@@ -61,7 +61,7 @@
             @foreach($Topic as $topics)
                 <tr>
                     <td> {{$topics->pertemuan_ke}} </td>
-                    <td> {{$topics->Kode_Matkul}} </td>
+                    <td> {{$topics->Nama_Matkul}} </td>
                     <td> {{$topics->tanggal}} </td>
                     <td> {{$topics->nama_topik}} </td>
                     <td> {{$topics->jumlah_mhs}} </td>

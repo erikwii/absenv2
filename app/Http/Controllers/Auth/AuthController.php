@@ -65,7 +65,7 @@ class AuthController extends Controller
     protected function student_validator(array $data)
     {
         return Validator::make($data, [
-            'noreg' => 'required|unique:students|max:255',
+            'Noreg' => 'required|unique:students|max:13',
             'nama' => 'required|max:255',
             'semester' => 'required|numeric',
         ]);
@@ -73,14 +73,14 @@ class AuthController extends Controller
 
     /**
      * Get a validator for an incoming dosen registration request.
-     *
+     * Todo: bug in kode_dosen validator
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function dosen_validator(array $data)
     {
         return Validator::make($data, [
-            'kode_dosen' => 'required|unique:lecturers|max:255',
+            'Kode_Dosen' => 'required|unique:lecturers|min:4',
             'nama' => 'required|max:255',
             'telepon' => 'numeric',
         ]);
@@ -221,7 +221,7 @@ class AuthController extends Controller
         $request->session()->forget('reg_data');
         //2. create new students instance, not extra parameter
         $student = new Student;
-        $student->Noreg=$request['noreg'];
+        $student->Noreg=$request['Noreg'];
         $student->Nama_Mhs =$request['nama'];
         $student->Prodi_Id =$request['Prodi_Id'];
         $student->Alamat=$request['alamat'];
@@ -255,7 +255,7 @@ class AuthController extends Controller
         $request->session()->forget('reg_data');
         //2. create new lecturer instance, not extra parameter
         $lecturer = new Lecturer;
-        $lecturer->Kode_Dosen=$request['kode_dosen'];
+        $lecturer->Kode_Dosen=$request['Kode_Dosen'];
         $lecturer->Nama_Dosen =$request['nama'];
         $lecturer->Telepon=$request['telepon'];
         $lecturer->id_user=$id;

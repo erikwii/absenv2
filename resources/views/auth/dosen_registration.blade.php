@@ -18,7 +18,7 @@
         Kode dosen
     </label>
     <div class="col-sm-2    ">
-        <input type="text" name="kode_dosen" value='' class="form-control" placeholder="enter kode dosen">
+        <input type="text" name="Kode_Dosen" value='' class="form-control" placeholder="enter kode dosen">
     </div>
 </div>
 
@@ -27,7 +27,7 @@
         Nama:
     </label>
     <div class="col-sm-2">
-        <input type="text" name="nama" value={{$reg_name}} class="form-control" placeholder="enter name">
+        <input type="text" name="nama" value={!! $reg_name !!} class="form-control" placeholder="enter name">
     </div>
 </div>
 

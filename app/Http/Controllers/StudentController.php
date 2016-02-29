@@ -33,6 +33,7 @@ class StudentController extends Controller
         $name = $student->Nama_Mhs;
         $noreg = $student->Noreg;
         $prodi_model=$student->prodi;
+        $prodi_id = $prodi_model->id;
         $prodi_name = $prodi_model->prodi;
         $semester = $student->Semester;
         $alamat = $student->Alamat;
@@ -42,11 +43,19 @@ class StudentController extends Controller
         $prodis = Prodi::all();
         $prodi_arr=Helpers::modelAsAssociativeArray($prodis,'id','prodi');
         return view('students.profil',['name'=>$name,'noreg'=>$noreg,'prodi'=>$prodi_name,'semester'=>$semester,
-            'alamat'=>$alamat,'telepon'=>$telepon,'mac'=>$mac,'prodi_opts'=>$prodi_arr]);
+            'alamat'=>$alamat,'telepon'=>$telepon,'mac'=>$mac,'prodi_opts'=>$prodi_arr,'prodi_id'=>$prodi_id]);
     }
 
     public function updateProfil(Request $request){
         $input = $request->all();
+
+        $validator = $this->profile_validator($input);
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
         $student=Student::find($input['Noreg']);
         $student->Noreg = $input['Noreg'];
         $student->Nama_Mhs = $input['Nama_Mhs'];
@@ -137,6 +146,13 @@ class StudentController extends Controller
         $presence->kehadiran=1;
         $presence->save();
         return $this->inputabsen();
+    }
+
+    protected function profile_validator(array $data){
+        $validator =Validator::make($data, [
+            'Telepon' => 'numeric',
+        ]);
+        return $validator;
     }
 
     protected function enrollment_validator(array  $data){

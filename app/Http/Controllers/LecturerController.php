@@ -30,11 +30,26 @@ class LecturerController extends Controller
 
     public function updateProfilDosen(Request $request){
         $input = $request->all();
+
+        $validator = $this->profile_validator($input);
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
         $lecturer = Lecturer::find($input['Kode_Dosen']);
         $lecturer->Nama_Dosen=$input['Nama_Dosen'];
         $lecturer->Telepon=$input['Telepon'];
         $lecturer->save();
         return $this->profildosen();
+    }
+
+    protected function profile_validator(array $data){
+        $validator =Validator::make($data, [
+            'Telepon' => 'numeric',
+        ]);
+        return $validator;
     }
 
     public function AjaxReloadRekapDosenWithSemester(Request $request){

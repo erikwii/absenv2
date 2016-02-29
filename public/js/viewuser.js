@@ -4,6 +4,7 @@
 $(document).ready(function(){
     $(".edit-btn").click(function(e){ // Click to only happen on announce links
         var user = $(this).data('id');
+        $("#id").val(user.id);
         $("#name").val(user.name);
         $("#email").val(user.email);
     });

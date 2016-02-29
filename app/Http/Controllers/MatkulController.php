@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Helpers;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\Prodi;
 use App\Models\Room;
 use App\Models\Kalender;
 use App\Models\WaktuKuliah;
+use Illuminate\Support\Facades\Validator;
 
 use Carbon\Carbon;
 class MatkulController extends Controller
@@ -78,10 +79,17 @@ class MatkulController extends Controller
      * Todo: Add Validator (Critical, after all core business function is implemented)
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function saveMatkul()
+    public function saveMatkul(Request $request)
     {
-        $input=Request::all();
-        //Course::create($input);
+        $input=$request->all();
+
+        $validator = $this->course_validator($input);
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
         $course = new Course;
         $course->Kode_Matkul=$input['Kode_Matkul'];
         $course->Nama_Matkul=$input['Nama_Matkul'];
@@ -98,12 +106,29 @@ class MatkulController extends Controller
         return $this->viewCourseByLecturer();
     }
 
+    protected function course_validator(array $data){
+        $validator =Validator::make($data, [
+            'Kode_Matkul' => 'required|unique:courses|min:4',
+            'Nama_Matkul' => 'required',
+            'SKS' => 'required',
+        ]);
+        return $validator;
+    }
+
     /**
      * Todo: Add Validator
      * @return MatkulController
      */
-    public function updateMatkul(){
-        $input=Request::all();
+    public function updateMatkul(Request $request){
+        $input=$request->all();
+
+        $validator = $this->course_validator($input);
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
         //retrieve the relevant model with where condition
         $course=Course::find($input['seksi']);
         $course->Nama_Matkul=$input['Nama_Matkul'];

@@ -27,12 +27,6 @@ class Topic extends Model
         'jumlah_mhs'
     ];
 
-    public function __construct(array $attributes)
-    {
-        parent::__construct($attributes);
-        $id_semester = Kalender::getRunningSemester()->id;
-    }
-
     //relationship
     public function courses()
     {

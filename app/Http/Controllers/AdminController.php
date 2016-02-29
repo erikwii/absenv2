@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Users;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,14 @@ class AdminController extends Controller
 
     public function updateProfilAdmin(Request $request){
         $input = $request->all();
+
+        $validator = $this->profile_validator($input);
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
         $admin = Admin::find($input['id']);
         $admin->Nama_Admin = $input['Nama_Admin'];
         $admin->Alamat = $input['Alamat'];
@@ -66,8 +75,8 @@ class AdminController extends Controller
             );
         }
 
-        //get old_password field
-        $user = Auth::user();
+        //mistake: need to get currently edited user
+        $user = Users::find($request['id']);
         $user->name=$request['name'];
         $user->email=$request['email'];
         $user->password=Hash::make($request['password']);
@@ -78,6 +87,13 @@ class AdminController extends Controller
     //Todo: Finishing implementation for delete user
     public function deleteUser($id){
         return view('admin.viewuser');
+    }
+
+    protected function profile_validator(array $data){
+        $validator =Validator::make($data, [
+            'Telepon' => 'numeric',
+        ]);
+        return $validator;
     }
 
     protected function account_validator(array $data)

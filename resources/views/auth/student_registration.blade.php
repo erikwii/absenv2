@@ -19,7 +19,7 @@
         No. Registrasi:
     </label>
     <div class="col-sm-2    ">
-        <input type="text" name="noreg" value='' class="form-control" placeholder="enter registration id">
+        <input type="text" name="Noreg" value='' class="form-control" placeholder="enter registration id">
     </div>
 </div>
 
@@ -28,7 +28,7 @@
         Nama:
     </label>
     <div class="col-sm-2">
-        <input type="text" name="nama" value={{$reg_name}} class="form-control" placeholder="enter name">
+        <input type="text" name="nama" value={!! $reg_name !!} class="form-control" placeholder="enter name">
     </div>
 </div>
 
