@@ -93,6 +93,7 @@ Route::get('/viewroom', 'RoomController@showRoom');
 Route::post('/viewroom', 'RoomController@editRoom');
 Route::get('/addroom', 'RoomController@addRoom');
 Route::post('/addroom', 'RoomController@saveRoom');
+Route::post('/deleteroom', 'RoomController@deleteRoom');
 
 //authentication routes
 Route::get('/auth/login', 'Auth\AuthController@getLogin');
@@ -118,7 +119,6 @@ Route::controllers([
 //route for admin registration
 Route::get('/auth/admin_registration','Auth\AuthAdminController@getAdminRegistrationForm');
 Route::post('/auth/admin_registration','Auth\AuthAdminController@postAdminRegistration');
-
 
 //forgot password
 Route::get('/auth/password/email', 'Auth\PasswordController@getEmail');

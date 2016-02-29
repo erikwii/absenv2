@@ -60,6 +60,13 @@ class RoomController extends Controller{
         return redirect('/viewroom');
     }
 
+    public function deleteRoom(Request $request){
+        $input = $request->all();
+        $room = Room::find($input['id']);
+        $room->delete();
+        return $this->showRoom();
+    }
+
     protected function room_validator(array $data)
     {
         $validator = Validator::make($data, [

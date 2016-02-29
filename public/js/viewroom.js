@@ -12,4 +12,14 @@ $(document).ready(function(){
         $('#daya_tampung').val(room.daya_tampung);
         $('#id_ruang').val(room.id);
     });
+
+    $(".delete-btn").click(function(e) { // Click to only happen on announce links{
+        var room = $(this).data('id');
+        $('<input>').attr({
+            type: 'hidden',
+            id: 'id',
+            name: 'id',
+            value: room.id,
+        }).appendTo('form');
+    });
 });

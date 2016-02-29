@@ -64,6 +64,9 @@
                             <button type="button" class="btn btn-link edit-btn" data-toggle="modal"
                                     data-target="#myModal" data-id={!! '\''.json_encode($room_data).'\'' !!}>Edit
                             </button>
+                            <button type="button" class="btn btn-link delete-btn" data-toggle="modal"
+                                    data-target="#deleteModal" data-id={!! '\''.json_encode($room_data).'\'' !!}>Delete
+                            </button>
                         </td>
                     </tr>
                 @endforeach
@@ -77,6 +80,28 @@
             <a href="/addroom" class="btn btn-primary" role="button">
                 Add Room
             </a>
+        </div>
+    </div>
+
+    <!-- delete Modal -->
+    <div id="deleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Confirm Delete</h4>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+                    <div class="row" style="text-align: center">
+                        {!! Form::open(array('url' => '/deleteroom', 'class' => 'form-horizontal','role'=>'form')) !!}
+                        {!! Form::submit('Yes',['class' => 'btn btn-primary']) !!}
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><span
+                                    class="glyphicon glyphicon-remove"></span>Cancel
+                        </button>
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
