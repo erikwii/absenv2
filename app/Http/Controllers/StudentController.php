@@ -175,7 +175,7 @@ class StudentController extends Controller
     }
 
     protected function checkSectionId($validator){
-        $seksi = $validator->getData()['kode_seksi'];
+        $seksi = $validator->getData()['seksi'];
         $id_semester = Kalender::getRunningSemester()->id;
         $instance = Course::where('seksi',$seksi)
             ->where('id_semester',$id_semester)
@@ -222,7 +222,7 @@ class StudentController extends Controller
      */
     protected function checkCompositeUnique($validator){
         $pertemuan = $validator->getData()['pertemuan_ke'];
-        $seksi = $validator->getData()['kode_seksi'];
+        $seksi = $validator->getData()['seksi'];
         $stat = Presence::isExist($pertemuan,$seksi);
         if($stat)
             return true;
