@@ -67,7 +67,7 @@
                         {!! Form::hidden('seksi', $enrollment->seksi) !!}
                         {!! Form::hidden('pertemuan',$enrollment->pertemuan+1) !!}
                         {!! Form::hidden('noreg', $noreg) !!}
-                        <?php $stat = $helpers::isAbsentFillable($enrollment->day, $enrollment->waktu_start, $enrollment->waktu_end)?>
+                        <?php $stat = $helpers::isAbsentFillable($enrollment->day, $enrollment->waktu_start, $enrollment->waktu_end, $enrollment->seksi, $noreg)?>
                         @if($stat)
                             <td>{!! Form::select('pertemuan_ke', $pertemuan, $enrollment->pertemuan+1,['class' => 'form-control']) !!}</td>
                             <td>

@@ -25,12 +25,12 @@ class Presence extends Model
     ];
 
     /**
-     * Get the time element from datetime parameter, then get kode_waktu from fetched time
+     * Get the time element from datetime parameter, then get kode_waktu from fetched time, based on Noreg and Kode Seksi
      * @param $date
      * @return mixed|null
      */
-    public static function getKodeWaktuByDate($date){
-        $instance = DB::select('SELECT time(tanggal) as time FROM presences WHERE date(tanggal)=?',[$date]);
+    public static function getKodeWaktuByDate($date, $kode_seksi, $noreg){
+        $instance = DB::select('SELECT time(tanggal) as time FROM presences WHERE date(tanggal)=? and kode_seksi=? and Noreg=? order by time desc',[$date, $kode_seksi, $noreg]);
         if(count($instance)==0)
             return null;
         $time = $instance[0]->time;

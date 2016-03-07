@@ -80,7 +80,7 @@ class Helpers
      * @param $time_start string of course start time
      * @param $time_end string of course end time
      */
-    public static function isAbsentFillable($day, $time_start, $time_end)
+    public static function isAbsentFillable($day, $time_start, $time_end, $kode_seksi, $noreg)
     {
         //get current time in Indonesia
         $current_day = trans('messages.' . date('l'));
@@ -95,7 +95,7 @@ class Helpers
         if(is_null($current_slot))
             return 0;
         $current_date = date('Y-m-d');
-        $recorded_slot = Presence::getKodeWaktuByDate($current_date);
+        $recorded_slot = Presence::getKodeWaktuByDate($current_date,$kode_seksi,$noreg);
         //if(is_null($recorded_slot))
         //    return 0;
         //insertable if current slot different from recorded slot

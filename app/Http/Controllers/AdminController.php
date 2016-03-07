@@ -58,7 +58,6 @@ class AdminController extends Controller
         return view('admin.crudjadwal');
     }
 
-    //Todo: Implement pagination
     public function viewuser()
     {
         //get all user instance
@@ -66,7 +65,6 @@ class AdminController extends Controller
         return view('admin.viewuser')->with('users',$users);
     }
 
-    //Todo: Finishing implementation for edit user
     public function editUser(Request $request){
         $validator = $this->account_validator($request->all());
         if ($validator->fails()) {
