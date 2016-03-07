@@ -48,17 +48,17 @@ trait RegistersUsers
         //return redirect($this->redirectPath());
 
         $path = 'auth/register';
+        $role=$registration_data['role'];
+        $registration_data = json_encode($registration_data);
         //fill path with some value so we knew next page is coming from this place
         $data = array('path' => $path, 'reg_data' => $registration_data);
-        if (strcmp($registration_data['role'], 'student') == 0) {
+        if (strcmp($role, 'student') == 0) {
             //TODO obfuscating passing parameter, at the moment plain text being passed
             //We can implement crypto here
             return redirect()->action('Auth\AuthController@getStudentRegistrationForm', $data);
         } else { //then the role is dosen
             return redirect()->action('Auth\AuthController@getDosenRegistrationForm', $data);
         }
-
-
     }
 
     public function postAdminRegister(Request $request)

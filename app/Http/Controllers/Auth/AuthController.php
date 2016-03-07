@@ -187,7 +187,7 @@ class AuthController extends Controller
         if(!$request->has('path'))
             return view('auth.register'); //return to registration form
         //else meaning it must has stored register data, global object within this class
-        $reg_data=$request->input('reg_data');
+        $reg_data=json_decode($request->input('reg_data'),true);
         //store reg_data as session
         $request->session()->put('reg_data',$reg_data);
         //pass along all prodi name
@@ -197,7 +197,8 @@ class AuthController extends Controller
         foreach($prodis as $prodi){
             $prodi_arr[$prodi->id]=$prodi->prodi;
         }
-        return view('auth.student_registration', ['reg_name'=>$reg_data['name'],'prodis'=>$prodi_arr]);
+        $reg_name = '\''.$reg_data['name'].'\'';
+        return view('auth.student_registration', ['reg_name'=>$reg_name,'prodis'=>$prodi_arr]);
     }
 
     /**
