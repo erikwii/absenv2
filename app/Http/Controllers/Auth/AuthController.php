@@ -171,10 +171,11 @@ class AuthController extends Controller
     public function getDosenRegistrationForm(Request $request){
         if(!$request->has('path'))
             return view('auth.register'); //return to registration form
-        $reg_data=$request->input('reg_data');
+        $reg_data=json_decode($request->input('reg_data'),true);
         //store reg_data as session
         $request->session()->put('reg_data',$reg_data);
-        return view('auth.dosen_registration',['reg_name'=>$reg_data['name']]);
+        $reg_name = '\''.$reg_data['name'].'\'';
+        return view('auth.dosen_registration',['reg_name'=>$reg_name]);
     }
 
     /**

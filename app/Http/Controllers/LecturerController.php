@@ -9,6 +9,7 @@ use App\Models\Lecturer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 use Carbon\Carbon;
 class LecturerController extends Controller
@@ -158,6 +159,8 @@ class LecturerController extends Controller
         $course = $course_model->get();
         $course_array = Helpers::modelAsAssociativeArray($course,'seksi','Nama_Matkul');
         //make default showing first course on the list
+        $enrollment=array();
+        $seksi=array();
         if(empty($course)) {
             $enrollment = array();
         } else{

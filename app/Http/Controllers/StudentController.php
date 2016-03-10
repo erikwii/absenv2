@@ -175,7 +175,7 @@ class StudentController extends Controller
     }
 
     protected function checkSectionId($validator){
-        $seksi = $validator->getData()['seksi'];
+        $seksi = $validator->getData()['kode_seksi'];
         $id_semester = Kalender::getRunningSemester()->id;
         $instance = Course::where('seksi',$seksi)
             ->where('id_semester',$id_semester)
