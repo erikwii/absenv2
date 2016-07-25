@@ -15,7 +15,7 @@ class HomeController extends Controller
         //get role of current user
         $role=$request->session()->get('role');
 
-        switch($role){
+        /*switch($role){
             case "student":
                 return redirect()->action('StudentController@profil');
                 break;
@@ -24,6 +24,19 @@ class HomeController extends Controller
                 break;
             case "admin":
                 return redirect()->action('AdminController@profiladmin');
+                break;
+            default:
+                return view('home');*/
+//diubah
+        switch($role){
+            case "admin":
+                return redirect()->action('AdminController@profiladmin');
+                break;
+            case "student":
+                return redirect()->action('StudentController@profil');
+                break;
+            case "dosen":
+                return redirect()->action('LecturerController@profildosen');
                 break;
             default:
                 return view('home');
