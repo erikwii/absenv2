@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers;
+use App\Models\Enrollment;
+use App\Models\Student;
 use App\Models\Admin;
 use App\Models\Users;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Course;
+use App\Models\Kalender;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -43,19 +48,307 @@ class AdminController extends Controller
         return $this->profiladmin();
     }
 
-    public function rekapadmin()
-    {
-        return view('admin.rekap');
+    public function AjaxReloadRekapAdminWithSemester(Request $request){
+        //get list of semester
+        $input=$request->all();
+
+        $semester_id=$request['Semester'];
+        $response = array(
+            'response' => 'Called created successfully',
+            '_token'=>$input['_token'],
+            'Semester'=>$semester_id
+        );
+
+        //the first call to respond selectChange goes to here
+        if (!array_key_exists('step',$input)){
+            return response()->json($response);
+        }
+
+        //the second call to respond body.onload() from ajax goes here
+        $kalender = Kalender::all('id','semester');;
+        $kalender_array = Helpers::modelAsAssociativeArray($kalender,'id','semester');
+
+        //get list of course sections for current semester and lecturer
+        //$lecturer = Auth::user()->lecturer;
+        //$kode_dosen = $lecturer->Kode_Dosen;
+        $course_model = DB::table('courses')
+            ->where('id_semester',$semester_id);
+        $course = $course_model->get();
+        $course_array = Helpers::modelAsAssociativeArray($course,'seksi','Nama_Matkul');
+        //make default showing first course on the list
+        if(empty($course)) {
+            $enrollment = array();
+            $seksi=null;
+        } else{
+            $seksi=$course[0]->seksi;
+            //pass along list of enrolled students
+            $enrollment=$course_model
+                ->where('seksi',$seksi)
+                ->join('enrollments as e','e.kode_seksi','=','courses.seksi')
+                ->join('students as s','s.Noreg','=','e.noreg')
+                ->get();
+        }
+
+        return view('admin.rekap')
+            ->with('kalender_options',$kalender_array)
+            ->with('course_options',$course_array)
+            ->with('course',$course)
+            ->with('enrolls',$enrollment)
+            ->with('semester_id',$semester_id)
+            ->with('kode_seksi',$seksi);
     }
 
-    public function showadmin()
+    public function postRekapAdmin(Request $request){
+        //get list of semester
+        $kalender = Kalender::all('id','semester');;
+        $kalender_array = Helpers::modelAsAssociativeArray($kalender,'id','semester');
+
+        //get list of course sections for current semester and lecturer
+        //$lecturer = Auth::user()->lecturer;
+        //$kode_dosen = $lecturer->Kode_Dosen;
+
+        $semester = $request->input('Semester');
+        //for debugging
+        $course_model = DB::table('courses')
+            ->where('id_semester',$semester);
+        $course = $course_model->get();
+        $course_array = Helpers::modelAsAssociativeArray($course,'seksi','Nama_Matkul');
+        //make default showing first course on the list
+        if(empty($course)) {
+            $enrollment = array();
+        } else{
+            $seksi=$request->input('Kode_Seksi');
+            //pass along list of enrolled students
+            $enrollment=$course_model
+                ->where('seksi',$seksi)
+                ->join('enrollments as e','e.kode_seksi','=','courses.seksi')
+                ->join('students as s','s.Noreg','=','e.noreg')
+                ->get();
+        }
+
+        return view('admin.rekap')
+            ->with('kalender_options',$kalender_array)
+            ->with('course_options',$course_array)
+            ->with('course',$course)
+            ->with('enrolls',$enrollment)
+            ->with('semester_id',$semester)
+            ->with('kode_seksi',$seksi);
+    }
+
+    public function rekapAdmin(Request $request){
+        //get list of semester
+        $kalender = Kalender::all('id','semester');
+        $kalender_array = Helpers::modelAsAssociativeArray($kalender,'id','semester');
+
+        //get list of course sections for current semester and lecturer
+        //$lecturer = Auth::user()->lecturer;
+        //$kode_dosen = $lecturer->Kode_Dosen;
+
+        $semester = Kalender::getRunningSemester();
+        //for debugging
+        $course_model = DB::table('courses')
+            ->where('id_semester',$semester->id);
+        $course = $course_model->get();
+        $course_array = Helpers::modelAsAssociativeArray($course,'seksi','Nama_Matkul');
+        //make default showing first course on the list
+        $enrollment=array();
+        $seksi=array();
+        if(empty($course)) {
+            $enrollment = array();
+        } else{
+            $seksi=$course[0]->seksi;
+            //pass along list of enrolled students
+            $enrollment=$course_model
+                ->where('seksi',$seksi)
+                ->join('enrollments as e','e.kode_seksi','=','courses.seksi')
+                ->join('students as s','s.Noreg','=','e.noreg')
+                ->get();
+        }
+
+        return view('admin.rekap')
+            ->with('kalender_options',$kalender_array)
+            ->with('course_options',$course_array)
+            ->with('course',$course)
+            ->with('enrolls',$enrollment)
+            ->with('semester_id',$semester->id)
+            ->with('kode_seksi',$seksi);
+    }
+
+
+    public function ajaxreloadshowadminwithsemester(Request $request){
+        //get list of semester
+        $input=$request->all();
+
+        $semester_id=$request['Semester'];
+        $response = array(
+            'response' => 'Called created successfully',
+            '_token'=>$input['_token'],
+            'Semester'=>$semester_id
+        );
+
+        //the first call to respond selectChange goes to here
+        if (!array_key_exists('step',$input)){
+            return response()->json($response);
+        }
+
+        //the second call to respond body.onload() from ajax goes here
+        $kalender = Kalender::all('id','semester');;
+        $kalender_array = Helpers::modelAsAssociativeArray($kalender,'id','semester');
+
+        //get list of course sections for current semester and lecturer
+        //$lecturer = Auth::user()->lecturer;
+        //$kode_dosen = $lecturer->Kode_Dosen;
+        $course_model = DB::table('courses')
+            ->where('id_semester',$semester_id);
+        $course = $course_model->get();
+        $course_array = Helpers::modelAsAssociativeArray($course,'seksi','Nama_Matkul');
+        //make default showing first course on the list
+        if(empty($course)) {
+            $enrollment = array();
+            $seksi=null;
+        } else{
+            $seksi=$course[0]->seksi;
+            //pass along list of enrolled students
+            $enrollment=$course_model
+                ->where('seksi',$seksi)
+                ->join('enrollments as e','e.kode_seksi','=','courses.seksi')
+                ->join('students as s','s.Noreg','=','e.noreg')
+                ->get();
+        }
+
+        return view('admin.showadmin')
+            ->with('kalender_options',$kalender_array)
+            ->with('course_options',$course_array)
+            ->with('course',$course)
+            ->with('enrolls',$enrollment)
+            ->with('semester_id',$semester_id)
+            ->with('kode_seksi',$seksi);
+    }
+
+    public function postshowadmin(Request $request){
+        //get list of semester
+        $kalender = Kalender::all('id','semester');;
+        $kalender_array = Helpers::modelAsAssociativeArray($kalender,'id','semester');
+
+        //get list of course sections for current semester and lecturer
+        //$lecturer = Auth::user()->lecturer;
+        //$kode_dosen = $lecturer->Kode_Dosen;
+
+        $semester = $request->input('Semester');
+        //for debugging
+        $course_model = DB::table('courses')
+            ->where('id_semester',$semester);
+        $course = $course_model->get();
+        $course_array = Helpers::modelAsAssociativeArray($course,'seksi','Nama_Matkul');
+        //make default showing first course on the list
+        if(empty($course)) {
+            $enrollment = array();
+        } else{
+            $seksi=$request->input('Kode_Seksi');
+            //pass along list of enrolled students
+            $enrollment=$course_model
+                ->where('seksi',$seksi)
+                ->join('enrollments as e','e.kode_seksi','=','courses.seksi')
+                ->join('students as s','s.Noreg','=','e.noreg')
+                ->get();
+        }
+
+        return view('admin.showadmin')
+            ->with('kalender_options',$kalender_array)
+            ->with('course_options',$course_array)
+            ->with('course',$course)
+            ->with('enrolls',$enrollment)
+            ->with('semester_id',$semester)
+            ->with('kode_seksi',$seksi);
+    }
+
+    public function showadmin(Request $request){
+        //get list of semester
+        $kalender = Kalender::all('id','semester');
+        $kalender_array = Helpers::modelAsAssociativeArray($kalender,'id','semester');
+
+        //get list of course sections for current semester and lecturer
+        //$lecturer = Auth::user()->lecturer;
+        //$kode_dosen = $lecturer->Kode_Dosen;
+
+        $semester = Kalender::getRunningSemester();
+        //for debugging
+        $course_model = DB::table('courses')
+            ->where('id_semester',$semester->id);
+        $course = $course_model->get();
+        $course_array = Helpers::modelAsAssociativeArray($course,'seksi','Nama_Matkul');
+        //make default showing first course on the list
+        $enrollment=array();
+        $seksi=array();
+        if(empty($course)) {
+            $enrollment = array();
+        } else{
+            $seksi=$course[0]->seksi;
+            //pass along list of enrolled students
+            $enrollment=$course_model
+                ->where('seksi',$seksi)
+                ->join('enrollments as e','e.kode_seksi','=','courses.seksi')
+                ->join('students as s','s.Noreg','=','e.noreg')
+                ->get();
+        }
+
+        return view('admin.showadmin')
+            ->with('kalender_options',$kalender_array)
+            ->with('course_options',$course_array)
+            ->with('course',$course)
+            ->with('enrolls',$enrollment)
+            ->with('semester_id',$semester->id)
+            ->with('kode_seksi',$seksi);
+    }
+
+
+/*    public function showadmin()
     {
         return view('admin.showadmin');
-    }
+    }*/
 
+    public function postcrudjadwal(Request $request)
+    {
+        $kalender = Kalender::all('id','semester');;
+        $kalender_array = Helpers::modelAsAssociativeArray($kalender,'id','semester');
+        $semester = $request->input('Semester');
+        //$semester = Kalender::getRunningSemester();
+        //$id_semester = Kalender::getRunningSemester()->id;
+        $courses = Course::where('id_semester',$semester)
+            ->get();
+        return view('admin.crudjadwal')
+            ->with('Courses', $courses)
+            ->with('kalender_options',$kalender_array)
+            ->with('semester_id',$semester);
+    }
     public function crudjadwal()
     {
-        return view('admin.crudjadwal');
+        $kalender = Kalender::all('id','semester');;
+        $kalender_array = Helpers::modelAsAssociativeArray($kalender,'id','semester');
+        $semester = Kalender::getRunningSemester()->id;
+        $courses = Course::where('id_semester',$semester)
+            ->get();
+        return view('admin.crudjadwal')
+            ->with('Courses', $courses)
+            ->with('kalender_options',$kalender_array)
+            ->with('semester_id',$semester);
+    }
+    public function addjadwal()
+    {
+        return view('admin.addjadwal');
+    }
+    public function editjadwal()
+    {
+
+    }
+    public function savejadwal()
+    {
+        
+        return view('admin.addjadwal');
+    }
+    public function deletejadwal()
+    {
+
     }
 
     public function viewuser()
@@ -83,8 +376,13 @@ class AdminController extends Controller
     }
 
     //Todo: Finishing implementation for delete user
-    public function deleteUser($id){
-        return view('admin.viewuser');
+    public function deleteUser(Request $request){
+        $user = Users::find($request['id']);
+        $user->name=$request['name'];
+        $user->email=$request['email'];
+        $user->password=Hash::make($request['password']);
+        $user->delete();
+        return $this->viewuser();
     }
 
     protected function profile_validator(array $data){

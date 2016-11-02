@@ -60,9 +60,17 @@ Route::get ('/rekapdosen', 'LecturerController@rekapDosen');
 Route::post ('/rekapdosen', 'LecturerController@postRekapDosen');
 Route::post ('/ajaxrekapdosen', 'LecturerController@AjaxReloadRekapDosenWithSemester');
 //route for rekap admin
-Route::get ('/rekapadmin', 'AdminController@rekapadmin');
+Route::get ('/rekapadmin', 'AdminController@rekapAdmin');
+Route::post ('/rekapadmin', 'AdminController@postRekapAdmin');
+Route::post ('/ajaxrekapadmin', 'AdminController@AjaxReloadRekapAdminWithSemester');
 //route for crudjadwal for admin
 Route::get ('/crudjadwal', 'AdminController@crudjadwal');
+Route::post ('/crudjadwal', 'AdminController@postcrudjadwal');
+Route::post('/editjadwal', 'AdminControllerr@editjadwal');
+Route::get('/addjadwal', 'AdminController@addjadwal');
+Route::post('/addjadwal', 'AdminController@savejadwal');
+Route::post('/deletejadwal', 'AdminController@deletejadwalm');
+
 //route for add course for mahasiswa
 Route::get ('/enrollmhs', 'StudentController@enrollmhs');
 Route::post ('/enrollmhs', 'StudentController@saveenrollment');
@@ -74,6 +82,9 @@ Route::get ('/inputabsen','StudentController@inputabsen');
 Route::post ('/inputabsen','StudentController@saveabsen');
 //route for show all presences for admin
 Route::get ('/showadmin', 'AdminController@showadmin');
+Route::post ('/showadmin', 'AdminController@postshowadmin');
+Route::post ('/ajaxshowadmin', 'AdminController@ajaxreloadshowadminwithsemester');
+
 //route for create new course dosen
 Route::get ('/createcourse/tambahMatkul', 'MatkulController@createMatkul');
 Route::post('/createcourse/tambahMatkul', 'MatkulController@saveMatkul');
@@ -84,9 +95,9 @@ Route::get ('/showcourse', 'MatkulController@viewCourseByLecturer');
 Route::get ('/lihatabsen', 'StudentController@lihatabsen');
 //route for add and delete user for admin
 Route::get ('/viewuser', 'AdminController@viewuser');
-Route::get ('/edituser/{id}', 'AdminController@editUser');
 Route::post ('/edituser/', 'AdminController@editUser');
-Route::get ('/deleteuser/{id}', 'AdminController@deleteUser');
+//Route::get ('/deleteuser/{id}', 'AdminController@deleteUser');
+Route::post ('/deletetuser/', 'AdminController@deleteUser');
 
 //routes for room management
 Route::get('/viewroom', 'RoomController@showRoom');

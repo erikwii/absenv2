@@ -55,6 +55,11 @@ class Course extends Model
         return $this->hasOne('App\Models\Room','id_ruang','id_ruang');
     }
 
+    public function lecturer(){
+        return $this->hasOne('App\Models\Lecturer','Kode_Dosen','Kode_Dosen');
+    }
+
+
     public function enrollment(){
         return $this->hasMany('App\Models\Enrollment','kode_seksi','seksi');
     }

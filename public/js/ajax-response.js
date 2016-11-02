@@ -23,7 +23,7 @@ $(document).ready(function() {
         console.log(token);
     });
 
-    //handle showTopic
+    //handle rekap dosen
     $('select#changeStatus[name="Semester"]').change(function(e){
         e.preventDefault();
         var semester_id = $('select[id="changeStatus"][name="Semester"]').val();
@@ -37,6 +37,45 @@ $(document).ready(function() {
                 var obj = JSON.parse(msg);
                 //$("#ajaxResponse").append("<div>"+obj._token+"</div>");
                 $('body').load( "/ajaxrekapdosen",{ "_token": obj._token, "Semester" : obj.Semester,"step" : 2} );
+            },
+            dataType: 'html'
+        });
+        console.log(token);
+    });
+
+    //handle rekap dosen
+    $('select#changeStatus[name="Semester"]').change(function(e){
+        e.preventDefault();
+        var semester_id = $('select[id="changeStatus"][name="Semester"]').val();
+        var token = $('input[name="_token"]').val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajaxrekapadmin',
+            data: {Semester: semester_id, _token: token},
+            success: function( msg ) {
+                //turn JSON object to javascript object for easier debugging
+                var obj = JSON.parse(msg);
+                //$("#ajaxResponse").append("<div>"+obj._token+"</div>");
+                $('body').load( "/ajaxrekapadmin",{ "_token": obj._token, "Semester" : obj.Semester,"step" : 2} );
+            },
+            dataType: 'html'
+        });
+        console.log(token);
+    });
+
+    $('select#changeStatus[name="Semester"]').change(function(e){
+        e.preventDefault();
+        var semester_id = $('select[id="changeStatus"][name="Semester"]').val();
+        var token = $('input[name="_token"]').val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajaxshowadmin',
+            data: {Semester: semester_id, _token: token},
+            success: function( msg ) {
+                //turn JSON object to javascript object for easier debugging
+                var obj = JSON.parse(msg);
+                //$("#ajaxResponse").append("<div>"+obj._token+"</div>");
+                $('body').load( "/ajaxshowadmin",{ "_token": obj._token, "Semester" : obj.Semester,"step" : 2} );
             },
             dataType: 'html'
         });

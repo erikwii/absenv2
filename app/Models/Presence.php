@@ -57,4 +57,13 @@ class Presence extends Model
             ->count('*');
         return $count;
     }
+
+    public static function getPresencePer ($seksi, $noreg, $pertemuan){
+        $count = DB::table('presences')
+            ->where('kode_seksi', $seksi)
+            ->where('Noreg',$noreg)
+            ->where('pertemuan_ke', $pertemuan)
+            ->count('*');
+        return $count;
+    }
 }
