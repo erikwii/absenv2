@@ -93,11 +93,10 @@ class AuthAdminController extends Controller
         return redirect()->action('AdminController@profiladmin');
     }
 
-
     public function getAdminRegistrationForm(Request $request)
     {
         if (!$request->has('path'))
-            return view('auth.admin_registration'); //return to registration form
+            return view('auth.register_admin'); //return to registration form
         $reg_data = $request->input('reg_data');
         //store reg_data as session
         $request->session()->put('reg_data', $reg_data);
