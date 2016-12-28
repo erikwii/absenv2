@@ -9,6 +9,7 @@ trait RegistersUsers
 {
     use RedirectsUsers;
 
+
     /**
      * Show the application registration form.
      *

@@ -42,25 +42,41 @@ class ValidClassNamePass extends NamespaceAwarePass
     }
 
     /**
-     * Validate class, interface and trait statements, and `new` expressions.
+     * Validate class, interface and trait definitions.
      *
-     * @throws FatalErrorException if a class, interface or trait is referenced which does not exist.
-     * @throws FatalErrorException if a class extends something that is not a class.
-     * @throws FatalErrorException if a class implements something that is not an interface.
-     * @throws FatalErrorException if an interface extends something that is not an interface.
-     * @throws FatalErrorException if a class, interface or trait redefines an existing class, interface or trait name.
+     * Validate them upon entering the node, so that we know about their
+     * presence and can validate constant fetches and static calls in class or
+     * trait methods.
      *
-     * @param Node $node
+     * @param Node
      */
-    public function leaveNode(Node $node)
+    public function enterNode(Node $node)
     {
+        parent::enterNode($node);
+
         if ($node instanceof ClassStmt) {
             $this->validateClassStatement($node);
         } elseif ($node instanceof InterfaceStmt) {
             $this->validateInterfaceStatement($node);
         } elseif ($node instanceof TraitStmt) {
             $this->validateTraitStatement($node);
-        } elseif ($node instanceof NewExpr) {
+        }
+    }
+
+    /**
+     * Validate `new` expressions, class constant fetches, and static calls.
+     *
+     * @throws FatalErrorException if a class, interface or trait is referenced which does not exist
+     * @throws FatalErrorException if a class extends something that is not a class
+     * @throws FatalErrorException if a class implements something that is not an interface
+     * @throws FatalErrorException if an interface extends something that is not an interface
+     * @throws FatalErrorException if a class, interface or trait redefines an existing class, interface or trait name
+     *
+     * @param Node $node
+     */
+    public function leaveNode(Node $node)
+    {
+        if ($node instanceof NewExpr) {
             $this->validateNewExpression($node);
         } elseif ($node instanceof ClassConstFetch) {
             $this->validateClassConstFetchExpression($node);
@@ -221,6 +237,16 @@ class ValidClassNamePass extends NamespaceAwarePass
     protected function ensureMethodExists($class, $name, $stmt)
     {
         $this->ensureClassExists($class, $stmt);
+
+        // let's pretend all calls to self, parent and static are valid
+        if (in_array(strtolower($class), array('self', 'parent', 'static'))) {
+            return;
+        }
+
+        // ... and all calls to classes defined right now
+        if ($this->findInScope($class) === self::CLASS_TYPE) {
+            return;
+        }
 
         // if method name is an expression, give it a pass for now
         if ($name instanceof Expr) {

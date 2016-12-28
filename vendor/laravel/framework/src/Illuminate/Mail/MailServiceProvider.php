@@ -21,9 +21,9 @@ class MailServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('mailer', function ($app) {
-            $this->registerSwiftMailer();
+        $this->registerSwiftMailer();
 
+        $this->app->singleton('mailer', function ($app) {
             // Once we have create the mailer instance, we will set a container instance
             // on the mailer. This allows us to resolve mailer classes via containers
             // for maximum testability on said classes instead of passing Closures.
@@ -48,12 +48,14 @@ class MailServiceProvider extends ServiceProvider
                 $mailer->alwaysTo($to['address'], $to['name']);
             }
 
-            // Here we will determine if the mailer should be in "pretend" mode for this
-            // environment, which will simply write out e-mail to the logs instead of
-            // sending it over the web, which is useful for local dev environments.
-            $pretend = $app['config']->get('mail.pretend', false);
+            // If a "reply to" address is set, we will set it on the mailer so that each
+            // message sent by the application will utilize the same address for this
+            // setting. This is more convenient than specifying it on each message.
+            $replyTo = $app['config']['mail.reply_to'];
 
-            $mailer->pretend($pretend);
+            if (is_array($replyTo) && isset($replyTo['address'])) {
+                $mailer->alwaysReplyTo($replyTo['address'], $replyTo['name']);
+            }
 
             return $mailer;
         });
@@ -70,12 +72,8 @@ class MailServiceProvider extends ServiceProvider
     {
         $mailer->setContainer($app);
 
-        if ($app->bound('Psr\Log\LoggerInterface')) {
-            $mailer->setLogger($app->make('Psr\Log\LoggerInterface'));
-        }
-
         if ($app->bound('queue')) {
-            $mailer->setQueue($app['queue.connection']);
+            $mailer->setQueue($app['queue']);
         }
     }
 

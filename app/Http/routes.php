@@ -107,7 +107,7 @@ Route::post('/addroom', 'RoomController@saveRoom');
 Route::post('/deleteroom', 'RoomController@deleteRoom');
 
 //authentication routes
-Route::get('/auth/login', 'Auth\AuthController@getLogin');
+Route::get('/auth/login', 'Auth\AuthController@showLoginForm');
 Route::post('/auth/login', 'Auth\AuthController@authenticate');
 Route::get('/auth/logout', 'Auth\AuthController@getLogout');
 //registration routes
@@ -123,16 +123,18 @@ Route::post('/auth/student_registration', 'Auth\AuthController@postStudentRegist
 Route::get('/auth/dosen_registration','Auth\AuthController@getDosenRegistrationForm');
 Route::post('/auth/dosen_registration','Auth\AuthController@postDosenRegistration');
 
+/*
 Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
+*/
 
 //route for admin registration
 Route::get('/auth/admin_registration','Auth\AuthAdminController@getAdminRegistrationForm');
 Route::post('/auth/admin_registration','Auth\AuthAdminController@postAdminRegistration');
 
 //forgot password
-Route::get('/auth/password/email', 'Auth\PasswordController@getEmail');
+Route::get('/auth/password/email', 'Auth\PasswordController@showResetForm');
 Route::post('/auth/password/email', 'Auth\PasswordController@postEmail');
 //reset password
 Route::get('/password/reset/{token}', 'Auth\PasswordController@getReset');

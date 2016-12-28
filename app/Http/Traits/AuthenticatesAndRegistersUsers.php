@@ -8,6 +8,8 @@
 
 namespace App\Http\Traits;
 
+
+
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 trait AuthenticatesAndRegistersUsers

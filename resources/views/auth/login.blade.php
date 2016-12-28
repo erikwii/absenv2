@@ -3,7 +3,7 @@
 <link href="{!! asset('assets/css/bootstrap.css') !!}" media="all" rel="stylesheet" type="text/css"/>
 
 <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
-    {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 50, 'height' => 50 )) !!} Online Presence Login
+    {!! Html::image('./img/logo.jpg', 'alt', array( 'width' => 50, 'height' => 50 )) !!} Online Presence Login
 </h1>
 
 {!! Form::open(array('url' => '/auth/login', 'class' => 'form-horizontal')) !!}

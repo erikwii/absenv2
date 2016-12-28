@@ -29,7 +29,7 @@
 
     <div class="form-group center-block">
         <label class="control-label col-sm-6" for="email">
-            e-mail:
+            E-mail:
         </label>
         <div class="col-sm-2    ">
             <input type="email" name="email" value="" class="form-control" placeholder="enter email">

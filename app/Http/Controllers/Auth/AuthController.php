@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -27,7 +28,7 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers;
     protected $redirectTo = 'profil';
     private $maxLoginAttempts = 7;
 
@@ -123,6 +124,8 @@ class AuthController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
+        //Todo: we are not suppling role from user input, but query db to get role based on name & password
+        //if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => $role],$request->has('remember'))) {
         if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => $role],$request->has('remember'))) {
             if(strcmp($role,'student')==0) {
                 $this->redirectTo = "profil";
