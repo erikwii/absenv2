@@ -1,4 +1,4 @@
-@include('errors.error_validator');
+@include('errors.error_validator')
 
 <link href="{!! asset('assets/css/bootstrap.css') !!}" media="all" rel="stylesheet" type="text/css"/>
 
