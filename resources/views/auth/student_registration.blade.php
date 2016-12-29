@@ -2,9 +2,8 @@
 
 <link href="{!! asset('assets/css/bootstrap.css') !!}" media="all" rel="stylesheet" type="text/css"/>
 
-
 <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
-    {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 50, 'height' => 50 )) !!} Online Presence User
+    {!! Html::image('./img/logo.jpg', 'alt', array( 'width' => 50, 'height' => 50 )) !!} Online Presence User
     Registration
 </h1>
 
@@ -34,7 +33,7 @@
 
 <div class="form-group">
     <label class="control-label col-sm-6" for="prodi">
-        Role:
+        Prodi:
     </label>
     <div class="col-sm-2">
         {!!Form::select('Prodi_Id', $prodis, 0, array('class' => 'form-control'))!!}
