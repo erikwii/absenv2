@@ -42,7 +42,10 @@ class Enrollment extends Model
      */
     public static function courseByUser($user_id)
     {
-        $id_semester = Kalender::getRunningSemester()->id;
+        $id_semester = Kalender::getRunningSemester();
+        if(empty($id_semester))
+            return null;
+        $id_semester=$id_semester->id;
         $instances = DB::select('SELECT e.id, c.seksi, c.Kode_Matkul,c.Nama_Matkul, c.day, c.time, c.Kode_Dosen,
           e.noreg, max(p.pertemuan_ke) as pertemuan, w.kode_waktu, w.waktu_start, w.waktu_end FROM `enrollments` as e
           left join courses as c on e.kode_seksi=c.seksi
@@ -50,6 +53,8 @@ class Enrollment extends Model
           left join waktu_kuliah as w on w.id=c.time
           where e.noreg=? and c.id_semester=?
           group by c.seksi',[$user_id,$id_semester]);
+        if(empty($instances))
+            return null;
         return $instances;
     }
 

@@ -43,8 +43,9 @@ class Kalender extends model
             ->whereBetween($cur_date,['start_period','end_period'])
             ->first();
         */
-        $instance = DB::select('select * from kalender_akademik where ? BETWEEN start_period and end_period', [$cur_date])[0];
-
-        return $instance;
+        $instance = DB::select('select * from kalender_akademik where ? BETWEEN start_period and end_period', [$cur_date]);
+        if(empty($instance))
+            return null;
+        return $instance[0];
     }
 }

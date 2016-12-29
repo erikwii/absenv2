@@ -73,7 +73,7 @@ class StudentController extends Controller
         //pass along all enrolled course by this user
         $user=Auth::user();
         $noreg=$user->student->Noreg;
-        $prodi_id=$user->student->Prodi_id;
+        //$prodi_id=$user->student->Prodi_id;
         $enrollment = Enrollment::courseByUser($noreg);
         return view('students.enroll')->with('enrollments',$enrollment);
     }
