@@ -152,9 +152,9 @@ class MatkulController extends Controller
         $user = Auth::user();
         //get the mapping for lecturer
         $prodi_id = $user->student->Prodi_Id;
-        $id_semester = Kalender::getRunningSemester()->id;
+        $id_semester = Kalender::getRunningSemester();
         $courses = Course::where('Prodi_Id',$prodi_id)
-            ->where('id_semester',$id_semester)
+            ->where('id_semester',!empty($id_semester) ? $id_semester->id : 0)
             ->get();
         return view('students.showcourse')->with('Courses', $courses);
     }

@@ -1,7 +1,7 @@
 @extends('layouts.mastermhs')
 @section('content')
     <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
-        {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE SYSTEM
+        {!! Html::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE SYSTEM
     </h1>
     <h2 style="text-align:center">
         <small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of Jakarta ::

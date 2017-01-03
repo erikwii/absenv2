@@ -2,7 +2,7 @@
 @section('content')
         <!-- Load waktu onload  -->
 <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
-    {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
+    {!! Html::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
     SYSTEM
 </h1>
 <h2 style="text-align:center">
@@ -47,6 +47,7 @@
             </tr>
             </thead>
             <tbody>
+            @if (!(empty($enrollments)))
             @foreach($Courses as $course)
                 <tr>
                     <?php $link = "/createcourse/tambahMatkul/" . $course->seksi?>
@@ -61,6 +62,11 @@
                     <td> {{$course->course_start_day}} </td>
                 </tr>
             @endforeach
+            @else
+                <tr><td>
+                        No data
+                    </td></tr>
+            @endif
             </tbody>
         </table>
     </div>
