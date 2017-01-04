@@ -152,18 +152,22 @@ class LecturerController extends Controller
         $kode_dosen = $lecturer->Kode_Dosen;
 
         $semester = Kalender::getRunningSemester();
+        $id_semester = !empty($semester) ? $semester->id : 0;
         //for debugging
         $course_model = DB::table('courses')
             ->where('Kode_Dosen',$kode_dosen)
-            ->where('id_semester',$semester->id);
-        $course = $course_model->get();
-        $course_array = Helpers::modelAsAssociativeArray($course,'seksi','Nama_Matkul');
-        //make default showing first course on the list
+            ->where('id_semester',$id_semester);
+
+        //Todo: Buggy here, app should be capable to course from all semester but atm only current semester
         $enrollment=array();
         $seksi=array();
-        if(empty($course)) {
-            $enrollment = array();
+        $course_array=array();
+        $course=array();
+        if(empty($course_model) || $course_model->count()==0) {
+
         } else{
+            $course = $course_model->get();
+            $course_array = Helpers::modelAsAssociativeArray($course,'seksi','Nama_Matkul');
             $seksi=$course[0]->seksi;
             //pass along list of enrolled students
             $enrollment=$course_model
@@ -178,7 +182,7 @@ class LecturerController extends Controller
             ->with('course_options',$course_array)
             ->with('course',$course)
             ->with('enrolls',$enrollment)
-            ->with('semester_id',$semester->id)
+            ->with('semester_id',$id_semester)
             ->with('kode_seksi',$seksi);
     }
 }

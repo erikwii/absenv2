@@ -4,7 +4,7 @@
 
 
 <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
-    {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 50, 'height' => 50 )) !!} Online Presence User
+    {!! Html::image('./img/logo.jpg', 'alt', array( 'width' => 50, 'height' => 50 )) !!} Online Presence User
     Registration
 </h1>
 

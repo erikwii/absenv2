@@ -96,13 +96,15 @@ class Course extends Model
      * @return mixed
      */
     public static function courseMapByLecturerId($lecturer_id){
-        $id_semester = Kalender::getRunningSemester()->id;
-
+        $semester = Kalender::getRunningSemester();
+        $id_semester = empty($semester) ? 0 : $semester->id;
+        if($id_semester==0)
+            return null;
         $instance = DB::table('courses')->select('Kode_Matkul','Nama_Matkul')
             ->where('Kode_Dosen',$lecturer_id)
             ->where('id_semester',$id_semester)
-            ->orderBy('Kode_Matkul','asc')
-            ->get();
+            ->orderBy('Kode_Matkul','asc');
+
         return $instance;
     }
 

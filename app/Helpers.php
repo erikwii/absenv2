@@ -46,6 +46,8 @@ class Helpers
     public static function toAssociativeArrays($instances)
     {
         $array = array();
+        if(empty($instances))
+            return array();
         foreach ($instances as $instance) {
             $instance_arr = (array)$instance;
             $vals = array_values($instance_arr);

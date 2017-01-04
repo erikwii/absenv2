@@ -1,9 +1,9 @@
 @extends('layouts.masterdosen')
 @section('content')
-{!! HTML::script('js/ajax-response.js') !!}
+{!! Html::script('js/ajax-response.js') !!}
 
     <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
-        {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
+        {!! Html::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
         SYSTEM
     </h1>
     <h2 style="text-align:center">
@@ -24,10 +24,11 @@
     <!-- time content -->
 
     <h3 style="text-align:center"> Kode Mata Kuliah </h3>
-    {!! Form::open(array('url' => '/coursetopic', 'class' => 'form-horizontal')) !!}
-    <div class="form-group center-block">
+        @if(!empty($Courses))
         {!! Form::label('matkul','Mata Kuliah',['class' => "control-label col-sm-6"]) !!}
 
+        {!! Form::open(array('url' => '/coursetopic', 'class' => 'form-horizontal')) !!}
+        <div class="form-group center-block">
         <div class="col-sm-2">
             @if(isset($course_id))
                 {!! Form::select('course_id', $Courses, $course_id,['class' => 'form-control','id'=>'changeStatus']) !!}
@@ -35,8 +36,19 @@
                 {!! Form::select('course_id', $Courses, null,['class' => 'form-control','id'=>'changeStatus']) !!}
             @endif
         </div>
-    </div>
-    {!! form::close() !!}
+            {!! form::close() !!}
+        </div>
+        @else
+            <div class="row">
+            <div class="col-sm-2 col-md-2">
+            </div>
+                <div class="col-sm-8 col-md-8">
+                <div class="alert alert-danger">
+                    <strong>No data!</strong> This lecturers does not teach any class.
+                </div>
+            <div class="col-sm-2 col-md-2   "></div>
+        @endif
+
 
     <!-- Not used here-->
     <div id="ajaxResponse"></div>
