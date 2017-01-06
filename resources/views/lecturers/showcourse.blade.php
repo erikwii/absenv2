@@ -45,6 +45,7 @@
             </tr>
             </thead>
             <tbody>
+            @if(!empty($Course))
             @foreach($Courses as $course)
                 <tr>
                     <?php $link = "/createcourse/tambahMatkul/" . $course->seksi?>
@@ -59,6 +60,13 @@
                     <td> {{$course->course_start_day}} </td>
                 </tr>
             @endforeach
+            @else
+                <tr>
+                    <td>
+                        No data
+                    </td>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>

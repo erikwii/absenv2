@@ -169,7 +169,8 @@ class MatkulController extends Controller
         $user = Auth::user();
         //get the mapping for lecturer
         $kode_dosen = $user->lecturer->Kode_Dosen;
-        $id_semester = Kalender::getRunningSemester()->id;
+        $semester = Kalender::getRunningSemester();
+        $id_semester = (!empty($semester) ? $semester->id : 0);
         $courses = Course::where('Kode_Dosen',$kode_dosen)
             ->where('id_semester',$id_semester)
             ->get();
