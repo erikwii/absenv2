@@ -3,7 +3,7 @@
     {{--{!! HTML::script('js/viewjadwal.js') !!}--}}
     <div class="row">
         <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
-            {!! HTML::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
+            {!! Html::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
             SYSTEM
         </h1>
         <h2 style="text-align:center">

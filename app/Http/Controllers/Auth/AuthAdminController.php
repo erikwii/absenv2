@@ -25,7 +25,7 @@ class AuthAdminController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers;
     protected $redirectTo = 'profil';
 
     /**
