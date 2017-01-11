@@ -145,16 +145,19 @@ class AdminController extends Controller
         //$kode_dosen = $lecturer->Kode_Dosen;
 
         $semester = Kalender::getRunningSemester();
+        $id_semester = (empty($semester) ? 0 : $semester->id);
         //for debugging
         $course_model = DB::table('courses')
-            ->where('id_semester',$semester->id);
+            ->where('id_semester',$id_semester);
         $course = $course_model->get();
         $course_array = Helpers::modelAsAssociativeArray($course,'seksi','Nama_Matkul');
         //make default showing first course on the list
         $enrollment=array();
         $seksi=array();
-        if(empty($course)) {
+        if(empty($course) || $course->count()==0) {
             $enrollment = array();
+            $seksi = array();
+
         } else{
             $seksi=$course[0]->seksi;
             //pass along list of enrolled students
@@ -170,7 +173,7 @@ class AdminController extends Controller
             ->with('course_options',$course_array)
             ->with('course',$course)
             ->with('enrolls',$enrollment)
-            ->with('semester_id',$semester->id)
+            ->with('semester_id',$id_semester)
             ->with('kode_seksi',$seksi);
     }
 
@@ -272,17 +275,16 @@ class AdminController extends Controller
         //$kode_dosen = $lecturer->Kode_Dosen;
 
         $semester = Kalender::getRunningSemester();
+        $id_semester = (empty($semester) ? 0 : $semester->id);
         //for debugging
         $course_model = DB::table('courses')
-            ->where('id_semester',$semester->id);
+            ->where('id_semester',$id_semester);
         $course = $course_model->get();
         $course_array = Helpers::modelAsAssociativeArray($course,'seksi','Nama_Matkul');
         //make default showing first course on the list
         $enrollment=array();
         $seksi=array();
-        if(empty($course)) {
-            $enrollment = array();
-        } else{
+        if(!empty($course) && $course->count()>0) {
             $seksi=$course[0]->seksi;
             //pass along list of enrolled students
             $enrollment=$course_model
@@ -297,7 +299,7 @@ class AdminController extends Controller
             ->with('course_options',$course_array)
             ->with('course',$course)
             ->with('enrolls',$enrollment)
-            ->with('semester_id',$semester->id)
+            ->with('semester_id',$id_semester)
             ->with('kode_seksi',$seksi);
     }
 
@@ -325,8 +327,9 @@ class AdminController extends Controller
     {
         $kalender = Kalender::all('id','semester');;
         $kalender_array = Helpers::modelAsAssociativeArray($kalender,'id','semester');
-        $semester = Kalender::getRunningSemester()->id;
-        $courses = Course::where('id_semester',$semester)
+        $semester = Kalender::getRunningSemester();
+        $id_semester = (empty($semester) ? 0 : $semester->id);
+        $courses = Course::where('id_semester',$id_semester)
             ->get();
         return view('admin.crudjadwal')
             ->with('Courses', $courses)
