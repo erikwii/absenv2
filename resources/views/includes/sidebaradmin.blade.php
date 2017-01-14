@@ -18,6 +18,9 @@
             <a href="/viewroom">Room Allocation</a>
         </li>
         <li @if(strcmp($path,"profiladmin")==0) class="active" @endif>
+            <a href="/admin/view_semester"> Semester </a>
+        </li>
+        <li @if(strcmp($path,"profiladmin")==0) class="active" @endif>
             <a href="/profiladmin"> Profile </a>
         </li>
     </ul>

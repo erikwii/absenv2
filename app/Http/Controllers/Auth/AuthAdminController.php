@@ -129,6 +129,7 @@ class AuthAdminController extends Controller
         $admin->id_user = $id;
         $admin->save();
         //3. redirect to profile page
+        $request->session()->put("role","admin");
         return redirect()->action('AdminController@profiladmin');
     }
 

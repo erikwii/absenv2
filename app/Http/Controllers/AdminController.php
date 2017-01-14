@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers;
 use App\Models\Enrollment;
+use App\Models\Semester;
 use App\Models\Student;
 use App\Models\Admin;
 use App\Models\Users;
@@ -361,6 +362,30 @@ class AdminController extends Controller
         return view('admin.viewuser')->with('users',$users);
     }
 
+    public function viewSemester(){
+        $semesters = Semester::all();
+        return view('admin.viewsemester')->with('semesters',$semesters);
+    }
+
+    public function updateSemester(Request $request){
+        $validator = $this->semester_validator($request->all());
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $id=$request['id'];
+        $semester=Semester::find($id);
+        $semester->semester = $request['semester'];
+        $semester->start_period = $request['start_period'];
+        $semester->end_period = $request['end_period'];
+        $semester->active = $request['active'];
+        $semester->save();
+
+        return $this->viewSemester();
+    }
+
     public function editUser(Request $request){
         $validator = $this->account_validator($request->all());
         if ($validator->fails()) {
@@ -387,6 +412,19 @@ class AdminController extends Controller
         $user->delete();
         return $this->viewuser();
     }
+
+    protected function semester_validator(array $data)
+    {
+        $validator = Validator::make($data, [
+            'semester' => 'required|max:255',
+            'start_period' => 'required',
+            'end_period' => 'required',
+            'active' => 'boolean',
+        ]);
+
+        return $validator;
+    }
+
 
     protected function profile_validator(array $data){
         $validator =Validator::make($data, [

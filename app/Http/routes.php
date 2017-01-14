@@ -100,6 +100,10 @@ Route::group(['middleware' => ['web']], function () {
 //Route::get ('/deleteuser/{id}', 'AdminController@deleteUser');
     Route::post ('/deletetuser/', 'AdminController@deleteUser');
 
+    //routes for running semester management
+    Route::get ('/admin/view_semester', 'AdminController@viewSemester');
+    Route::post ('/admin/view_semester', 'AdminController@updateSemester');
+
 //routes for room management
     Route::get('/viewroom', 'RoomController@showRoom');
     Route::post('/viewroom', 'RoomController@editRoom');

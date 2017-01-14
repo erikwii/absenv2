@@ -228,6 +228,7 @@ class AuthController extends Controller
         $student->Mac=$request['Mac'];
         $student->id_user=$id;
         $student->save();
+        $request->session()->put("role","student");
         //3.forward the user into profile page, redirectPath() return $redirectTo
         return redirect()->action('StudentController@profil');
     }
@@ -258,6 +259,7 @@ class AuthController extends Controller
         $lecturer->Telepon=$request['telepon'];
         $lecturer->id_user=$id;
         $lecturer->save();
+        $request->session()->put("role","dosen");
         //3. redirect to profile page
         return redirect()->action('LecturerController@profildosen');
     }
