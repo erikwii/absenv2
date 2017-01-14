@@ -103,7 +103,7 @@ class Course extends Model
         $instance = DB::table('courses')->select('Kode_Matkul','Nama_Matkul')
             ->where('Kode_Dosen',$lecturer_id)
             ->where('id_semester',$id_semester)
-            ->orderBy('Kode_Matkul','asc');
+            ->orderBy('Kode_Matkul','asc')->get();
 
         return $instance;
     }

@@ -45,7 +45,7 @@
             </tr>
             </thead>
             <tbody>
-            @if(!empty($Course))
+            @if(!empty($Courses))
             @foreach($Courses as $course)
                 <tr>
                     <?php $link = "/createcourse/tambahMatkul/" . $course->seksi?>

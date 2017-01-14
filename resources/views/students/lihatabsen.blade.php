@@ -8,6 +8,16 @@
         </small>
     </h2>
     <br>
+
+    <!-- time content -->
+    <h5><p class='text-center'>
+            Hari, Tanggal :
+            @inject('helpers', 'App\Helpers')
+            {!! $helpers::indonesian_date() !!}
+            <span id='output'></span> WIB
+        </p>
+    </h5>
+
     <h3 style="text-align:center">My Presence</h3>
     <br>
     <div class="row">

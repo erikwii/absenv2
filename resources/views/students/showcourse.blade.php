@@ -47,11 +47,14 @@
             </tr>
             </thead>
             <tbody>
-            @if (!(empty($enrollments)))
+            @if (!(empty($Courses)))
             @foreach($Courses as $course)
                 <tr>
                     <?php $link = "/createcourse/tambahMatkul/" . $course->seksi?>
+                    <!--
                     <td><a href={!! $link !!}>{!! $course->seksi !!}</a></td>
+                    -->
+                        <td>{!! $course->seksi !!}</td>
                     <td> {!! $course->Kode_Matkul !!}</td>
                     <td> {{$course->Nama_Matkul}} </td>
                     <td> {{$course->SKS}} </td>

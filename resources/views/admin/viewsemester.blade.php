@@ -28,8 +28,8 @@
     <h3 style="text-align:center"> Daftar Semester </h3>
 
     <div class="row">
-        <div class="col-md-1 col-sm-1"></div>
-        <div class="col-md-10 col-sm-10">
+        <div class="col-md-2 col-sm-2"></div>
+        <div class="col-md-8 col-sm-8">
             <table class="table table-responsive table-striped table-hover">
                 <thead>
                 <tr>
@@ -75,11 +75,11 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-1 col-sm-1"></div>
+        <div class="col-md-2 col-sm-2"></div>
     </div>
 
     <div class="row">
-        <div class="col-md-1 col-sm-1"></div>
+        <div class="col-md-2 col-sm-2"></div>
         <div class="col-md-1 col-sm-1">
             <a href="/admin/add_semester" class="btn btn-primary" role="button">
                 Add Semester

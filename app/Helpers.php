@@ -81,6 +81,7 @@ class Helpers
      * @param $day string of course day
      * @param $time_start string of course start time
      * @param $time_end string of course end time
+     * @return $final_stat boolean
      */
     public static function isAbsentFillable($day, $time_start, $time_end, $kode_seksi, $noreg)
     {

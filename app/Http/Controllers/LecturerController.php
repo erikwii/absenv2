@@ -82,7 +82,7 @@ class LecturerController extends Controller
         $course = $course_model->get();
         $course_array = Helpers::modelAsAssociativeArray($course,'seksi','Nama_Matkul');
         //make default showing first course on the list
-        if(empty($course)) {
+        if(empty($course_array)) {
             $enrollment = array();
             $seksi=null;
         } else{
@@ -158,7 +158,6 @@ class LecturerController extends Controller
             ->where('Kode_Dosen',$kode_dosen)
             ->where('id_semester',$id_semester);
 
-        //Todo: Buggy here, app should be capable to course from all semester but atm only current semester
         $enrollment=array();
         $seksi=array();
         $course_array=array();
