@@ -91,11 +91,14 @@
         </div>
     </div>
 
-    {!! Form::open(array('url' => '/addjadwal', 'class' => 'form-horizontal')) !!}
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary form-control"><b>Add Course Schedule</b></button>
+    <div class="row">
+        <div class="col-md-1 col-sm-1"></div>
+        <div class="col-md-1 col-sm-1">
+            <a href="/addjadwal" class="btn btn-primary" role="button">
+                Add Jadwal
+            </a>
+        </div>
     </div>
-    {!! Form::close() !!}
 
     {{--<div class="row">
         <div class="col-md-2 col-sm-2"></div>

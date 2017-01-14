@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Helpers;
-use App\Models\Enrollment;
+use App\Models\Prodi;
+use App\Models\Room;
 use App\Models\Semester;
-use App\Models\Student;
 use App\Models\Admin;
 use App\Models\Users;
+use App\Models\WaktuKuliah;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Course;
@@ -339,7 +340,22 @@ class AdminController extends Controller
     }
     public function addjadwal()
     {
-        return view('admin.addjadwal');
+        $prodis = Prodi::all();
+        $prodi_arr=array();
+        foreach($prodis as $prodi){
+            $prodi_arr[$prodi->id]=$prodi->prodi;
+        }
+        $room = Room::room_name();
+        $room_arr = Helpers::toAssociativeArrays($room);
+        $waktu_kuliah = WaktuKuliah::waktuMap();
+        $waktu_opts = Helpers::toAssociativeArrays($waktu_kuliah);
+        //Todo: Must offer all dosen data here, at the moment post not implemented
+        $Kode_Dosen = null;
+        return view('admin.addjadwal')
+            ->with('prodi_options',$prodi_arr)
+            ->with('room_options', $room_arr)
+            ->with('waktu_options', $waktu_opts)
+            ->with('Kode_Dosen', $Kode_Dosen);
     }
     public function editjadwal()
     {
