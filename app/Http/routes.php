@@ -103,6 +103,8 @@ Route::group(['middleware' => ['web']], function () {
     //routes for running semester management
     Route::get ('/admin/view_semester', 'AdminController@viewSemester');
     Route::post ('/admin/view_semester', 'AdminController@updateSemester');
+    Route::get ('/admin/add_semester', 'AdminController@addSemester');
+    Route::post ('/admin/add_semester', 'AdminController@saveSemester');
 
 //routes for room management
     Route::get('/viewroom', 'RoomController@showRoom');

@@ -383,6 +383,28 @@ class AdminController extends Controller
         return view('admin.viewsemester')->with('semesters',$semesters);
     }
 
+    public function addSemester(){
+        return view('admin.addsemester');
+    }
+
+    public function saveSemester(Request $request){
+        $validator = $this->semester_validator($request->all());
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $semester = new Semester;
+        $semester->semester = $request['semester'];
+        $semester->start_period = $request['start_period'];
+        $semester->end_period = $request['end_period'];
+        $semester->active = 1;
+        $semester->save();
+
+        return redirect('/admin/view_semester');
+    }
+
     public function updateSemester(Request $request){
         $validator = $this->semester_validator($request->all());
         if ($validator->fails()) {
