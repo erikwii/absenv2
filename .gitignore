@@ -18,3 +18,6 @@ composer.phar
 storage/debugbar/
 vendor/composer/autoload_static.php
 vendor/predis/
+storage/logs/laravel.log
+.phpstorm.meta.php
+vendor/*
