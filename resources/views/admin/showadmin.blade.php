@@ -1,6 +1,6 @@
 @extends('layouts.masteradmin')
 @section('content')
-    {!! Html::script('ajaajax-response-admin.js!!}
+    {!! Html::script('js/ajax-response-admin.js') !!}
     <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
         {!! Html::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE SYSTEM
     </h1>

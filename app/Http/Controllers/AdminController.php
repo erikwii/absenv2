@@ -336,7 +336,7 @@ class AdminController extends Controller
         return view('admin.crudjadwal')
             ->with('Courses', $courses)
             ->with('kalender_options',$kalender_array)
-            ->with('semester_id',$semester);
+            ->with('semester_id',$id_semester);
     }
     public function addjadwal()
     {
