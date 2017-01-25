@@ -35,7 +35,7 @@
     </div>
 
     <div class="form-group form-group-sm">
-        {!! Form::label('Kode_Matkul','Mata Kuliah',['class' => "control-label col-sm-6"]) !!}
+        {!! Form::label('Kode_Matkul','M ata Kuliah',['class' => "control-label col-sm-6"]) !!}
         <div class="col-sm-2">
             {!! Form::select('Kode_Matkul',$courses, null,['class' => 'form-control']) !!}
         </div>
