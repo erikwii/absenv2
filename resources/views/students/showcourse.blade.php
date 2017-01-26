@@ -28,7 +28,7 @@
 @include('errors.error_validator')
 
 <!--<tr>-->
-<h3 style="text-align:center"> Daftar Courses </h3>
+<h3 style="text-align:center"> Daftar Mata Kuliah </h3>
 <div class="row">
     <div class="col-md-1 col-sm-1"></div>
     <div class="col-md-10 col-sm-10">

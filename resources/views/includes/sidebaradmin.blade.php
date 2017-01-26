@@ -15,7 +15,7 @@
             <a href="/rekapadmin">Rekap Absen</a>
         </li>
         <li @if(strcmp($path,"viewroom")==0) class="active" @endif>
-            <a href="/viewroom">Room Allocation</a>
+            <a href="/viewroom">Alokasi Ruang</a>
         </li>
         <li @if(strcmp($path,"admin/view_semester")==0) class="active" @endif>
             <a href="/admin/view_semester"> Semester </a>
