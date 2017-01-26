@@ -3,10 +3,10 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <li @if(strcmp($path,"showadmin")==0) class="active" @endif>
-            <a href="/showadmin">Show All Presences</a>
+            <a href="/showadmin">Rekapitulasi Absen</a>
         </li>
         <li @if(strcmp($path,"viewuser")==0) class="active" @endif>
-            <a href="/viewuser">View User</a>
+            <a href="/viewuser">Daftar User</a>
         </li>
         <li @if(strcmp($path,"crudjadwal")==0) class="active" @endif>
             <a href="/crudjadwal">CRUD Course Schedule</a>
