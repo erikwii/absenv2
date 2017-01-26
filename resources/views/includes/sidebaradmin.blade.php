@@ -9,7 +9,7 @@
             <a href="/viewuser">Daftar User</a>
         </li>
         <li @if(strcmp($path,"crudjadwal")==0) class="active" @endif>
-            <a href="/crudjadwal">CRUD Course Schedule</a>
+            <a href="/crudjadwal">Jadwal Kuliah</a>
         </li>
         <li @if(strcmp($path,"rekapadmin")==0) class="active" @endif>
             <a href="/rekapadmin">Rekap Absen</a>
