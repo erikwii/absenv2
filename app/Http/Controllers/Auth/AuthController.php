@@ -255,6 +255,7 @@ class AuthController extends Controller
         //2. create new lecturer instance, not extra parameter
         $lecturer = new Lecturer;
         $lecturer->Kode_Dosen=$request['Kode_Dosen'];
+        $lecturer->nidn =$request['nidn'];
         $lecturer->Nama_Dosen =$request['nama'];
         $lecturer->Telepon=$request['telepon'];
         $lecturer->id_user=$id;

@@ -3,8 +3,7 @@
     {!! Html::script('js/datepicker.js') !!}
 
     <h1 class="page-header" style="background-color:#222222; color:#DEDEDE; text-align:center">
-        {!! Html::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE
-        SYSTEM
+        {!! Html::image('./img/logo.jpg', 'alt', array( 'width' => 150, 'height' => 150 )) !!} ONLINE PRESENCE SYSTEM
     </h1>
     <h2 style="text-align:center">
         <small>:: Department of Mathematics, Faculty of Mathematics and Natural Science State University of
@@ -35,7 +34,7 @@
     </div>
 
     <div class="form-group form-group-sm">
-        {!! Form::label('Kode_Matkul','M ata Kuliah',['class' => "control-label col-sm-6"]) !!}
+        {!! Form::label('Kode_Matkul','Mata Kuliah',['class' => "control-label col-sm-6"]) !!}
         <div class="col-sm-2">
             {!! Form::select('Kode_Matkul',$courses, null,['class' => 'form-control']) !!}
         </div>

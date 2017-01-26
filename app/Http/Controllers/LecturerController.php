@@ -24,9 +24,11 @@ class LecturerController extends Controller
         $user = Auth::user();
         $name = $user->name;
         $lecturer = $user->lecturer;
+        $nidn = $lecturer->nidn;
         $kode_dosen = $lecturer->Kode_Dosen;
         $telepon = $lecturer->Telepon;
-        return view('lecturers.profildosen',['name' => $name,'kode_dosen' => $kode_dosen,'telepon' => $telepon]);
+        return view('lecturers.profildosen',['name' => $name,'kode_dosen' => $kode_dosen,
+            'nidn'=>$nidn,'telepon' => $telepon]);
     }
 
     public function updateProfilDosen(Request $request){

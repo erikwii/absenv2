@@ -18,6 +18,7 @@ class Lecturer extends Model
     //
     protected $fillable =[
         'Kode_Dosen',
+        'nidn',
         'Nama_Dosen',
         'Telepon'
     ];

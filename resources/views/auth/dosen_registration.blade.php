@@ -22,6 +22,15 @@
     </div>
 </div>
 
+<div class="form-group center-block">
+    <label class="control-label col-sm-6" for="kode_dosen">
+        NIDN
+    </label>
+    <div class="col-sm-2    ">
+        <input type="text" name="nidn" value='' class="form-control" placeholder="enter nidn">
+    </div>
+</div>
+
 <div class="form-group">
     <label class="control-label col-sm-6" for="name">
         Nama:

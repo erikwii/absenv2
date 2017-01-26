@@ -66,8 +66,8 @@
     <!-- Put filter box here -->
 
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
             <table class="table table-responsive table-striped table-hover">
                 <thead>
                 <tr>
@@ -94,6 +94,7 @@
                 </tbody>
             </table>
         </div>
+        <div class="col-md-2"></div>
         <br>
         <br>
     </div>

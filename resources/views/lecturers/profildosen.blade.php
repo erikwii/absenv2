@@ -42,6 +42,10 @@
                     <td>{!! $kode_dosen !!}</td>
                 </tr>
                 <tr>
+                    <td>NIDN</td>
+                    <td>{!! $nidn !!}</td>
+                </tr>
+                <tr>
                     <td>Nama Dosen</td>
                     <td>{!! $name !!}</td>
                 </tr>
@@ -76,6 +80,10 @@
                     <div class="form-group">
                         {!! Form::label('Kode_Dosen', 'Kode Dosen', array('class' => 'control-label')) !!}
                         {!! Form::text('Kode_Dosen',$kode_dosen,['class' => 'form-control','readonly'])!!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('nidn', 'NIDN', array('class' => 'control-label')) !!}
+                        {!! Form::text('nidn',$nidn,['class' => 'form-control'])!!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('Nama_Dosen', 'Nama Dosen', array('class' => 'control-label')) !!}

@@ -5,6 +5,10 @@ Catatan development plan
 - menambahkan fungsi upload csv untuk create user (for students only)
 - Create course schedule hanya dapat dilakukan oleh admin (tambahkan field dosen pengampu)
   + implement with ajax
-- Pada admin tambahkan fasilitas untuk entry kode prodi
+- Pada admin tambahkan fasilitas untuk entry kode prodi (current)
+- Pada admin tambahkan fasilitas untuk melihat topik perkuliahan
 - menambahkan fungsi create user dosen
-- Database update, table lecturers should insert nidn/nip
+- Database update, table lecturers should insert nidn/nim
+- remapping all routes to its proper namespace
+- change to authorization based role for each page (at the moment only used authentication)
+- mapping database column to all lowercase

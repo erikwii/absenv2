@@ -70,7 +70,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/editjadwal', 'AdminControllerr@editjadwal');
     Route::get('/addjadwal', 'AdminController@addjadwal');
     Route::post('/addjadwal', 'AdminController@savejadwal');
-    Route::post('/deletejadwal', 'AdminController@deletejadwalm');
+    Route::post('/deletejadwal', 'AdminController@deletejadwal');
 
 //route for add course for mahasiswa
     Route::get ('/enrollmhs', 'StudentController@enrollmhs');
